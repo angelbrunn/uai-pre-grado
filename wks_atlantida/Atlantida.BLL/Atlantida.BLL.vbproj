@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA471E24-E2BA-4F94-A10C-9CDCCADFBEAA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Atlantida.BLL</RootNamespace>
+    <AssemblyName>Atlantida.BLL</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Atlantida.BLL.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Atlantida.BLL.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="INegBackup.vb" />
+    <Compile Include="INegBitacora.vb" />
+    <Compile Include="INegMultiIdioma.vb" />
+    <Compile Include="INegMultiUsuario.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="NegBackup.vb" />
+    <Compile Include="NegBitacora.vb" />
+    <Compile Include="NegCobro.vb" />
+    <Compile Include="NegEncuesta.vb" />
+    <Compile Include="NegMultiIdioma.vb" />
+    <Compile Include="NegMultiUsuario.vb" />
+    <Compile Include="NegNegocio.vb" />
+    <Compile Include="negocio.vb" />
+    <Compile Include="NegPago.vb" />
+    <Compile Include="NegPostVenta.vb" />
+    <Compile Include="NegPresupuesto.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantida.Bitacora\Atlantida.Bitacora.vbproj">
+      <Project>{3abd3777-bfcd-4b30-9488-1b0b434f6aff}</Project>
+      <Name>Atlantida.Bitacora</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantida.DAL\Atlantida.DAL.vbproj">
+      <Project>{9de0f0e3-9760-4312-bc17-9f902f89a96a}</Project>
+      <Name>Atlantida.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantida.Entidades\Atlantida.Entidades.vbproj">
+      <Project>{bdce7423-161c-4486-a643-10c403e151d0}</Project>
+      <Name>Atlantida.Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantida.Excepcion\Atlantida.Excepcion.vbproj">
+      <Project>{3d36e0d7-1d71-4ed1-b69c-4aabff87e351}</Project>
+      <Name>Atlantida.Excepcion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantida.IO\Atlantida.IO.vbproj">
+      <Project>{4eb6a5e2-9dcb-40b3-a889-e94cac12b0d3}</Project>
+      <Name>Atlantida.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantida.Seguridad\Atlantida.Seguridad.vbproj">
+      <Project>{7f0872d3-87a7-4236-a1bd-d80a12e7c9f5}</Project>
+      <Name>Atlantida.Seguridad</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
