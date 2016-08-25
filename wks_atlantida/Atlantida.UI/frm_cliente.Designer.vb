@@ -23,6 +23,10 @@ Partial Class frm_cliente
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.box_cliente = New System.Windows.Forms.GroupBox()
+        Me.lbl_fecNat = New System.Windows.Forms.Label()
+        Me.txt_fechaNac = New System.Windows.Forms.TextBox()
+        Me.lbl_telefono = New System.Windows.Forms.Label()
+        Me.txt_telefono = New System.Windows.Forms.TextBox()
         Me.btn_baja = New System.Windows.Forms.Button()
         Me.btn_modificacion = New System.Windows.Forms.Button()
         Me.btn_alta = New System.Windows.Forms.Button()
@@ -41,6 +45,10 @@ Partial Class frm_cliente
         '
         'box_cliente
         '
+        Me.box_cliente.Controls.Add(Me.lbl_fecNat)
+        Me.box_cliente.Controls.Add(Me.txt_fechaNac)
+        Me.box_cliente.Controls.Add(Me.lbl_telefono)
+        Me.box_cliente.Controls.Add(Me.txt_telefono)
         Me.box_cliente.Controls.Add(Me.btn_baja)
         Me.box_cliente.Controls.Add(Me.btn_modificacion)
         Me.box_cliente.Controls.Add(Me.btn_alta)
@@ -55,14 +63,46 @@ Partial Class frm_cliente
         Me.box_cliente.Controls.Add(Me.lbl_apellido)
         Me.box_cliente.Location = New System.Drawing.Point(9, 46)
         Me.box_cliente.Name = "box_cliente"
-        Me.box_cliente.Size = New System.Drawing.Size(392, 223)
+        Me.box_cliente.Size = New System.Drawing.Size(392, 241)
         Me.box_cliente.TabIndex = 15
         Me.box_cliente.TabStop = False
         Me.box_cliente.Text = "Datos del pasajero"
         '
+        'lbl_fecNat
+        '
+        Me.lbl_fecNat.AutoSize = True
+        Me.lbl_fecNat.Location = New System.Drawing.Point(6, 173)
+        Me.lbl_fecNat.Name = "lbl_fecNat"
+        Me.lbl_fecNat.Size = New System.Drawing.Size(57, 13)
+        Me.lbl_fecNat.TabIndex = 21
+        Me.lbl_fecNat.Text = "Fech.Nac."
+        '
+        'txt_fechaNac
+        '
+        Me.txt_fechaNac.Location = New System.Drawing.Point(94, 166)
+        Me.txt_fechaNac.Name = "txt_fechaNac"
+        Me.txt_fechaNac.Size = New System.Drawing.Size(292, 20)
+        Me.txt_fechaNac.TabIndex = 20
+        '
+        'lbl_telefono
+        '
+        Me.lbl_telefono.AutoSize = True
+        Me.lbl_telefono.Location = New System.Drawing.Point(6, 147)
+        Me.lbl_telefono.Name = "lbl_telefono"
+        Me.lbl_telefono.Size = New System.Drawing.Size(49, 13)
+        Me.lbl_telefono.TabIndex = 19
+        Me.lbl_telefono.Text = "Telefono"
+        '
+        'txt_telefono
+        '
+        Me.txt_telefono.Location = New System.Drawing.Point(94, 140)
+        Me.txt_telefono.Name = "txt_telefono"
+        Me.txt_telefono.Size = New System.Drawing.Size(292, 20)
+        Me.txt_telefono.TabIndex = 18
+        '
         'btn_baja
         '
-        Me.btn_baja.Location = New System.Drawing.Point(252, 191)
+        Me.btn_baja.Location = New System.Drawing.Point(247, 202)
         Me.btn_baja.Name = "btn_baja"
         Me.btn_baja.Size = New System.Drawing.Size(75, 23)
         Me.btn_baja.TabIndex = 17
@@ -71,7 +111,7 @@ Partial Class frm_cliente
         '
         'btn_modificacion
         '
-        Me.btn_modificacion.Location = New System.Drawing.Point(171, 191)
+        Me.btn_modificacion.Location = New System.Drawing.Point(166, 202)
         Me.btn_modificacion.Name = "btn_modificacion"
         Me.btn_modificacion.Size = New System.Drawing.Size(75, 23)
         Me.btn_modificacion.TabIndex = 16
@@ -80,7 +120,7 @@ Partial Class frm_cliente
         '
         'btn_alta
         '
-        Me.btn_alta.Location = New System.Drawing.Point(90, 191)
+        Me.btn_alta.Location = New System.Drawing.Point(85, 202)
         Me.btn_alta.Name = "btn_alta"
         Me.btn_alta.Size = New System.Drawing.Size(75, 23)
         Me.btn_alta.TabIndex = 15
@@ -89,7 +129,7 @@ Partial Class frm_cliente
         '
         'btn_validar
         '
-        Me.btn_validar.Location = New System.Drawing.Point(9, 191)
+        Me.btn_validar.Location = New System.Drawing.Point(4, 202)
         Me.btn_validar.Name = "btn_validar"
         Me.btn_validar.Size = New System.Drawing.Size(75, 23)
         Me.btn_validar.TabIndex = 14
@@ -199,4 +239,8 @@ Partial Class frm_cliente
     Friend WithEvents lbl_nombre As System.Windows.Forms.Label
     Friend WithEvents lbl_apellido As System.Windows.Forms.Label
     Friend WithEvents btn_ok As System.Windows.Forms.Button
+    Friend WithEvents lbl_telefono As System.Windows.Forms.Label
+    Friend WithEvents txt_telefono As System.Windows.Forms.TextBox
+    Friend WithEvents txt_fechaNac As System.Windows.Forms.TextBox
+    Friend WithEvents lbl_fecNat As System.Windows.Forms.Label
 End Class

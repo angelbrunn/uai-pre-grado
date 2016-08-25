@@ -47,10 +47,8 @@ Partial Class frm_presupuesto
         Me.btn_asignar = New System.Windows.Forms.Button()
         Me.btn_reserva = New System.Windows.Forms.Button()
         Me.btn_disponibilidad = New System.Windows.Forms.Button()
-        Me.txt_origen = New System.Windows.Forms.TextBox()
         Me.lbl_origen = New System.Windows.Forms.Label()
         Me.lbl_destino = New System.Windows.Forms.Label()
-        Me.txt_destino = New System.Windows.Forms.TextBox()
         Me.txt_fechaida = New System.Windows.Forms.TextBox()
         Me.lbl_fechIda = New System.Windows.Forms.Label()
         Me.lbl_fechVue = New System.Windows.Forms.Label()
@@ -68,6 +66,8 @@ Partial Class frm_presupuesto
         Me.lbl_idPres = New System.Windows.Forms.Label()
         Me.txt_idProveedor = New System.Windows.Forms.TextBox()
         Me.btn_cancelar = New System.Windows.Forms.Button()
+        Me.lst_origen = New System.Windows.Forms.ListBox()
+        Me.lst_destino = New System.Windows.Forms.ListBox()
         Me.box_cliente.SuspendLayout()
         Me.box_presupuesto.SuspendLayout()
         Me.box_resultadodisp.SuspendLayout()
@@ -188,6 +188,8 @@ Partial Class frm_presupuesto
         '
         'box_presupuesto
         '
+        Me.box_presupuesto.Controls.Add(Me.lst_destino)
+        Me.box_presupuesto.Controls.Add(Me.lst_origen)
         Me.box_presupuesto.Controls.Add(Me.chk_crucero)
         Me.box_presupuesto.Controls.Add(Me.chk_tren)
         Me.box_presupuesto.Controls.Add(Me.chk_bus)
@@ -199,10 +201,8 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.Controls.Add(Me.btn_asignar)
         Me.box_presupuesto.Controls.Add(Me.btn_reserva)
         Me.box_presupuesto.Controls.Add(Me.btn_disponibilidad)
-        Me.box_presupuesto.Controls.Add(Me.txt_origen)
         Me.box_presupuesto.Controls.Add(Me.lbl_origen)
         Me.box_presupuesto.Controls.Add(Me.lbl_destino)
-        Me.box_presupuesto.Controls.Add(Me.txt_destino)
         Me.box_presupuesto.Controls.Add(Me.txt_fechaida)
         Me.box_presupuesto.Controls.Add(Me.lbl_fechIda)
         Me.box_presupuesto.Controls.Add(Me.lbl_fechVue)
@@ -326,16 +326,6 @@ Partial Class frm_presupuesto
         Me.btn_disponibilidad.Text = "Disponibilidad"
         Me.btn_disponibilidad.UseVisualStyleBackColor = True
         '
-        'txt_origen
-        '
-        Me.txt_origen.AutoCompleteCustomSource.AddRange(New String() {"BUENOS AIRES", "MAR DEL PLATA", "MONTEVIDEO"})
-        Me.txt_origen.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txt_origen.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txt_origen.Location = New System.Drawing.Point(111, 38)
-        Me.txt_origen.Name = "txt_origen"
-        Me.txt_origen.Size = New System.Drawing.Size(270, 20)
-        Me.txt_origen.TabIndex = 10
-        '
         'lbl_origen
         '
         Me.lbl_origen.AutoSize = True
@@ -353,16 +343,6 @@ Partial Class frm_presupuesto
         Me.lbl_destino.Size = New System.Drawing.Size(43, 13)
         Me.lbl_destino.TabIndex = 12
         Me.lbl_destino.Text = "Destino"
-        '
-        'txt_destino
-        '
-        Me.txt_destino.AutoCompleteCustomSource.AddRange(New String() {"BUENOS AIRES", "MAR DEL PLATA", "MONTEVIDEO"})
-        Me.txt_destino.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txt_destino.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txt_destino.Location = New System.Drawing.Point(111, 66)
-        Me.txt_destino.Name = "txt_destino"
-        Me.txt_destino.Size = New System.Drawing.Size(270, 20)
-        Me.txt_destino.TabIndex = 13
         '
         'txt_fechaida
         '
@@ -512,6 +492,22 @@ Partial Class frm_presupuesto
         Me.btn_cancelar.Text = "Cancelar"
         Me.btn_cancelar.UseVisualStyleBackColor = True
         '
+        'lst_origen
+        '
+        Me.lst_origen.FormattingEnabled = True
+        Me.lst_origen.Location = New System.Drawing.Point(111, 38)
+        Me.lst_origen.Name = "lst_origen"
+        Me.lst_origen.Size = New System.Drawing.Size(270, 17)
+        Me.lst_origen.TabIndex = 32
+        '
+        'lst_destino
+        '
+        Me.lst_destino.FormattingEnabled = True
+        Me.lst_destino.Location = New System.Drawing.Point(111, 66)
+        Me.lst_destino.Name = "lst_destino"
+        Me.lst_destino.Size = New System.Drawing.Size(270, 17)
+        Me.lst_destino.TabIndex = 33
+        '
         'frm_presupuesto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -568,10 +564,8 @@ Partial Class frm_presupuesto
     Friend WithEvents btn_asignar As System.Windows.Forms.Button
     Friend WithEvents btn_reserva As System.Windows.Forms.Button
     Friend WithEvents btn_disponibilidad As System.Windows.Forms.Button
-    Friend WithEvents txt_origen As System.Windows.Forms.TextBox
     Friend WithEvents lbl_origen As System.Windows.Forms.Label
     Friend WithEvents lbl_destino As System.Windows.Forms.Label
-    Friend WithEvents txt_destino As System.Windows.Forms.TextBox
     Friend WithEvents txt_fechaida As System.Windows.Forms.TextBox
     Friend WithEvents lbl_fechIda As System.Windows.Forms.Label
     Friend WithEvents lbl_fechVue As System.Windows.Forms.Label
@@ -589,4 +583,6 @@ Partial Class frm_presupuesto
     Friend WithEvents lbl_idPres As System.Windows.Forms.Label
     Friend WithEvents txt_idProveedor As System.Windows.Forms.TextBox
     Friend WithEvents btn_cancelar As System.Windows.Forms.Button
+    Friend WithEvents lst_destino As System.Windows.Forms.ListBox
+    Friend WithEvents lst_origen As System.Windows.Forms.ListBox
 End Class

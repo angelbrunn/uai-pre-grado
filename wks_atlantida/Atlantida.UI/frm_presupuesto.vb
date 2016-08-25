@@ -26,6 +26,11 @@ Public Class frm_presupuesto
     ''' <summary>
     ''' 
     ''' </summary>
+    ''' <remarks></remarks>
+    Dim interfazPresupuesto As NegPresupuesto = New NegPresupuesto
+    ''' <summary>
+    ''' 
+    ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
@@ -80,7 +85,7 @@ Public Class frm_presupuesto
         End If
 
         'Cargo disponibilidad - 1:ABIERTO / 2:COMPLETO
-        DataGridView_disp.DataSource = n.disponibiliadPasajes(txt_origen.Text, txt_destino.Text, ft, txt_fechaida.Text)
+        DataGridView_disp.DataSource = n.disponibiliadPasajes(lst_destino.Text, lst_origen.Text, ft, txt_fechaida.Text)
         Dim column As DataGridViewColumn = DataGridView_disp.Columns(0)
         column.Width = 127
     End Sub
@@ -176,6 +181,9 @@ Public Class frm_presupuesto
             If enu.Current.componente = "lbl_origen" Then
                 Me.lbl_origen.Text = enu.Current.value
             End If
+            If enu.Current.componente = "lbl_idPres" Then
+                Me.lbl_idPres.Text = enu.Current.value
+            End If
             If enu.Current.componente = "btn_cancelar" Then
                 Me.btn_cancelar.Text = enu.Current.value
             End If
@@ -192,6 +200,14 @@ Public Class frm_presupuesto
     ''' <remarks></remarks>
     Private Sub frm_presupuesto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         modificarIdiomaSegunPreferencias(UsuarioIdioma)
+        Dim listadoDestinos As New List(Of Destinos)
+        listadoDestinos = interfazPresupuesto.obtenerDestinosDisponibles()
+
+        Dim enumerator As IEnumerator(Of Destinos) = listadoDestinos.GetEnumerator
+        While enumerator.MoveNext
+            lst_destino.Items.Add(enumerator.Current.destino)
+            lst_origen.Items.Add(enumerator.Current.destino)
+        End While
     End Sub
     ''' <summary>
     ''' 

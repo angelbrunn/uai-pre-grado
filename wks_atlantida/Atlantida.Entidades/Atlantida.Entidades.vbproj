@@ -65,6 +65,7 @@
     <Compile Include="Bitacora.vb" />
     <Compile Include="Cliente.vb" />
     <Compile Include="Cuenta.vb" />
+    <Compile Include="Destinos.vb" />
     <Compile Include="Divisa.vb" />
     <Compile Include="Encuesta.vb" />
     <Compile Include="Grupo.vb" />
