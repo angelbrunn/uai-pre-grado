@@ -39,6 +39,28 @@ Namespace SIS.DAL
             End Try
             Return listaDisponibles
         End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function paquetesPromoDisp() As DataTable
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim command As New SqlCommand("sp_paquetes_promocionables")
+
+            Dim connection As New SqlConnection(conexString)
+            command.Connection = connection
+            command.CommandType = CommandType.StoredProcedure
+
+            Dim adapter As New SqlDataAdapter(command)
+            adapter.SelectCommand.CommandTimeout = 300
+
+            Dim Ada As New SqlDataAdapter(command)
+            Dim Dt As New DataTable()
+            Ada.Fill(Dt)
+            connection.Close()
+            Return Dt
+        End Function
     End Class
 End Namespace
 

@@ -90,6 +90,23 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerPaquetesPromo() As DataTable
+            Dim listadoPaquetesProm As DataTable
+            listadoPaquetesProm = Nothing
+            Dim oDalPaquetesPromocionables As New DALPresupuesto
+            Try
+                listadoPaquetesProm = oDalPaquetesPromocionables.paquetesPromoDisp()
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return listadoPaquetesProm
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>

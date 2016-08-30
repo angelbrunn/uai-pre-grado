@@ -85,8 +85,8 @@ Public Class frm_presupuesto
         End If
 
         'Cargo disponibilidad - 1:ABIERTO / 2:COMPLETO
-        DataGridView_disp.DataSource = n.disponibiliadPasajes(lst_destino.Text, lst_origen.Text, ft, txt_fechaida.Text)
-        Dim column As DataGridViewColumn = DataGridView_disp.Columns(0)
+        dgw_PaqProm.DataSource = n.disponibiliadPasajes(lst_destino.Text, lst_origen.Text, ft, txt_fechaida.Text)
+        Dim column As DataGridViewColumn = dgw_PaqProm.Columns(0)
         column.Width = 127
     End Sub
     Private Sub modificarIdiomaSegunPreferencias(ByVal idioma As String)
@@ -208,6 +208,17 @@ Public Class frm_presupuesto
             lst_destino.Items.Add(enumerator.Current.destino)
             lst_origen.Items.Add(enumerator.Current.destino)
         End While
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_obtPaqProm_Click(sender As Object, e As EventArgs) Handles btn_obtPaqProm.Click
+        Dim listadoPaquetesProm As DataTable
+        listadoPaquetesProm = interfazPresupuesto.obtenerPaquetesPromo()
+        dgw_PaqProm.DataSource = listadoPaquetesProm
     End Sub
     ''' <summary>
     ''' 

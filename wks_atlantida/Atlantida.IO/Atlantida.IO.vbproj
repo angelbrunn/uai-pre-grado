@@ -64,9 +64,6 @@
   <ItemGroup>
     <Compile Include="IOBackup.vb" />
     <Compile Include="IOBitacora.vb" />
-    <Compile Include="IOCobro.vb" />
-    <Compile Include="IOPresupuesto.vb" />
-    <Compile Include="IOVoucher.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

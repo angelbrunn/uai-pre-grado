@@ -36,6 +36,8 @@ Partial Class frm_presupuesto
         Me.lbl_cliente2 = New System.Windows.Forms.Label()
         Me.lbl_cliente3 = New System.Windows.Forms.Label()
         Me.box_presupuesto = New System.Windows.Forms.GroupBox()
+        Me.lst_destino = New System.Windows.Forms.ListBox()
+        Me.lst_origen = New System.Windows.Forms.ListBox()
         Me.chk_crucero = New System.Windows.Forms.RadioButton()
         Me.chk_tren = New System.Windows.Forms.RadioButton()
         Me.chk_bus = New System.Windows.Forms.RadioButton()
@@ -54,7 +56,7 @@ Partial Class frm_presupuesto
         Me.lbl_fechVue = New System.Windows.Forms.Label()
         Me.txt_fechavuelta = New System.Windows.Forms.TextBox()
         Me.box_resultadodisp = New System.Windows.Forms.GroupBox()
-        Me.DataGridView_disp = New System.Windows.Forms.DataGridView()
+        Me.dgw_PaqProm = New System.Windows.Forms.DataGridView()
         Me.box_hospedaje = New System.Windows.Forms.GroupBox()
         Me.ListView_estadoop = New System.Windows.Forms.ListView()
         Me.box_disponibilidad = New System.Windows.Forms.GroupBox()
@@ -66,12 +68,10 @@ Partial Class frm_presupuesto
         Me.lbl_idPres = New System.Windows.Forms.Label()
         Me.txt_idProveedor = New System.Windows.Forms.TextBox()
         Me.btn_cancelar = New System.Windows.Forms.Button()
-        Me.lst_origen = New System.Windows.Forms.ListBox()
-        Me.lst_destino = New System.Windows.Forms.ListBox()
         Me.box_cliente.SuspendLayout()
         Me.box_presupuesto.SuspendLayout()
         Me.box_resultadodisp.SuspendLayout()
-        CType(Me.DataGridView_disp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgw_PaqProm, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.box_hospedaje.SuspendLayout()
         Me.box_disponibilidad.SuspendLayout()
         Me.box_estadoOP.SuspendLayout()
@@ -213,6 +213,22 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.TabIndex = 8
         Me.box_presupuesto.TabStop = False
         Me.box_presupuesto.Text = "Paquete No promocionable"
+        '
+        'lst_destino
+        '
+        Me.lst_destino.FormattingEnabled = True
+        Me.lst_destino.Location = New System.Drawing.Point(111, 66)
+        Me.lst_destino.Name = "lst_destino"
+        Me.lst_destino.Size = New System.Drawing.Size(270, 17)
+        Me.lst_destino.TabIndex = 33
+        '
+        'lst_origen
+        '
+        Me.lst_origen.FormattingEnabled = True
+        Me.lst_origen.Location = New System.Drawing.Point(111, 38)
+        Me.lst_origen.Name = "lst_origen"
+        Me.lst_origen.Size = New System.Drawing.Size(270, 17)
+        Me.lst_origen.TabIndex = 32
         '
         'chk_crucero
         '
@@ -380,7 +396,7 @@ Partial Class frm_presupuesto
         '
         'box_resultadodisp
         '
-        Me.box_resultadodisp.Controls.Add(Me.DataGridView_disp)
+        Me.box_resultadodisp.Controls.Add(Me.dgw_PaqProm)
         Me.box_resultadodisp.Location = New System.Drawing.Point(12, 264)
         Me.box_resultadodisp.Name = "box_resultadodisp"
         Me.box_resultadodisp.Size = New System.Drawing.Size(790, 166)
@@ -388,13 +404,13 @@ Partial Class frm_presupuesto
         Me.box_resultadodisp.TabStop = False
         Me.box_resultadodisp.Text = "Paquete Promocionable"
         '
-        'DataGridView_disp
+        'dgw_PaqProm
         '
-        Me.DataGridView_disp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView_disp.Location = New System.Drawing.Point(9, 19)
-        Me.DataGridView_disp.Name = "DataGridView_disp"
-        Me.DataGridView_disp.Size = New System.Drawing.Size(767, 141)
-        Me.DataGridView_disp.TabIndex = 1
+        Me.dgw_PaqProm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgw_PaqProm.Location = New System.Drawing.Point(9, 19)
+        Me.dgw_PaqProm.Name = "dgw_PaqProm"
+        Me.dgw_PaqProm.Size = New System.Drawing.Size(767, 141)
+        Me.dgw_PaqProm.TabIndex = 1
         '
         'box_hospedaje
         '
@@ -492,22 +508,6 @@ Partial Class frm_presupuesto
         Me.btn_cancelar.Text = "Cancelar"
         Me.btn_cancelar.UseVisualStyleBackColor = True
         '
-        'lst_origen
-        '
-        Me.lst_origen.FormattingEnabled = True
-        Me.lst_origen.Location = New System.Drawing.Point(111, 38)
-        Me.lst_origen.Name = "lst_origen"
-        Me.lst_origen.Size = New System.Drawing.Size(270, 17)
-        Me.lst_origen.TabIndex = 32
-        '
-        'lst_destino
-        '
-        Me.lst_destino.FormattingEnabled = True
-        Me.lst_destino.Location = New System.Drawing.Point(111, 66)
-        Me.lst_destino.Name = "lst_destino"
-        Me.lst_destino.Size = New System.Drawing.Size(270, 17)
-        Me.lst_destino.TabIndex = 33
-        '
         'frm_presupuesto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -532,7 +532,7 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.ResumeLayout(False)
         Me.box_presupuesto.PerformLayout()
         Me.box_resultadodisp.ResumeLayout(False)
-        CType(Me.DataGridView_disp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgw_PaqProm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.box_hospedaje.ResumeLayout(False)
         Me.box_disponibilidad.ResumeLayout(False)
         Me.box_estadoOP.ResumeLayout(False)
@@ -571,7 +571,7 @@ Partial Class frm_presupuesto
     Friend WithEvents lbl_fechVue As System.Windows.Forms.Label
     Friend WithEvents txt_fechavuelta As System.Windows.Forms.TextBox
     Friend WithEvents box_resultadodisp As System.Windows.Forms.GroupBox
-    Friend WithEvents DataGridView_disp As System.Windows.Forms.DataGridView
+    Friend WithEvents dgw_PaqProm As System.Windows.Forms.DataGridView
     Friend WithEvents box_hospedaje As System.Windows.Forms.GroupBox
     Friend WithEvents ListView_estadoop As System.Windows.Forms.ListView
     Friend WithEvents box_disponibilidad As System.Windows.Forms.GroupBox
