@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Bitacora.vb" />
     <Compile Include="Cliente.vb" />
+    <Compile Include="Cobro.vb" />
     <Compile Include="Cuenta.vb" />
     <Compile Include="Destinos.vb" />
     <Compile Include="Divisa.vb" />
@@ -87,6 +88,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Pago.vb" />
     <Compile Include="PaquetePromocionable.vb" />
     <Compile Include="Permiso.vb" />
     <Compile Include="Presupuesto.vb" />

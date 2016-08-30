@@ -1,5 +1,10 @@
 ﻿Namespace SIS.Entidades
-    Public Class Presupuesto
+    Public Class Cobro
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private idCobro As Integer
         ''' <summary>
         ''' 
         ''' </summary>
@@ -9,37 +14,36 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private codigoCliente As String
+        Private monto As Double
         ''' <summary>
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private legajo As Integer
+        Private nroFactura As Integer
         ''' <summary>
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private destino As String
+        Private ventaCancelada As Boolean
         ''' <summary>
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private fechaPartida As Date
+        Private fechaCobro As Date
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
         ''' <remarks></remarks>
-        Private fechaRegreso As Date
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <remarks></remarks>
-        Private idPaquetePromocionable As Integer
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <remarks></remarks>
-        Private fechaCreacion As Date
+        Public Property idCobros() As Integer
+            Get
+                Return idCobro
+            End Get
+            Set(ByVal value As Integer)
+                idCobro = value
+            End Set
+        End Property
         ''' <summary>
         ''' 
         ''' </summary>
@@ -60,12 +64,12 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property codCliente() As String
+        Public Property montos() As Double
             Get
-                Return idPresupuesto
+                Return monto
             End Get
-            Set(ByVal value As String)
-                codigoCliente = value
+            Set(ByVal value As Double)
+                monto = value
             End Set
         End Property
         ''' <summary>
@@ -74,12 +78,12 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property legPresu() As Integer
+        Public Property numeroFactura() As Integer
             Get
-                Return legajo
+                Return nroFactura
             End Get
             Set(ByVal value As Integer)
-                legajo = value
+                nroFactura = value
             End Set
         End Property
         ''' <summary>
@@ -88,12 +92,12 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property destPres() As String
+        Public Property ventaCancel() As Boolean
             Get
-                Return destino
+                Return ventaCancelada
             End Get
-            Set(ByVal value As String)
-                destino = value
+            Set(ByVal value As Boolean)
+                ventaCancelada = value
             End Set
         End Property
         ''' <summary>
@@ -102,54 +106,12 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property FechPartida() As Date
+        Public Property FechCobro() As Date
             Get
-                Return fechaPartida
-            End Get
-            Set(ByVal value As Date)
-                fechaPartida = value
-            End Set
-        End Property
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property FechRegreso() As Date
-            Get
-                Return fechaRegreso
+                Return fechaCobro
             End Get
             Set(ByVal value As Date)
-                fechaRegreso = value
-            End Set
-        End Property
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property idPaqPromocionable() As Integer
-            Get
-                Return idPaquetePromocionable
-            End Get
-            Set(ByVal value As Integer)
-                idPaquetePromocionable = value
-            End Set
-        End Property
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property FechCreacion() As Date
-            Get
-                Return fechaCreacion
-            End Get
-            Set(ByVal value As Date)
-                fechaCreacion = value
+                fechaCobro = value
             End Set
         End Property
     End Class
