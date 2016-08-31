@@ -1,4 +1,6 @@
-﻿Imports Atlantida.Entidades.SIS.Entidades
+﻿Imports System.IO
+Imports Atlantida.IO.SIS.IO
+Imports Atlantida.Entidades.SIS.Entidades
 Imports Atlantida.DAL.SIS.DAL
 
 Namespace SIS.BLL
@@ -104,6 +106,40 @@ Namespace SIS.BLL
 
             Return listadoPaquetesProm
         End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub exportarAArchivoPresupuesto(ByVal ruta As String, ByVal delim As String)
+            Dim oIOPresupuesto As New IOPresupuesto
+            Dim listaPresupuesto As New List(Of Presupuesto)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                listaPresupuesto = oDalPresupuesto.obtenerTablaPresupuesto()
+                oIOPresupuesto.escribirArchivoPresupuesto(ruta, delim, listaPresupuesto)
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub importarDesdeArchivoPresupuesto(ByVal ruta As String, ByVal delim As String)
+            Dim oIOPresupuesto As New IOPresupuesto
+            Dim oDalPresupuesto As New DALPresupuesto
+            Dim listaPresupuesto As New List(Of Presupuesto)
+
+            listaPresupuesto = oIOPresupuesto.leerArchivoPresupuesto(ruta, delim)
+
+            Dim enu As IEnumerator(Of Presupuesto) = listaPresupuesto.GetEnumerator
+            While enu.MoveNext
+                oDalPresupuesto.insertarPresupuesto(enu.Current)
+            End While
+        End Sub
         ''' <summary>
         ''' 
         ''' </summary>
