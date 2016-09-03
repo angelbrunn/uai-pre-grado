@@ -61,33 +61,35 @@ Public Class frm_presupuesto
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub btn_disponibilidad_Click(sender As Object, e As EventArgs) Handles btn_disponibilidad.Click
+    Private Sub btn_disponibilidad_Click(sender As Object, e As EventArgs) Handles btn_obtPaqNoProm.Click
+
+        frm_PaqueteNoPromocionable.Show()
         'Defino un flag para el tipo de transporte - FIXME:solo funciona para una seleccion
-        Dim ft As String = ""
-        Dim chiquito As String = ""
+        'Dim ft As String = ""
+        'Dim chiquito As String = ""
 
         'Agregar Enum
-        If chk_bus.Checked = True Then
-            chiquito += "3, "
-        End If
-        If chk_tren.Checked = True Then
-            chiquito += "2, "
-        End If
-        If chk_avion.Checked = True Then
-            chiquito += "1, "
-        End If
-        If chk_crucero.Checked = True Then
-            chiquito += "4, "
-        End If
+        'If chk_bus.Checked = True Then
+        '    chiquito += "3, "
+        'End If
+        'If chk_tren.Checked = True Then
+        '    chiquito += "2, "
+        'End If
+        'If chk_avion.Checked = True Then
+        '    chiquito += "1, "
+        'End If
+        'If chk_crucero.Checked = True Then
+        '    chiquito += "4, "
+        'End If
 
-        If Not chiquito = "" Then
-            ft = String.Format(" AND rut_tipotransporte IN ({0}) ", chiquito.Substring(0, chiquito.Length - 2))
-        End If
+        'If Not chiquito = "" Then
+        '    ft = String.Format(" AND rut_tipotransporte IN ({0}) ", chiquito.Substring(0, chiquito.Length - 2))
+        'End If
 
         'Cargo disponibilidad - 1:ABIERTO / 2:COMPLETO
-        dgw_PaqProm.DataSource = n.disponibiliadPasajes(lst_destino.Text, lst_origen.Text, ft, txt_fechaida.Text)
-        Dim column As DataGridViewColumn = dgw_PaqProm.Columns(0)
-        column.Width = 127
+        'dgw_PaqProm.DataSource = n.disponibiliadPasajes(lst_destino.Text, lst_origen.Text, ft, txt_fechaida.Text)
+        'Dim column As DataGridViewColumn = dgw_PaqProm.Columns(0)
+        'column.Width = 127
     End Sub
     Private Sub modificarIdiomaSegunPreferencias(ByVal idioma As String)
         'Obtengo el listado de nombre de los componentes en ambos idiomas.
@@ -100,14 +102,8 @@ Public Class frm_presupuesto
             If enu.Current.componente = "box_cliente" Then
                 Me.box_cliente.Text = enu.Current.value
             End If
-            If enu.Current.componente = "box_disponibilidad" Then
-                Me.box_disponibilidad.Text = enu.Current.value
-            End If
             If enu.Current.componente = "box_estadoOP" Then
                 Me.box_estadoOP.Text = enu.Current.value
-            End If
-            If enu.Current.componente = "box_hospedaje" Then
-                Me.box_hospedaje.Text = enu.Current.value
             End If
             If enu.Current.componente = "box_presupuesto" Then
                 Me.box_presupuesto.Text = enu.Current.value
@@ -122,7 +118,7 @@ Public Class frm_presupuesto
                 Me.btn_cargar.Text = enu.Current.value
             End If
             If enu.Current.componente = "btn_disponibilidad" Then
-                Me.btn_disponibilidad.Text = enu.Current.value
+                Me.btn_obtPaqNoProm.Text = enu.Current.value
             End If
             If enu.Current.componente = "btn_generapresu" Then
                 Me.btn_generapresu.Text = enu.Current.value
@@ -132,9 +128,6 @@ Public Class frm_presupuesto
             End If
             If enu.Current.componente = "btn_obtPaqProm" Then
                 Me.btn_obtPaqProm.Text = enu.Current.value
-            End If
-            If enu.Current.componente = "btn_reserva" Then
-                Me.btn_reserva.Text = enu.Current.value
             End If
             If enu.Current.componente = "btn_terminaop" Then
                 Me.btn_terminaop.Text = enu.Current.value
@@ -150,9 +143,6 @@ Public Class frm_presupuesto
             End If
             If enu.Current.componente = "chk_tren" Then
                 Me.chk_tren.Text = enu.Current.value
-            End If
-            If enu.Current.componente = "lbl_asiento" Then
-                Me.lbl_asiento.Text = enu.Current.value
             End If
             If enu.Current.componente = "lbl_cliente1" Then
                 Me.lbl_cliente1.Text = enu.Current.value
@@ -187,6 +177,9 @@ Public Class frm_presupuesto
             If enu.Current.componente = "btn_cancelar" Then
                 Me.btn_cancelar.Text = enu.Current.value
             End If
+            If enu.Current.componente = "btn_obtPaqNoProm" Then
+                Me.btn_obtPaqNoProm.Text = enu.Current.value
+            End If
             If enu.Current.componente = "frm_presupuesto" Then
                 Me.Text = enu.Current.value
             End If
@@ -219,6 +212,18 @@ Public Class frm_presupuesto
         Dim listadoPaquetesProm As DataTable
         listadoPaquetesProm = interfazPresupuesto.obtenerPaquetesPromo()
         dgw_PaqProm.DataSource = listadoPaquetesProm
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_hospedaje_Click(sender As Object, e As EventArgs) Handles btn_hospedaje.Click
+        'Dim listadoHospedaje As DataTable
+        'listadoHospedaje = interfazPresupuesto.obtenerHospedajesDisponibles()
+        'dgw_hospedaje.DataSource = listadoHospedaje
+        frm_hospedaje.Show()
     End Sub
     ''' <summary>
     ''' 

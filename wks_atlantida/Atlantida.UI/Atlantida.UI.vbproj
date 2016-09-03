@@ -76,6 +76,24 @@
     <Compile Include="frm_encuesta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frm_hospedaje.Designer.vb">
+      <DependentUpon>frm_hospedaje.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_hospedaje.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_idioma.Designer.vb">
+      <DependentUpon>frm_idioma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_idioma.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_PaqueteNoPromocionable.Designer.vb">
+      <DependentUpon>frm_PaqueteNoPromocionable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_PaqueteNoPromocionable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frm_presupuesto.Designer.vb">
       <DependentUpon>frm_presupuesto.vb</DependentUpon>
     </Compile>
@@ -167,6 +185,15 @@
   <ItemGroup>
     <EmbeddedResource Include="frm_encuesta.resx">
       <DependentUpon>frm_encuesta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_hospedaje.resx">
+      <DependentUpon>frm_hospedaje.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_idioma.resx">
+      <DependentUpon>frm_idioma.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_PaqueteNoPromocionable.resx">
+      <DependentUpon>frm_PaqueteNoPromocionable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_presupuesto.resx">
       <DependentUpon>frm_presupuesto.vb</DependentUpon>

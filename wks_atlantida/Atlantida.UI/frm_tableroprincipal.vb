@@ -98,6 +98,9 @@ Public Class frm_TableroPrincipal
             If enu.Current.componente = "Menu_PstVenta" Then
                 'Me.Menu_PstVenta.Text = enu.Current.value
             End If
+            If enu.Current.componente = "Menu_Idioma" Then
+                Me.Menu_Idioma.Text = enu.Current.value
+            End If
             If enu.Current.componente = "Menu_Terminar" Then
                 Me.Menu_Terminar.Text = enu.Current.value
             End If
@@ -127,6 +130,9 @@ Public Class frm_TableroPrincipal
             End If
             If enu.Current.componente = "SubMenu_Usuario" Then
                 Me.SubMenu_Usuario.Text = enu.Current.value
+            End If
+            If enu.Current.componente = "SubMenu_Cambiar" Then
+                Me.SubMenu_Cambiar.Text = enu.Current.value
             End If
         End While
     End Sub
@@ -178,6 +184,14 @@ Public Class frm_TableroPrincipal
         frm_cobro.UsuarioIdioma = unUsuario.idioma
         frm_cobro.Show()
     End Sub
+
+    Private Sub CambiarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubMenu_Cambiar.Click
+        Dim formulario As New frm_idioma()
+        formulario.chUsuario = unUsuario
+        formulario.Show()
+        Me.Close()
+    End Sub
+
     ''' <summary>
     ''' 
     ''' </summary>

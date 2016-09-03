@@ -33,6 +33,8 @@ Partial Class frm_TableroPrincipal
         Me.Menu_CyP = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubMenu_Cobro = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubMenu_Pago = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Menu_Idioma = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SubMenu_Cambiar = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_Terminar = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubMenu_Salir = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_General.SuspendLayout()
@@ -41,7 +43,7 @@ Partial Class frm_TableroPrincipal
         'Menu_General
         '
         resources.ApplyResources(Me.Menu_General, "Menu_General")
-        Me.Menu_General.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Menu_Administracion, Me.Menu_Generar, Me.Menu_CyP, Me.Menu_Terminar})
+        Me.Menu_General.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Menu_Administracion, Me.Menu_Generar, Me.Menu_CyP, Me.Menu_Idioma, Me.Menu_Terminar})
         Me.Menu_General.Name = "Menu_General"
         '
         'Menu_Administracion
@@ -92,6 +94,17 @@ Partial Class frm_TableroPrincipal
         resources.ApplyResources(Me.SubMenu_Pago, "SubMenu_Pago")
         Me.SubMenu_Pago.Name = "SubMenu_Pago"
         '
+        'Menu_Idioma
+        '
+        resources.ApplyResources(Me.Menu_Idioma, "Menu_Idioma")
+        Me.Menu_Idioma.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubMenu_Cambiar})
+        Me.Menu_Idioma.Name = "Menu_Idioma"
+        '
+        'SubMenu_Cambiar
+        '
+        resources.ApplyResources(Me.SubMenu_Cambiar, "SubMenu_Cambiar")
+        Me.SubMenu_Cambiar.Name = "SubMenu_Cambiar"
+        '
         'Menu_Terminar
         '
         resources.ApplyResources(Me.Menu_Terminar, "Menu_Terminar")
@@ -131,5 +144,7 @@ Partial Class frm_TableroPrincipal
     Friend WithEvents Menu_Terminar As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubMenu_Salir As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubMenu_Depuracion As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Menu_Idioma As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SubMenu_Cambiar As System.Windows.Forms.ToolStripMenuItem
 
 End Class

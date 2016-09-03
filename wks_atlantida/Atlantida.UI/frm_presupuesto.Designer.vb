@@ -47,8 +47,7 @@ Partial Class frm_presupuesto
         Me.btn_generapresu = New System.Windows.Forms.Button()
         Me.btn_terminaop = New System.Windows.Forms.Button()
         Me.btn_asignar = New System.Windows.Forms.Button()
-        Me.btn_reserva = New System.Windows.Forms.Button()
-        Me.btn_disponibilidad = New System.Windows.Forms.Button()
+        Me.btn_obtPaqNoProm = New System.Windows.Forms.Button()
         Me.lbl_origen = New System.Windows.Forms.Label()
         Me.lbl_destino = New System.Windows.Forms.Label()
         Me.txt_fechaida = New System.Windows.Forms.TextBox()
@@ -57,14 +56,8 @@ Partial Class frm_presupuesto
         Me.txt_fechavuelta = New System.Windows.Forms.TextBox()
         Me.box_resultadodisp = New System.Windows.Forms.GroupBox()
         Me.dgw_PaqProm = New System.Windows.Forms.DataGridView()
-        Me.box_hospedaje = New System.Windows.Forms.GroupBox()
-        Me.ListView_estadoop = New System.Windows.Forms.ListView()
-        Me.box_disponibilidad = New System.Windows.Forms.GroupBox()
-        Me.lst_disponibilidad = New System.Windows.Forms.ListBox()
-        Me.lbl_asiento = New System.Windows.Forms.Label()
-        Me.list_asientos = New System.Windows.Forms.ListBox()
         Me.box_estadoOP = New System.Windows.Forms.GroupBox()
-        Me.list_estadoOP = New System.Windows.Forms.ListView()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.lbl_idPres = New System.Windows.Forms.Label()
         Me.txt_idProveedor = New System.Windows.Forms.TextBox()
         Me.btn_cancelar = New System.Windows.Forms.Button()
@@ -72,9 +65,8 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.SuspendLayout()
         Me.box_resultadodisp.SuspendLayout()
         CType(Me.dgw_PaqProm, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.box_hospedaje.SuspendLayout()
-        Me.box_disponibilidad.SuspendLayout()
         Me.box_estadoOP.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'box_cliente
@@ -199,8 +191,7 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.Controls.Add(Me.btn_generapresu)
         Me.box_presupuesto.Controls.Add(Me.btn_terminaop)
         Me.box_presupuesto.Controls.Add(Me.btn_asignar)
-        Me.box_presupuesto.Controls.Add(Me.btn_reserva)
-        Me.box_presupuesto.Controls.Add(Me.btn_disponibilidad)
+        Me.box_presupuesto.Controls.Add(Me.btn_obtPaqNoProm)
         Me.box_presupuesto.Controls.Add(Me.lbl_origen)
         Me.box_presupuesto.Controls.Add(Me.lbl_destino)
         Me.box_presupuesto.Controls.Add(Me.txt_fechaida)
@@ -292,7 +283,7 @@ Partial Class frm_presupuesto
         Me.btn_obtPaqProm.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btn_obtPaqProm.Location = New System.Drawing.Point(6, 171)
         Me.btn_obtPaqProm.Name = "btn_obtPaqProm"
-        Me.btn_obtPaqProm.Size = New System.Drawing.Size(170, 39)
+        Me.btn_obtPaqProm.Size = New System.Drawing.Size(170, 30)
         Me.btn_obtPaqProm.TabIndex = 25
         Me.btn_obtPaqProm.Text = "Obtener Paquetes Prom."
         Me.btn_obtPaqProm.UseVisualStyleBackColor = True
@@ -324,23 +315,14 @@ Partial Class frm_presupuesto
         Me.btn_asignar.Text = "Asignar"
         Me.btn_asignar.UseVisualStyleBackColor = True
         '
-        'btn_reserva
+        'btn_obtPaqNoProm
         '
-        Me.btn_reserva.Location = New System.Drawing.Point(94, 216)
-        Me.btn_reserva.Name = "btn_reserva"
-        Me.btn_reserva.Size = New System.Drawing.Size(82, 23)
-        Me.btn_reserva.TabIndex = 19
-        Me.btn_reserva.Text = "Reservar"
-        Me.btn_reserva.UseVisualStyleBackColor = True
-        '
-        'btn_disponibilidad
-        '
-        Me.btn_disponibilidad.Location = New System.Drawing.Point(6, 216)
-        Me.btn_disponibilidad.Name = "btn_disponibilidad"
-        Me.btn_disponibilidad.Size = New System.Drawing.Size(82, 23)
-        Me.btn_disponibilidad.TabIndex = 18
-        Me.btn_disponibilidad.Text = "Disponibilidad"
-        Me.btn_disponibilidad.UseVisualStyleBackColor = True
+        Me.btn_obtPaqNoProm.Location = New System.Drawing.Point(6, 207)
+        Me.btn_obtPaqNoProm.Name = "btn_obtPaqNoProm"
+        Me.btn_obtPaqNoProm.Size = New System.Drawing.Size(170, 32)
+        Me.btn_obtPaqNoProm.TabIndex = 18
+        Me.btn_obtPaqNoProm.Text = "Obtener Paquetes NoProm."
+        Me.btn_obtPaqNoProm.UseVisualStyleBackColor = True
         '
         'lbl_origen
         '
@@ -409,65 +391,12 @@ Partial Class frm_presupuesto
         Me.dgw_PaqProm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgw_PaqProm.Location = New System.Drawing.Point(9, 19)
         Me.dgw_PaqProm.Name = "dgw_PaqProm"
-        Me.dgw_PaqProm.Size = New System.Drawing.Size(767, 141)
+        Me.dgw_PaqProm.Size = New System.Drawing.Size(775, 141)
         Me.dgw_PaqProm.TabIndex = 1
-        '
-        'box_hospedaje
-        '
-        Me.box_hospedaje.Controls.Add(Me.ListView_estadoop)
-        Me.box_hospedaje.Location = New System.Drawing.Point(1042, 12)
-        Me.box_hospedaje.Name = "box_hospedaje"
-        Me.box_hospedaje.Size = New System.Drawing.Size(240, 418)
-        Me.box_hospedaje.TabIndex = 10
-        Me.box_hospedaje.TabStop = False
-        Me.box_hospedaje.Text = "Hospedaje disponible"
-        '
-        'ListView_estadoop
-        '
-        Me.ListView_estadoop.Location = New System.Drawing.Point(6, 19)
-        Me.ListView_estadoop.Name = "ListView_estadoop"
-        Me.ListView_estadoop.Size = New System.Drawing.Size(228, 393)
-        Me.ListView_estadoop.TabIndex = 1
-        Me.ListView_estadoop.UseCompatibleStateImageBehavior = False
-        '
-        'box_disponibilidad
-        '
-        Me.box_disponibilidad.Controls.Add(Me.lst_disponibilidad)
-        Me.box_disponibilidad.Location = New System.Drawing.Point(808, 12)
-        Me.box_disponibilidad.Name = "box_disponibilidad"
-        Me.box_disponibilidad.Size = New System.Drawing.Size(228, 418)
-        Me.box_disponibilidad.TabIndex = 11
-        Me.box_disponibilidad.TabStop = False
-        Me.box_disponibilidad.Text = "Disponibilidad"
-        '
-        'lst_disponibilidad
-        '
-        Me.lst_disponibilidad.FormattingEnabled = True
-        Me.lst_disponibilidad.Location = New System.Drawing.Point(6, 19)
-        Me.lst_disponibilidad.Name = "lst_disponibilidad"
-        Me.lst_disponibilidad.Size = New System.Drawing.Size(214, 394)
-        Me.lst_disponibilidad.TabIndex = 1
-        '
-        'lbl_asiento
-        '
-        Me.lbl_asiento.AutoSize = True
-        Me.lbl_asiento.Location = New System.Drawing.Point(811, 436)
-        Me.lbl_asiento.Name = "lbl_asiento"
-        Me.lbl_asiento.Size = New System.Drawing.Size(42, 13)
-        Me.lbl_asiento.TabIndex = 2
-        Me.lbl_asiento.Text = "Asiento"
-        '
-        'list_asientos
-        '
-        Me.list_asientos.FormattingEnabled = True
-        Me.list_asientos.Location = New System.Drawing.Point(814, 455)
-        Me.list_asientos.Name = "list_asientos"
-        Me.list_asientos.Size = New System.Drawing.Size(462, 95)
-        Me.list_asientos.TabIndex = 0
         '
         'box_estadoOP
         '
-        Me.box_estadoOP.Controls.Add(Me.list_estadoOP)
+        Me.box_estadoOP.Controls.Add(Me.DataGridView1)
         Me.box_estadoOP.Location = New System.Drawing.Point(12, 436)
         Me.box_estadoOP.Name = "box_estadoOP"
         Me.box_estadoOP.Size = New System.Drawing.Size(790, 119)
@@ -475,13 +404,13 @@ Partial Class frm_presupuesto
         Me.box_estadoOP.TabStop = False
         Me.box_estadoOP.Text = "Estado operacion"
         '
-        'list_estadoOP
+        'DataGridView1
         '
-        Me.list_estadoOP.Location = New System.Drawing.Point(6, 19)
-        Me.list_estadoOP.Name = "list_estadoOP"
-        Me.list_estadoOP.Size = New System.Drawing.Size(770, 89)
-        Me.list_estadoOP.TabIndex = 1
-        Me.list_estadoOP.UseCompatibleStateImageBehavior = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(9, 12)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(775, 101)
+        Me.DataGridView1.TabIndex = 0
         '
         'lbl_idPres
         '
@@ -512,15 +441,11 @@ Partial Class frm_presupuesto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1289, 566)
+        Me.ClientSize = New System.Drawing.Size(814, 566)
         Me.Controls.Add(Me.btn_cancelar)
         Me.Controls.Add(Me.txt_idProveedor)
         Me.Controls.Add(Me.lbl_idPres)
-        Me.Controls.Add(Me.lbl_asiento)
         Me.Controls.Add(Me.box_estadoOP)
-        Me.Controls.Add(Me.box_disponibilidad)
-        Me.Controls.Add(Me.list_asientos)
-        Me.Controls.Add(Me.box_hospedaje)
         Me.Controls.Add(Me.box_resultadodisp)
         Me.Controls.Add(Me.box_presupuesto)
         Me.Controls.Add(Me.box_cliente)
@@ -533,9 +458,8 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.PerformLayout()
         Me.box_resultadodisp.ResumeLayout(False)
         CType(Me.dgw_PaqProm, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.box_hospedaje.ResumeLayout(False)
-        Me.box_disponibilidad.ResumeLayout(False)
         Me.box_estadoOP.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -562,8 +486,7 @@ Partial Class frm_presupuesto
     Friend WithEvents btn_generapresu As System.Windows.Forms.Button
     Friend WithEvents btn_terminaop As System.Windows.Forms.Button
     Friend WithEvents btn_asignar As System.Windows.Forms.Button
-    Friend WithEvents btn_reserva As System.Windows.Forms.Button
-    Friend WithEvents btn_disponibilidad As System.Windows.Forms.Button
+    Friend WithEvents btn_obtPaqNoProm As System.Windows.Forms.Button
     Friend WithEvents lbl_origen As System.Windows.Forms.Label
     Friend WithEvents lbl_destino As System.Windows.Forms.Label
     Friend WithEvents txt_fechaida As System.Windows.Forms.TextBox
@@ -572,17 +495,11 @@ Partial Class frm_presupuesto
     Friend WithEvents txt_fechavuelta As System.Windows.Forms.TextBox
     Friend WithEvents box_resultadodisp As System.Windows.Forms.GroupBox
     Friend WithEvents dgw_PaqProm As System.Windows.Forms.DataGridView
-    Friend WithEvents box_hospedaje As System.Windows.Forms.GroupBox
-    Friend WithEvents ListView_estadoop As System.Windows.Forms.ListView
-    Friend WithEvents box_disponibilidad As System.Windows.Forms.GroupBox
-    Friend WithEvents lbl_asiento As System.Windows.Forms.Label
-    Friend WithEvents lst_disponibilidad As System.Windows.Forms.ListBox
-    Friend WithEvents list_asientos As System.Windows.Forms.ListBox
     Friend WithEvents box_estadoOP As System.Windows.Forms.GroupBox
-    Friend WithEvents list_estadoOP As System.Windows.Forms.ListView
     Friend WithEvents lbl_idPres As System.Windows.Forms.Label
     Friend WithEvents txt_idProveedor As System.Windows.Forms.TextBox
     Friend WithEvents btn_cancelar As System.Windows.Forms.Button
     Friend WithEvents lst_destino As System.Windows.Forms.ListBox
     Friend WithEvents lst_origen As System.Windows.Forms.ListBox
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
 End Class

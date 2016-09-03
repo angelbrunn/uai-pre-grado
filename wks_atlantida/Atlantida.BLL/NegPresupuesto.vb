@@ -143,6 +143,23 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerHospedajesDisponibles() As DataTable
+            Dim listadoHospedaje As DataTable
+            listadoHospedaje = Nothing
+            Dim oDalHospedaje As New DALHospedaje
+            Try
+                listadoHospedaje = oDalHospedaje.hospedajesDisponibles()
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return listadoHospedaje
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>

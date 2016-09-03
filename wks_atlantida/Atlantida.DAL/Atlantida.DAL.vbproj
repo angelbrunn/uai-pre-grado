@@ -71,7 +71,7 @@
     <Compile Include="DALEncuesta.vb" />
     <Compile Include="DALGrupo.vb" />
     <Compile Include="DALGrupoPermiso.vb" />
-    <Compile Include="DALHospedeje.vb" />
+    <Compile Include="DALHospedaje.vb" />
     <Compile Include="DALMultiIdioma.vb" />
     <Compile Include="DALPago.vb" />
     <Compile Include="DALPaquetesPromocionables.vb" />
