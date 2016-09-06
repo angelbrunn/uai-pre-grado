@@ -64,6 +64,39 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="origen"></param>
+        ''' <param name="destino"></param>
+        ''' <param name="fechIda"></param>
+        ''' <param name="fechVuelta"></param>
+        ''' <param name="medioTransp"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function paquetesNoPromo(ByVal origen As String, ByVal destino As String, ByVal fechIda As String, ByVal fechVuelta As String, ByVal medioTransp As String) As DataTable
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim command As New SqlCommand("sp_paquetes_no_promocionables")
+
+            Dim connection As New SqlConnection(conexString)
+            command.Connection = connection
+            command.CommandType = CommandType.StoredProcedure
+
+            command.Parameters.AddWithValue("@pOrigen", origen)
+            command.Parameters.AddWithValue("@pDestino", destino)
+            command.Parameters.AddWithValue("@pFIda", fechIda)
+            command.Parameters.AddWithValue("@pFVta", fechVuelta)
+            command.Parameters.AddWithValue("@pMedioTransp", medioTransp)
+
+            Dim adapter As New SqlDataAdapter(command)
+            adapter.SelectCommand.CommandTimeout = 300
+
+            Dim Ada As New SqlDataAdapter(command)
+            Dim Dt As New DataTable()
+            Ada.Fill(Dt)
+            connection.Close()
+            Return Dt
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function obtenerTablaPresupuesto() As List(Of Presupuesto)

@@ -47,6 +47,53 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="codigoCliente"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function obtenerClientePorId(ByVal dni As Integer) As Cliente
+            Dim oCliente As New Cliente
+
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "SELECT * FROM Cliente WHERE dni=@dni"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+            iPar.ParameterName = "dni"
+            iPar.DbType = DbType.Int32
+            iPar.Value = dni
+            comando.Parameters.Add(iPar)
+
+            Dim adapter As New SqlDataAdapter(comando)
+            Dim ds As New DataSet
+
+            Try
+                adapter.Fill(ds, "Cliente")
+                Dim dr As DataRow = ds.Tables("Cliente").Rows.Item(0)
+
+                oCliente.codigoCliente = dr("codigoCliente")
+                oCliente.dni = dr("dni")
+                oCliente.nombre = dr("nombre")
+                oCliente.apellido = dr("apellido")
+                oCliente.email = dr("email")
+                oCliente.telefono = dr("telefono")
+                oCliente.fecNacimiento = dr("fechaNac")
+                oCliente.medioContacto = dr("medioContacto")
+                oCliente.inhabilitar = dr("inhibicion")
+
+            Catch ex As Exception
+                Throw New DALExcepcion("Error en BD", ex)
+            End Try
+            Return oCliente
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="_cliente"></param>
         ''' <remarks></remarks>
         Public Sub modificarCliente(ByVal _cliente As Cliente)

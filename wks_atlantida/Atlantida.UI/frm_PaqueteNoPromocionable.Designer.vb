@@ -33,7 +33,7 @@ Partial Class frm_PaqueteNoPromocionable
         Me.dgw_PaqNotProm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgw_PaqNotProm.Location = New System.Drawing.Point(12, 12)
         Me.dgw_PaqNotProm.Name = "dgw_PaqNotProm"
-        Me.dgw_PaqNotProm.Size = New System.Drawing.Size(692, 183)
+        Me.dgw_PaqNotProm.Size = New System.Drawing.Size(641, 183)
         Me.dgw_PaqNotProm.TabIndex = 0
         '
         'btn_seleccionar
@@ -47,7 +47,7 @@ Partial Class frm_PaqueteNoPromocionable
         '
         'btn_cancelar
         '
-        Me.btn_cancelar.Location = New System.Drawing.Point(613, 201)
+        Me.btn_cancelar.Location = New System.Drawing.Point(562, 201)
         Me.btn_cancelar.Name = "btn_cancelar"
         Me.btn_cancelar.Size = New System.Drawing.Size(91, 50)
         Me.btn_cancelar.TabIndex = 2
@@ -58,7 +58,7 @@ Partial Class frm_PaqueteNoPromocionable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(716, 263)
+        Me.ClientSize = New System.Drawing.Size(666, 263)
         Me.Controls.Add(Me.btn_cancelar)
         Me.Controls.Add(Me.btn_seleccionar)
         Me.Controls.Add(Me.dgw_PaqNotProm)

@@ -226,6 +226,5 @@ Public Class frm_cliente
             txt_telefono.Text = _Cliente.telefono
             txt_fechaNac.Text = _Cliente.fecNacimiento
         End If
-        Me.txt_dni.Clear()
     End Sub
 End Class

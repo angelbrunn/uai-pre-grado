@@ -56,7 +56,7 @@ Partial Class frm_presupuesto
         Me.txt_fechavuelta = New System.Windows.Forms.TextBox()
         Me.box_resultadodisp = New System.Windows.Forms.GroupBox()
         Me.dgw_PaqProm = New System.Windows.Forms.DataGridView()
-        Me.box_estadoOP = New System.Windows.Forms.GroupBox()
+        Me.box_result = New System.Windows.Forms.GroupBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.lbl_idPres = New System.Windows.Forms.Label()
         Me.txt_idProveedor = New System.Windows.Forms.TextBox()
@@ -65,7 +65,7 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.SuspendLayout()
         Me.box_resultadodisp.SuspendLayout()
         CType(Me.dgw_PaqProm, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.box_estadoOP.SuspendLayout()
+        Me.box_result.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -384,7 +384,7 @@ Partial Class frm_presupuesto
         Me.box_resultadodisp.Size = New System.Drawing.Size(790, 166)
         Me.box_resultadodisp.TabIndex = 9
         Me.box_resultadodisp.TabStop = False
-        Me.box_resultadodisp.Text = "Paquete Promocionable"
+        Me.box_resultadodisp.Text = "Visualizar Paquete"
         '
         'dgw_PaqProm
         '
@@ -394,15 +394,15 @@ Partial Class frm_presupuesto
         Me.dgw_PaqProm.Size = New System.Drawing.Size(775, 141)
         Me.dgw_PaqProm.TabIndex = 1
         '
-        'box_estadoOP
+        'box_result
         '
-        Me.box_estadoOP.Controls.Add(Me.DataGridView1)
-        Me.box_estadoOP.Location = New System.Drawing.Point(12, 436)
-        Me.box_estadoOP.Name = "box_estadoOP"
-        Me.box_estadoOP.Size = New System.Drawing.Size(790, 119)
-        Me.box_estadoOP.TabIndex = 11
-        Me.box_estadoOP.TabStop = False
-        Me.box_estadoOP.Text = "Estado operacion"
+        Me.box_result.Controls.Add(Me.DataGridView1)
+        Me.box_result.Location = New System.Drawing.Point(12, 436)
+        Me.box_result.Name = "box_result"
+        Me.box_result.Size = New System.Drawing.Size(790, 119)
+        Me.box_result.TabIndex = 11
+        Me.box_result.TabStop = False
+        Me.box_result.Text = "Presupuesto"
         '
         'DataGridView1
         '
@@ -445,7 +445,7 @@ Partial Class frm_presupuesto
         Me.Controls.Add(Me.btn_cancelar)
         Me.Controls.Add(Me.txt_idProveedor)
         Me.Controls.Add(Me.lbl_idPres)
-        Me.Controls.Add(Me.box_estadoOP)
+        Me.Controls.Add(Me.box_result)
         Me.Controls.Add(Me.box_resultadodisp)
         Me.Controls.Add(Me.box_presupuesto)
         Me.Controls.Add(Me.box_cliente)
@@ -458,7 +458,7 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.PerformLayout()
         Me.box_resultadodisp.ResumeLayout(False)
         CType(Me.dgw_PaqProm, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.box_estadoOP.ResumeLayout(False)
+        Me.box_result.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -495,7 +495,7 @@ Partial Class frm_presupuesto
     Friend WithEvents txt_fechavuelta As System.Windows.Forms.TextBox
     Friend WithEvents box_resultadodisp As System.Windows.Forms.GroupBox
     Friend WithEvents dgw_PaqProm As System.Windows.Forms.DataGridView
-    Friend WithEvents box_estadoOP As System.Windows.Forms.GroupBox
+    Friend WithEvents box_result As System.Windows.Forms.GroupBox
     Friend WithEvents lbl_idPres As System.Windows.Forms.Label
     Friend WithEvents txt_idProveedor As System.Windows.Forms.TextBox
     Friend WithEvents btn_cancelar As System.Windows.Forms.Button

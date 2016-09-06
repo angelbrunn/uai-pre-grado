@@ -8,7 +8,7 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private codigoCliente As String
+        Public codigoCliente As String
         ''' <summary>
         ''' 
         ''' </summary>

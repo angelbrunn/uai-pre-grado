@@ -32,6 +32,21 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="idCliente"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerCliente(ByVal _dni As Integer)
+            Dim oDalCliente As New DALCLiente
+            Try
+                oDalCliente.obtenerClientePorId(_dni)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="_cliente"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
@@ -106,6 +121,29 @@ Namespace SIS.BLL
 
             Return listadoPaquetesProm
         End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="origen"></param>
+        ''' <param name="destino"></param>
+        ''' <param name="fechIda"></param>
+        ''' <param name="fechVuelta"></param>
+        ''' <param name="medioTransp"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerPaqueteNoPromo(ByVal origen As String, ByVal destino As String, ByVal fechIda As String, ByVal fechVuelta As String, ByVal medioTransp As String) As DataTable
+            Dim listadoPaquetesNoProm As DataTable
+            listadoPaquetesNoProm = Nothing
+            Dim oDalPaquetesNoPromocionables As New DALPresupuesto
+            Try
+                listadoPaquetesNoProm = oDalPaquetesNoPromocionables.paquetesNoPromo(origen, destino, fechIda, fechVuelta, medioTransp)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return listadoPaquetesNoProm
+        End Function
+
         ''' <summary>
         ''' 
         ''' </summary>
