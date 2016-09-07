@@ -83,7 +83,7 @@ Namespace SIS.DAL
                 oCliente.email = dr("email")
                 oCliente.telefono = dr("telefono")
                 oCliente.fecNacimiento = dr("fechaNac")
-                oCliente.medioContacto = dr("medioContacto")
+                'oCliente.medioContacto = dr("medioContacto")
                 oCliente.inhabilitar = dr("inhibicion")
 
             Catch ex As Exception

@@ -115,12 +115,15 @@ Public Class frm_presupuesto
 
         If _medioTransporte Is Nothing Then
             MsgBox("Debe Seleccionar un Medio de Transporte")
+            bandera = False
         End If
 
-        Dim listadoPaquetesNoProm As DataTable
-        listadoPaquetesNoProm = interfazPresupuesto.obtenerPaqueteNoPromo(_Origen, _Destino, _FIda, _FVta, _medioTransporte)
-        frm_PaqueteNoPromocionable.dgw_PaqNotProm.DataSource = listadoPaquetesNoProm
-        frm_PaqueteNoPromocionable.Show()
+        If bandera = True Then
+            Dim listadoPaquetesNoProm As DataTable
+            listadoPaquetesNoProm = interfazPresupuesto.obtenerPaqueteNoPromo(_Origen, _Destino, _FIda, _FVta, _medioTransporte)
+            frm_PaqueteNoPromocionable.dgw_PaqNotProm.DataSource = listadoPaquetesNoProm
+            frm_PaqueteNoPromocionable.Show()
+        End If
     End Sub
     ''' <summary>
     ''' 
@@ -265,13 +268,26 @@ Public Class frm_presupuesto
         frm_hospedaje.Show()
     End Sub
 
-    Private Sub btn_generapresu_Click(sender As Object, e As DataGridViewCellEventArgs) Handles btn_generapresu.Click
-        Dim oPresupuesto As Presupuesto
+    Private Sub btn_generapresu_Click(sender As Object, e As EventArgs) Handles btn_generapresu.Click
+        Dim f As DataGridViewCellEventArgs
+        dataGridViewVisualizar(sender, f)
 
+    End Sub
+
+
+    Private Sub dataGridViewVisualizar(sender As Object, e As DataGridViewCellEventArgs) Handles dgw_PaqProm.CellContentClick, dgw_PaqProm.CellDoubleClick
         'Tomar del datagridview los valores necesarios para armar el presupuesto
+        Dim oPresupuesto As Presupuesto
+        oPresupuesto = New Presupuesto()
 
 
-        'obtener el cliente
+        'Obtener la cantidad de pasajeros | Ingresamos Pasajeros
+        Dim cantPasajeros As Integer
+        cantPasajeros = 0
+        'Apellido - Nombre - fechaNacimiento - edad= sysdate - fechaNacimiento
+
+
+        'obtener Primer Cliente | presupuesto generado con el dni del primer pasajero
         Dim oCliente As Cliente
         Dim _dni As String
         _dni = cli.dni
@@ -282,39 +298,51 @@ Public Class frm_presupuesto
         Dim oUsuario As Usuario
         oUsuario = interfazUsuario.obtenerUsuario(UsuarioId)
 
-        Dim Legajo As String
-        Legajo = oUsuario.legajo
-
-
-        'Fecha Ida y Regreso del paquete promo o no promo
-        Dim _FIda As String
-        _FIda = txt_fechaida.Text
-        Dim _FVta As String
-        _FVta = txt_fechavuelta.Text
-        'id paquete promo o no promo
-
-        'Fecha de creacion | si es promo fecha cre sino sysdate
+        'Fecha de creacion | sysdate
         Dim _FCre As DateTime
         _FCre = DateTime.Now
-
-
-        'Gravar presupuesto en estado sin reserva ni pago
-
-        'Descontar disponibilidad para ese paquete
-
 
         Dim idx As Integer
         idx = e.RowIndex
         Dim selectedRow As DataGridViewRow
         selectedRow = dgw_PaqProm.Rows(idx)
 
-        'oPresupuesto.idPqPromocionable = selectedRow.Cells(0).Value.ToString()
-        oPresupuesto.FechCreacion = selectedRow.Cells(0).Value.ToString()
+        'Creo el objeto Presupuesto
+        Dim idPaquete As Integer
+        Dim idOper As Integer
+        Dim tipoPaq As String
+        tipoPaq = selectedRow.Cells(8).Value.ToString()
 
+        If tipoPaq = "PROMO" Then
+            'FIXME:Obtener idPaquetePromo
+            idPaquete = 1
+        ElseIf tipoPaq = "NO PROMO" Then
+            idPaquete = 0
+            'FIXME: obtener id de la oper
+            idOper = 1
+        End If
+
+        Dim estadoInicialPresu As String
+        estadoInicialPresu = "SRES"
+
+        oPresupuesto.codCliente = oCliente.codCliente.ToString()
+        oPresupuesto.legPresu = oUsuario.legajo.ToString()
+        oPresupuesto.destPres = selectedRow.Cells(1).Value.ToString()
+        oPresupuesto.FechPartida = selectedRow.Cells(2).Value.ToString()
+        oPresupuesto.FechRegreso = selectedRow.Cells(3).Value.ToString()
+        oPresupuesto.idPaqPromocionable = idPaquete.ToString()
+        oPresupuesto.FechCreacion = _FCre
+        oPresupuesto.EstadoPresu = estadoInicialPresu.ToString()
+        'Gravar presupuesto en estado sin reserva ni pago
+        'ESTADOS: SRES - RES - PAG - CAN
+        interfazPresupuesto.insertarPresupuesto(oPresupuesto)
+        'Descontar disponibilidad para ese paquete
+        If idPaquete = 1 Then
+            interfazPresupuesto.descontarPaquete(idPaquete, cantPasajeros)
+        ElseIf idPaquete = 0 Then
+            interfazPresupuesto.descontarOperacion(idOper, cantPasajeros)
+        End If
     End Sub
-
-
-
     ''' <summary>
     ''' 
     ''' </summary>
@@ -343,7 +371,12 @@ Public Class frm_presupuesto
             idioma = value
         End Set
     End Property
-
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btn_cancelar_Click(sender As Object, e As EventArgs) Handles btn_cancelar.Click
         'Cambiar el estado del presupuesto a cancelado
     End Sub

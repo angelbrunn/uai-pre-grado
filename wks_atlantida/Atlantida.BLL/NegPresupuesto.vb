@@ -35,15 +35,17 @@ Namespace SIS.BLL
         ''' <param name="idCliente"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function obtenerCliente(ByVal _dni As Integer)
+        Function obtenerCliente(ByVal _dni As Integer) As Cliente
             Dim oDalCliente As New DALCLiente
+            Dim _cliente As Cliente
+            _cliente = Nothing
             Try
-                oDalCliente.obtenerClientePorId(_dni)
+                _cliente = oDalCliente.obtenerClientePorId(_dni)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
+            Return _cliente
         End Function
-
         ''' <summary>
         ''' 
         ''' </summary>
@@ -143,7 +145,38 @@ Namespace SIS.BLL
 
             Return listadoPaquetesNoProm
         End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_presupuesto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function insertarPresupuesto(ByVal _presupuesto As Presupuesto)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                oDalPresupuesto.insertarPresupuesto(_presupuesto)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
 
+        Function descontarPaquete(ByVal _idPaquete As Integer, ByVal _cantidadPasajeros As Integer)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                'oDalPresupuesto.descontarPaquetePromo(_idPaquete, _cantidadPasajeros)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+
+        Function descontarOperacion(ByVal _idOper As Integer, ByVal _cantidadPasajeros As Integer)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                'oDalPresupuesto.descontarPaquetePromo(_idOper, _idPaquete)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
         ''' <summary>
         ''' 
         ''' </summary>

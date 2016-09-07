@@ -141,7 +141,7 @@ Namespace SIS.DAL
         ''' <remarks></remarks>
         Public Sub insertarPresupuesto(ByVal oPresupuesto As Presupuesto)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO Presupuesto([idPresupuesto],[codigoCliente],[legajo],[destino],[fechaPartida],[fechaRegreso],[idPaquetePromocionable],[fechaCreacion]) VALUES (@idPresupuesto,@codigoCliente,@legajo,@destino,@fechaPartida,@fechaRegreso,@idPaquetePromocionable,@fechaCreacion)"
+            Dim sqlQuery As String = "INSERT INTO Presupuesto([codigoCliente],[legajo],[destino],[fechaPartida],[fechaRegreso],[idPaquetePromocionable],[fechaCreacion],[estado]) VALUES (@codigoCliente,@legajo,@destino,@fechaPartida,@fechaRegreso,@idPaquetePromocionable,@fechaCreacion,@estado)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -151,11 +151,6 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-
-            iPar.ParameterName = "idPresupuesto"
-            iPar.DbType = DbType.Int32
-            iPar.Value = oPresupuesto.idPresu
-            comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
             iPar.ParameterName = "codigoCliente"
@@ -197,6 +192,12 @@ Namespace SIS.DAL
             iPar.ParameterName = "fechaCreacion"
             iPar.DbType = DbType.Date
             iPar.Value = oPresupuesto.FechCreacion
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "estado"
+            iPar.DbType = DbType.String
+            iPar.Value = oPresupuesto.EstadoPresu
             comando.Parameters.Add(iPar)
 
             Try

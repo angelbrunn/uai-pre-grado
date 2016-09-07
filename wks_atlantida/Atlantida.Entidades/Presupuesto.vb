@@ -43,6 +43,11 @@
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <remarks></remarks>
+        Private estado As String
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
@@ -62,7 +67,7 @@
         ''' <remarks></remarks>
         Public Property codCliente() As String
             Get
-                Return idPresupuesto
+                Return codigoCliente
             End Get
             Set(ByVal value As String)
                 codigoCliente = value
@@ -150,6 +155,20 @@
             End Get
             Set(ByVal value As Date)
                 fechaCreacion = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property EstadoPresu() As String
+            Get
+                Return estado
+            End Get
+            Set(ByVal value As String)
+                estado = value
             End Set
         End Property
     End Class
