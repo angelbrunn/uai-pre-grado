@@ -13,7 +13,7 @@ Namespace SIS.DAL
             Dim listaHospedaje As New List(Of Hospedaje)
 
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "SELECT DISTINCT razonSocial,montoAPagar,categoria,descripcion FROM Hospedaje "
+            Dim sqlQuery As String = "SELECT DISTINCT idProvHos,razonSocial,montoAPagar,categoria,descripcion FROM Hospedaje "
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -30,6 +30,7 @@ Namespace SIS.DAL
                 Dim enu As IEnumerator(Of DataRow) = ds.Tables("Hospedaje").Rows.GetEnumerator
                 While enu.MoveNext
                     Dim oHospedaje As New Hospedaje
+                    oHospedaje.idHospedaje = enu.Current("idProvHos").ToString
                     oHospedaje.razSocial = enu.Current("razonSocial").ToString
                     oHospedaje.monPagar = enu.Current("montoAPagar").ToString
                     oHospedaje.cat = enu.Current("categoria").ToString

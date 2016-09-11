@@ -57,7 +57,7 @@ Partial Class frm_presupuesto
         Me.box_resultadodisp = New System.Windows.Forms.GroupBox()
         Me.dgw_PaqProm = New System.Windows.Forms.DataGridView()
         Me.box_result = New System.Windows.Forms.GroupBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dgw_presupuesto = New System.Windows.Forms.DataGridView()
         Me.lbl_idPres = New System.Windows.Forms.Label()
         Me.txt_idProveedor = New System.Windows.Forms.TextBox()
         Me.btn_cancelar = New System.Windows.Forms.Button()
@@ -66,7 +66,7 @@ Partial Class frm_presupuesto
         Me.box_resultadodisp.SuspendLayout()
         CType(Me.dgw_PaqProm, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.box_result.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgw_presupuesto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'box_cliente
@@ -396,7 +396,7 @@ Partial Class frm_presupuesto
         '
         'box_result
         '
-        Me.box_result.Controls.Add(Me.DataGridView1)
+        Me.box_result.Controls.Add(Me.dgw_presupuesto)
         Me.box_result.Location = New System.Drawing.Point(12, 436)
         Me.box_result.Name = "box_result"
         Me.box_result.Size = New System.Drawing.Size(790, 119)
@@ -404,13 +404,13 @@ Partial Class frm_presupuesto
         Me.box_result.TabStop = False
         Me.box_result.Text = "Presupuesto"
         '
-        'DataGridView1
+        'dgw_presupuesto
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(9, 12)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(775, 101)
-        Me.DataGridView1.TabIndex = 0
+        Me.dgw_presupuesto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgw_presupuesto.Location = New System.Drawing.Point(9, 12)
+        Me.dgw_presupuesto.Name = "dgw_presupuesto"
+        Me.dgw_presupuesto.Size = New System.Drawing.Size(775, 101)
+        Me.dgw_presupuesto.TabIndex = 0
         '
         'lbl_idPres
         '
@@ -459,7 +459,7 @@ Partial Class frm_presupuesto
         Me.box_resultadodisp.ResumeLayout(False)
         CType(Me.dgw_PaqProm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.box_result.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgw_presupuesto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -501,5 +501,5 @@ Partial Class frm_presupuesto
     Friend WithEvents btn_cancelar As System.Windows.Forms.Button
     Friend WithEvents lst_destino As System.Windows.Forms.ListBox
     Friend WithEvents lst_origen As System.Windows.Forms.ListBox
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents dgw_presupuesto As System.Windows.Forms.DataGridView
 End Class

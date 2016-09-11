@@ -34,12 +34,27 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
+        Private pasajeros As String
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
         Private idPaquetePromocionable As Integer
         ''' <summary>
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
+        Private idPaqueteNoPromocionable As Integer
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
         Private fechaCreacion As Date
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private disponibilidad As Integer
         ''' <summary>
         ''' 
         ''' </summary>
@@ -149,6 +164,20 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
+        Public Property idPaqNoPromocionable() As Integer
+            Get
+                Return idPaquetePromocionable
+            End Get
+            Set(ByVal value As Integer)
+                idPaquetePromocionable = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
         Public Property FechCreacion() As Date
             Get
                 Return fechaCreacion
@@ -163,12 +192,40 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
+        Public Property dispPresu() As Integer
+            Get
+                Return disponibilidad
+            End Get
+            Set(ByVal value As Integer)
+                disponibilidad = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
         Public Property EstadoPresu() As String
             Get
                 Return estado
             End Get
             Set(ByVal value As String)
                 estado = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property PasajerosPresu() As String
+            Get
+                Return pasajeros
+            End Get
+            Set(ByVal value As String)
+                pasajeros = value
             End Set
         End Property
     End Class

@@ -77,6 +77,21 @@ Public Class frm_backup
                 interfazBackup.exportarAArchivoUsuarioGrupo(ruta, Me.txtbxDelimitador.Text)
             End If
 
+            If chkbxPresupuesto.Checked Then
+                ruta = Me.txtbxRuta.Text + "bkp_presupuesto.csv"
+                interfazBackup.exportarAArchivoPresupuesto(ruta, Me.txtbxDelimitador.Text)
+            End If
+
+            If chkbxPago.Checked Then
+                ruta = Me.txtbxRuta.Text + "bkp_pago.csv"
+                interfazBackup.exportarAArchivoPago(ruta, Me.txtbxDelimitador.Text)
+            End If
+
+            If chkbxCobro.Checked Then
+                ruta = Me.txtbxRuta.Text + "bkp_cobro.csv"
+                interfazBackup.exportarAArchivoCobro(ruta, Me.txtbxDelimitador.Text)
+            End If
+
             MsgBox("Exportación realizada correctamente")
         Catch ex As Exception
             interfazNegocioBitacora.registrarEnBitacora_BKP(UsuarioId, ex)
@@ -205,6 +220,21 @@ Public Class frm_backup
                 interfazBackup.importarDesdeArchivoUsuarioGrupo(ruta, Me.txtbxDelimitador.Text)
             End If
 
+            If chkbxPresupuesto.Checked Then
+                ruta = Me.txtbxRuta.Text + "bkp_presupuesto.csv"
+                interfazBackup.importarDesdeArchivoPresupuesto(ruta, Me.txtbxDelimitador.Text)
+            End If
+
+            If chkbxPago.Checked Then
+                ruta = Me.txtbxRuta.Text + "bkp_pago.csv"
+                interfazBackup.importarDesdeArchivoPago(ruta, Me.txtbxDelimitador.Text)
+            End If
+
+            If chkbxCobro.Checked Then
+                ruta = Me.txtbxRuta.Text + "bkp_cobro.csv"
+                interfazBackup.importarDesdeArchivoCobro(ruta, Me.txtbxDelimitador.Text)
+            End If
+
             MsgBox("Importación realizada de forma satisfactoria")
         Catch ex As Exception
             interfazNegocioBitacora.registrarEnBitacora_BKP(UsuarioId, ex)
@@ -283,6 +313,9 @@ Public Class frm_backup
         Me.chkbxGrupoPermiso.Checked = False
         Me.chkbxPermiso.Checked = False
         Me.chkbxMultiIdioma.Checked = False
+        Me.chkbxPresupuesto.Checked = False
+        Me.chkbxCobro.Checked = False
+        Me.chkbxPago.Checked = False
     End Sub
     ''' <summary>
     ''' 

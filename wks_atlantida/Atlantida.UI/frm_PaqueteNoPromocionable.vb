@@ -54,7 +54,7 @@ Public Class frm_PaqueteNoPromocionable
     Private Sub btn_seleccionar_Click(sender As Object, e As EventArgs) Handles btn_seleccionar.Click
         'frm_presupuesto.dgw_PaqProm.DataSource = dgw_PaqNotProm
         'frm_presupuesto.Show()
-        'Me.Close()
+        Me.Close()
     End Sub
     ''' <summary>
     ''' 

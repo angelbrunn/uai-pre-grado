@@ -141,7 +141,7 @@ Namespace SIS.DAL
         ''' <remarks></remarks>
         Public Sub insertarPresupuesto(ByVal oPresupuesto As Presupuesto)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO Presupuesto([codigoCliente],[legajo],[destino],[fechaPartida],[fechaRegreso],[idPaquetePromocionable],[fechaCreacion],[estado]) VALUES (@codigoCliente,@legajo,@destino,@fechaPartida,@fechaRegreso,@idPaquetePromocionable,@fechaCreacion,@estado)"
+            Dim sqlQuery As String = "INSERT INTO Presupuesto([codigoCliente],[legajo],[destino],[fechaPartida],[fechaRegreso],[pasajeros],[idPaquetePromocionable],[fechaCreacion],[estado]) VALUES (@codigoCliente,@legajo,@destino,@fechaPartida,@fechaRegreso,@pasajeros,@idPaquetePromocionable,@fechaCreacion,@estado)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -183,6 +183,12 @@ Namespace SIS.DAL
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
+            iPar.ParameterName = "pasajeros"
+            iPar.DbType = DbType.String
+            iPar.Value = oPresupuesto.PasajerosPresu
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
             iPar.ParameterName = "idPaquetePromocionable"
             iPar.DbType = DbType.Int32
             iPar.Value = oPresupuesto.idPaqPromocionable
@@ -207,6 +213,79 @@ Namespace SIS.DAL
             Catch ex As Exception
             End Try
         End Sub
+
+
+        Public Sub descontarPaquetePromo(ByVal oPresupuesto As Presupuesto)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE PaquetesPromocionable SET [cantidadPasajero]=@cantidadPasajero WHERE idPaquetePromocionable=@idPaquetePromocionable"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "idPaquetePromocionable"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oPresupuesto.idPaqPromocionable
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "cantidadPasajero"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oPresupuesto.dispPresu
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="oPresupuesto"></param>
+        ''' <remarks></remarks>
+        Public Sub descontarPaqueteNoPromo(ByVal oPresupuesto As Presupuesto)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Operaciones SET [capacidad]=@capacidad WHERE idOp=@idOp"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "idOp"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oPresupuesto.idPaqNoPromocionable
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "capacidad"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oPresupuesto.dispPresu
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+
+
+
+
     End Class
 End Namespace
 

@@ -48,13 +48,17 @@ Public Class frm_presupuesto
         If popUp.ShowDialog() = DialogResult.OK Then
             Me.cli = popUp.cli
             If String.IsNullOrEmpty(txt_cliente1.Text) Then
-                Me.txt_cliente1.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido + " " + popUp.cli.email
+                'Me.txt_cliente1.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido + " " + popUp.cli.email
+                Me.txt_cliente1.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido
             ElseIf String.IsNullOrEmpty(txt_cliente2.Text) Then
-                Me.txt_cliente2.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido + " " + popUp.cli.email
+                'Me.txt_cliente2.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido + " " + popUp.cli.email
+                Me.txt_cliente2.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido
             ElseIf String.IsNullOrEmpty(txt_cliente3.Text) Then
-                Me.txt_cliente3.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido + " " + popUp.cli.email
+                'Me.txt_cliente3.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido + " " + popUp.cli.email
+                Me.txt_cliente3.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido
             ElseIf String.IsNullOrEmpty(txt_cliente4.Text) Then
-                Me.txt_cliente4.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido + " " + popUp.cli.email
+                'Me.txt_cliente4.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido + " " + popUp.cli.email
+                Me.txt_cliente4.Text = popUp.cli.dni + " " + popUp.cli.nombre + " " + popUp.cli.apellido
             End If
         End If
     End Sub
@@ -269,8 +273,8 @@ Public Class frm_presupuesto
     End Sub
 
     Private Sub btn_generapresu_Click(sender As Object, e As EventArgs) Handles btn_generapresu.Click
-        Dim f As DataGridViewCellEventArgs
-        dataGridViewVisualizar(sender, f)
+
+        'IMPLEMENTAR CODE GRABAR PRESUPUESTO
 
     End Sub
 
@@ -279,20 +283,68 @@ Public Class frm_presupuesto
         'Tomar del datagridview los valores necesarios para armar el presupuesto
         Dim oPresupuesto As Presupuesto
         oPresupuesto = New Presupuesto()
-
+        Dim _dni As String
+        Dim _nomYape As String
+        Dim _Pasajeros As String
+        _Pasajeros = ""
+        Dim tx1 As String
+        Dim tx2 As String
+        Dim tx3 As String
+        Dim tx4 As String
+        Dim tx5 As String
 
         'Obtener la cantidad de pasajeros | Ingresamos Pasajeros
         Dim cantPasajeros As Integer
         cantPasajeros = 0
-        'Apellido - Nombre - fechaNacimiento - edad= sysdate - fechaNacimiento
 
+        If txt_cliente1.Text <> "" Then
+            'Recorrer el txt y guardarme el dni
+            tx1 = txt_cliente1.Text
+            _dni = tx1.Substring(0, 8)
+            _nomYape = tx1.Substring(9, tx1.Length - 9)
+            _Pasajeros = _Pasajeros + " | " + _nomYape
+            cantPasajeros = cantPasajeros + 1
+        End If
+
+        If txt_cliente2.Text <> "" Then
+            tx2 = txt_cliente2.Text
+            _nomYape = tx2.Substring(9, tx2.Length - 9)
+            _Pasajeros = _Pasajeros + " | " + _nomYape
+            cantPasajeros = cantPasajeros + 1
+        End If
+
+        If txt_cliente3.Text <> "" Then
+            tx3 = txt_cliente3.Text
+            _nomYape = tx3.Substring(9, tx3.Length - 9)
+            _Pasajeros = _Pasajeros + " | " + _nomYape
+            cantPasajeros = cantPasajeros + 1
+        End If
+
+        If txt_cliente4.Text <> "" Then
+            tx4 = txt_cliente4.Text
+            _nomYape = tx4.Substring(9, tx4.Length - 9)
+            _Pasajeros = _Pasajeros + " | " + _nomYape
+            cantPasajeros = cantPasajeros + 1
+        End If
+
+        If txt_cliente5.Text <> "" Then
+            tx5 = txt_cliente5.Text
+            _nomYape = tx5.Substring(9, tx5.Length - 9)
+            _Pasajeros = _Pasajeros + " | " + _nomYape
+            cantPasajeros = cantPasajeros + 1
+        End If
 
         'obtener Primer Cliente | presupuesto generado con el dni del primer pasajero
         Dim oCliente As Cliente
-        Dim _dni As String
-        _dni = cli.dni
         oCliente = interfazPresupuesto.obtenerCliente(_dni)
+        Dim codigoClienteFact As String
+        codigoClienteFact = 0
+        Dim _fClienteFact As Boolean = True
 
+        If _fClienteFact = True Then
+            codigoClienteFact = oCliente.codCliente.ToString()
+            _fClienteFact = False
+        End If
 
         'Obtener Legajo del Vendedor
         Dim oUsuario As Usuario
@@ -311,37 +363,68 @@ Public Class frm_presupuesto
         Dim idPaquete As Integer
         Dim idOper As Integer
         Dim tipoPaq As String
-        tipoPaq = selectedRow.Cells(8).Value.ToString()
+        'Guardo tipo de paquete PROMO|NO PROMO
+        tipoPaq = selectedRow.Cells(9).Value.ToString()
 
         If tipoPaq = "PROMO" Then
-            'FIXME:Obtener idPaquetePromo
-            idPaquete = 1
+            idPaquete = selectedRow.Cells(0).Value.ToString()
         ElseIf tipoPaq = "NO PROMO" Then
             idPaquete = 0
-            'FIXME: obtener id de la oper
-            idOper = 1
+            idOper = selectedRow.Cells(0).Value.ToString()
         End If
 
         Dim estadoInicialPresu As String
         estadoInicialPresu = "SRES"
 
-        oPresupuesto.codCliente = oCliente.codCliente.ToString()
+        oPresupuesto.codCliente = codigoClienteFact.ToString()
         oPresupuesto.legPresu = oUsuario.legajo.ToString()
         oPresupuesto.destPres = selectedRow.Cells(1).Value.ToString()
-        oPresupuesto.FechPartida = selectedRow.Cells(2).Value.ToString()
-        oPresupuesto.FechRegreso = selectedRow.Cells(3).Value.ToString()
+        oPresupuesto.FechPartida = selectedRow.Cells(3).Value.ToString()
+        oPresupuesto.FechRegreso = selectedRow.Cells(4).Value.ToString()
+        oPresupuesto.PasajerosPresu = _Pasajeros.ToString()
         oPresupuesto.idPaqPromocionable = idPaquete.ToString()
         oPresupuesto.FechCreacion = _FCre
         oPresupuesto.EstadoPresu = estadoInicialPresu.ToString()
         'Gravar presupuesto en estado sin reserva ni pago
+
+
+
+        If tipoPaq = "NO PROMO" Then
+            'Generar un presupuestoTransporte en estado inpago
+
+            'Actualizas estado del presupuesto | estado: SRES-INT
+            estadoInicialPresu = estadoInicialPresu + "-INT"
+        End If
+
+        If tipoPaq = "NO PROMO" Then
+            'Generar un presupuestoHotel en estado inpago en caso de elegir hotel
+
+            'Actualizas estado del presupuesto | estado: SRES-INH
+            estadoInicialPresu = estadoInicialPresu + "-INH"
+        End If
+
+
         'ESTADOS: SRES - RES - PAG - CAN
         interfazPresupuesto.insertarPresupuesto(oPresupuesto)
         'Descontar disponibilidad para ese paquete
+        oPresupuesto.dispPresu = selectedRow.Cells(6).Value
         If idPaquete = 1 Then
-            interfazPresupuesto.descontarPaquete(idPaquete, cantPasajeros)
+            interfazPresupuesto.descontarPaquete(oPresupuesto, cantPasajeros)
         ElseIf idPaquete = 0 Then
-            interfazPresupuesto.descontarOperacion(idOper, cantPasajeros)
+            oPresupuesto.idPaqPromocionable = 0
+            oPresupuesto.idPaqNoPromocionable = idOper
+            interfazPresupuesto.descontarOperacion(oPresupuesto, cantPasajeros)
         End If
+
+
+
+
+
+
+
+
+        'Cargar el presupuesto | dgw_presupuesto
+        dgw_PaqProm.Refresh()
     End Sub
     ''' <summary>
     ''' 
@@ -380,4 +463,11 @@ Public Class frm_presupuesto
     Private Sub btn_cancelar_Click(sender As Object, e As EventArgs) Handles btn_cancelar.Click
         'Cambiar el estado del presupuesto a cancelado
     End Sub
+
+
+
+    'Private Sub dgw_PaqProm_MouseClick(sender As Object, e As MouseEventArgs) Handles dgw_PaqProm.MouseClick
+    '    'Cargar un objeto o una lista o variables con los datos del dgw
+    '    'Cuando hago un click guardo los valores de manera temporal del registro que tengo seleccionado
+    'End Sub
 End Class

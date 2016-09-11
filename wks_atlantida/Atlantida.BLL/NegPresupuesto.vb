@@ -159,20 +159,20 @@ Namespace SIS.BLL
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
         End Function
-
-        Function descontarPaquete(ByVal _idPaquete As Integer, ByVal _cantidadPasajeros As Integer)
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_presupuesto"></param>
+        ''' <param name="cantidadPasajeros"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function descontarPaquete(ByVal _presupuesto As Presupuesto, ByVal cantidadPasajeros As Integer)
             Dim oDalPresupuesto As New DALPresupuesto
+            Dim _cantidadPasajerosTmp As Integer
             Try
-                'oDalPresupuesto.descontarPaquetePromo(_idPaquete, _cantidadPasajeros)
-            Catch ex As Exception
-                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
-            End Try
-        End Function
-
-        Function descontarOperacion(ByVal _idOper As Integer, ByVal _cantidadPasajeros As Integer)
-            Dim oDalPresupuesto As New DALPresupuesto
-            Try
-                'oDalPresupuesto.descontarPaquetePromo(_idOper, _idPaquete)
+                _cantidadPasajerosTmp = _presupuesto.dispPresu
+                _presupuesto.dispPresu = _cantidadPasajerosTmp - cantidadPasajeros
+                oDalPresupuesto.descontarPaquetePromo(_presupuesto)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
@@ -180,37 +180,21 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
-        ''' <param name="ruta"></param>
-        ''' <param name="delim"></param>
+        ''' <param name="_presupuesto"></param>
+        ''' <param name="cantidadPasajeros"></param>
+        ''' <returns></returns>
         ''' <remarks></remarks>
-        Sub exportarAArchivoPresupuesto(ByVal ruta As String, ByVal delim As String)
-            Dim oIOPresupuesto As New IOPresupuesto
-            Dim listaPresupuesto As New List(Of Presupuesto)
+        Function descontarOperacion(ByVal _presupuesto As Presupuesto, ByVal cantidadPasajeros As Integer)
             Dim oDalPresupuesto As New DALPresupuesto
+            Dim _cantidadPasajerosTmp As Integer
             Try
-                listaPresupuesto = oDalPresupuesto.obtenerTablaPresupuesto()
-                oIOPresupuesto.escribirArchivoPresupuesto(ruta, delim, listaPresupuesto)
+                _cantidadPasajerosTmp = _presupuesto.destPres
+                _presupuesto.destPres = _cantidadPasajerosTmp - cantidadPasajeros
+                oDalPresupuesto.descontarPaqueteNoPromo(_presupuesto)
             Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
-        End Sub
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <param name="ruta"></param>
-        ''' <param name="delim"></param>
-        ''' <remarks></remarks>
-        Sub importarDesdeArchivoPresupuesto(ByVal ruta As String, ByVal delim As String)
-            Dim oIOPresupuesto As New IOPresupuesto
-            Dim oDalPresupuesto As New DALPresupuesto
-            Dim listaPresupuesto As New List(Of Presupuesto)
-
-            listaPresupuesto = oIOPresupuesto.leerArchivoPresupuesto(ruta, delim)
-
-            Dim enu As IEnumerator(Of Presupuesto) = listaPresupuesto.GetEnumerator
-            While enu.MoveNext
-                oDalPresupuesto.insertarPresupuesto(enu.Current)
-            End While
-        End Sub
+        End Function
         ''' <summary>
         ''' 
         ''' </summary>

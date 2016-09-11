@@ -152,6 +152,54 @@ Namespace SIS.BLL
             Catch ex As IOException
             End Try
         End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub exportarAArchivoCobro(ByVal ruta As String, ByVal delim As String) Implements INegBackup.exportarAArchivoCobro
+            Dim oIOCobro As New IOCobro
+            Dim listaCobro As New List(Of Cobro)
+            Dim oDalCobro As New DALCobro
+            Try
+                listaCobro = oDalCobro.obtenerTablaCobro()
+                oIOCobro.escribirArchivoCobro(ruta, delim, listaCobro)
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub exportarAArchivoPago(ByVal ruta As String, ByVal delim As String) Implements INegBackup.exportarAArchivoPago
+            Dim oIOPago As New IOPago
+            Dim listaPago As New List(Of Pago)
+            Dim oDalPago As New DALPago
+            Try
+                listaPago = oDalPago.obtenerTablaPago()
+                oIOPago.escribirArchivoCobro(ruta, delim, listaPago)
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub exportarAArchivoPresupuesto(ByVal ruta As String, ByVal delim As String) Implements INegBackup.exportarAArchivoPresupuesto
+            Dim oIOPresupuesto As New IOPresupuesto
+            Dim listaPresupuesto As New List(Of Presupuesto)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                listaPresupuesto = oDalPresupuesto.obtenerTablaPresupuesto()
+                oIOPresupuesto.escribirArchivoPresupuesto(ruta, delim, listaPresupuesto)
+            Catch ex As Exception
+            End Try
+        End Sub
         ' ##### IMPORTAR #####
         ''' <summary>
         ''' 
@@ -356,6 +404,60 @@ Namespace SIS.BLL
 
             oDalBitacora.insertarUsuarioGrupoDesdeBackup(listaUsuarioGrupo)
 
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub importarDesdeArchivoCobro(ByVal ruta As String, ByVal delim As String) Implements INegBackup.importarDesdeArchivoCobro
+            Dim oIOCobro As New IOCobro
+            Dim oDalCobro As New DALCobro
+            Dim listaCobro As New List(Of Cobro)
+
+            listaCobro = oIOCobro.leerArchivoCobro(ruta, delim)
+
+            Dim enu As IEnumerator(Of Cobro) = listaCobro.GetEnumerator
+            While enu.MoveNext
+                oDalCobro.insertarCobro(enu.Current)
+            End While
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub importarDesdeArchivoPago(ByVal ruta As String, ByVal delim As String) Implements INegBackup.importarDesdeArchivoPago
+            Dim oIOPago As New IOPago
+            Dim oDalPago As New DALPago
+            Dim listaPago As New List(Of Pago)
+
+            listaPago = oIOPago.leerArchivoCobro(ruta, delim)
+
+            Dim enu As IEnumerator(Of Pago) = listaPago.GetEnumerator
+            While enu.MoveNext
+                oDalPago.insertarPago(enu.Current)
+            End While
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub importarDesdeArchivoPresupuesto(ByVal ruta As String, ByVal delim As String) Implements INegBackup.importarDesdeArchivoPresupuesto
+            Dim oIOPresupuesto As New IOPresupuesto
+            Dim oDalPresupuesto As New DALPresupuesto
+            Dim listaPresupuesto As New List(Of Presupuesto)
+
+            listaPresupuesto = oIOPresupuesto.leerArchivoPresupuesto(ruta, delim)
+
+            Dim enu As IEnumerator(Of Presupuesto) = listaPresupuesto.GetEnumerator
+            While enu.MoveNext
+                oDalPresupuesto.insertarPresupuesto(enu.Current)
+            End While
         End Sub
     End Class
 End Namespace

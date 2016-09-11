@@ -63,6 +63,27 @@ Namespace SIS.BLL
         ''' <param name="delim"></param>
         ''' <remarks></remarks>
         Sub exportarAArchivoMultiIdioma(ByVal ruta As String, ByVal delim As String)
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub exportarAArchivoPresupuesto(ByVal ruta As String, ByVal delim As String)
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub exportarAArchivoCobro(ByVal ruta As String, ByVal delim As String)
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub exportarAArchivoPago(ByVal ruta As String, ByVal delim As String)
         ' ### IMPORTAR ###
         ''' <summary>
         ''' 
@@ -120,6 +141,27 @@ Namespace SIS.BLL
         ''' <param name="delim"></param>
         ''' <remarks></remarks>
         Sub importarDesdeArchivoUsuarioGrupo(ByVal ruta As String, ByVal delim As String)
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub importarDesdeArchivoPresupuesto(ByVal ruta As String, ByVal delim As String)
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub importarDesdeArchivoPago(ByVal ruta As String, ByVal delim As String)
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="ruta"></param>
+        ''' <param name="delim"></param>
+        ''' <remarks></remarks>
+        Sub importarDesdeArchivoCobro(ByVal ruta As String, ByVal delim As String)
         ' ##### INSERT EN BD #####
         ''' <summary>
         ''' 
