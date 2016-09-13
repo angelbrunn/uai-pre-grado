@@ -137,11 +137,33 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function getPresupueto() As DataTable
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim command As New SqlCommand("sp_get_presupuesto")
+
+            Dim connection As New SqlConnection(conexString)
+            command.Connection = connection
+            command.CommandType = CommandType.StoredProcedure
+
+            Dim adapter As New SqlDataAdapter(command)
+            adapter.SelectCommand.CommandTimeout = 300
+
+            Dim Ada As New SqlDataAdapter(command)
+            Dim Dt As New DataTable()
+            Ada.Fill(Dt)
+            connection.Close()
+            Return Dt
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="oPresupuesto"></param>
         ''' <remarks></remarks>
-        Public Sub insertarPresupuesto(ByVal oPresupuesto As Presupuesto)
+        Public Sub insertarPresupuesto(ByVal oPresupuesto As Presupuesto, ByVal _idhospedaje As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO Presupuesto([codigoCliente],[legajo],[destino],[fechaPartida],[fechaRegreso],[pasajeros],[idPaquetePromocionable],[fechaCreacion],[estado]) VALUES (@codigoCliente,@legajo,@destino,@fechaPartida,@fechaRegreso,@pasajeros,@idPaquetePromocionable,@fechaCreacion,@estado)"
+            Dim sqlQuery As String = "INSERT INTO Presupuesto([codigoCliente],[legajo],[destino],[fechaPartida],[fechaRegreso],[pasajeros],[idPaquetePromocionable],[fechaCreacion],[estado],[idPresupuestoTransporte],[idPresupuestoHotel]) VALUES (@codigoCliente,@legajo,@destino,@fechaPartida,@fechaRegreso,@pasajeros,@idPaquetePromocionable,@fechaCreacion,@estado,@idPresupuestoTransporte,@estado)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -206,6 +228,18 @@ Namespace SIS.DAL
             iPar.Value = oPresupuesto.EstadoPresu
             comando.Parameters.Add(iPar)
 
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idPresupuestoTransporte"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oPresupuesto.IdTransp
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idPresupuestoHotel"
+            iPar.DbType = DbType.Int32
+            iPar.Value = _idhospedaje
+            comando.Parameters.Add(iPar)
+
             Try
                 conex.Open()
                 comando.ExecuteNonQuery()
@@ -213,8 +247,73 @@ Namespace SIS.DAL
             Catch ex As Exception
             End Try
         End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idProvHos"></param>
+        ''' <remarks></remarks>
+        Public Sub insertarPresupuestoHospedaje(ByVal idProvHos As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "INSERT INTO PresupuestoHospedaje([idProvHos]) VALUES (@idProvHos)"
 
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
 
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idProvHos"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idProvHos
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idProvTrans"></param>
+        ''' <remarks></remarks>
+        Public Sub insertarPresupuestoTransporte(ByVal idProvTrans As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "INSERT INTO PresupuestoHospedaje([idProvTrans]) VALUES (@idProvTrans)"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idProvTrans"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idProvTrans
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="oPresupuesto"></param>
+        ''' <remarks></remarks>
         Public Sub descontarPaquetePromo(ByVal oPresupuesto As Presupuesto)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
             Dim sqlQuery As String = "UPDATE PaquetesPromocionable SET [cantidadPasajero]=@cantidadPasajero WHERE idPaquetePromocionable=@idPaquetePromocionable"
@@ -282,10 +381,6 @@ Namespace SIS.DAL
             Catch ex As Exception
             End Try
         End Sub
-
-
-
-
     End Class
 End Namespace
 

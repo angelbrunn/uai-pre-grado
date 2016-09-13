@@ -170,9 +170,6 @@ Public Class frm_presupuesto
             If enu.Current.componente = "box_resultadodisp" Then
                 Me.box_resultadodisp.Text = enu.Current.value
             End If
-            If enu.Current.componente = "btn_asignar" Then
-                Me.btn_asignar.Text = enu.Current.value
-            End If
             If enu.Current.componente = "btn_cargar" Then
                 Me.btn_cargar.Text = enu.Current.value
             End If
@@ -369,13 +366,6 @@ Public Class frm_presupuesto
         'Guardo tipo de paquete PROMO|NO PROMO
         tipoPaq = presupuestoTemporal.TipoPaquete
 
-        'If tipoPaq = "PROMO" Then
-        '    idPaquete = selectedRow.Cells(0).Value.ToString()
-        'ElseIf tipoPaq = "NO PROMO" Then
-        '    idPaquete = 0
-        '    idOper = selectedRow.Cells(0).Value.ToString()
-        'End If
-
         Dim estadoInicialPresu As String
         estadoInicialPresu = "SRES"
 
@@ -392,20 +382,28 @@ Public Class frm_presupuesto
 
         If presupuestoTemporal.TipoPaquete = "NO PROMO" Then
             'Generar un presupuestoTransporte en estado inpago
-
+            interfazPresupuesto.insertarPresupuestoTransporte(presupuestoTemporal.IdTransp)
             'Actualizas estado del presupuesto | estado: SRES-INT
             estadoInicialPresu = estadoInicialPresu + "-INT"
         End If
 
-        If presupuestoTemporal.TipoPaquete = "NO PROMO" Then
+        If (presupuestoTemporal.TipoPaquete = "NO PROMO" & hospedajeTemporal.idHospedaje <> 0) Then
             'Generar un presupuestoHotel en estado inpago en caso de elegir hotel
+
+            interfazPresupuesto.insertarPresupuestoHospedaje(hospedajeTemporal.idHospedaje)
 
             'Actualizas estado del presupuesto | estado: SRES-INH
             estadoInicialPresu = estadoInicialPresu + "-INH"
         End If
 
+        If hospedajeTemporal.idHospedaje <> 0 Then
+            'SI SE AGREGO HOTEL ENTONCES SE GRABA EL ID DE ESE HOTEL
+            interfazPresupuesto.insertarPresupuesto(oPresupuesto, hospedajeTemporal.idHospedaje)
+        End If
+
         'ESTADOS: SRES - RES - PAG - CAN
         interfazPresupuesto.insertarPresupuesto(oPresupuesto)
+
         'Descontar disponibilidad para ese paquete
         oPresupuesto.dispPresu = presupuestoTemporal.dispPresu
         If presupuestoTemporal.idPaqPromocionable = 1 Then
@@ -415,6 +413,9 @@ Public Class frm_presupuesto
             oPresupuesto.idPaqueteNoPromocionable = presupuestoTemporal.idPaqueteNoPromocionable
             interfazPresupuesto.descontarOperacion(oPresupuesto, cantPasajeros)
         End If
+
+        'Cargar presupuesto en la view
+        dgw_presupuesto.DataSource = interfazPresupuesto.obtenerPresupuesto()
     End Sub
     ''' <summary>
     ''' 
@@ -471,10 +472,10 @@ Public Class frm_presupuesto
         presupuestoTemporal.destPres = presupuesto.destPres
         presupuestoTemporal.FechPartida = presupuesto.FechPartida
         presupuestoTemporal.FechRegreso = presupuesto.FechRegreso
+        presupuestoTemporal.IdTransp = presupuesto.IdTransp
         presupuestoTemporal.idPaqPromocionable = presupuesto.idPaqPromocionable
         presupuestoTemporal.dispPresu = presupuesto.dispPresu
         setDataGridView()
-
     End Function
     ''' <summary>
     ''' 

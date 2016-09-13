@@ -456,7 +456,7 @@ Namespace SIS.BLL
 
             Dim enu As IEnumerator(Of Presupuesto) = listaPresupuesto.GetEnumerator
             While enu.MoveNext
-                oDalPresupuesto.insertarPresupuesto(enu.Current)
+                oDalPresupuesto.insertarPresupuesto(enu.Current, 0)
             End While
         End Sub
     End Class

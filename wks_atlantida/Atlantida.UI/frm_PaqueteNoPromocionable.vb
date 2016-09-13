@@ -80,7 +80,7 @@ Public Class frm_PaqueteNoPromocionable
         Dim idOper As Integer
         Dim tipoPaq As String
         'Guardo tipo de paquete PROMO|NO PROMO
-        tipoPaq = selectedRow.Cells(8).Value.ToString()
+        tipoPaq = selectedRow.Cells(9).Value.ToString()
 
         If tipoPaq = "PROMO" Then
             idPaquete = selectedRow.Cells(0).Value.ToString()
@@ -95,8 +95,9 @@ Public Class frm_PaqueteNoPromocionable
         presupuestoTemporal.destPres = selectedRow.Cells(2).Value.ToString()
         presupuestoTemporal.FechPartida = selectedRow.Cells(3).Value.ToString()
         presupuestoTemporal.FechRegreso = selectedRow.Cells(4).Value.ToString()
+        presupuestoTemporal.IdTransp = selectedRow.Cells(5).Value.ToString()
         presupuestoTemporal.idPaqPromocionable = idPaquete.ToString()
-        presupuestoTemporal.dispPresu = selectedRow.Cells(6).Value
+        presupuestoTemporal.dispPresu = selectedRow.Cells(7).Value
     End Sub
     ''' <summary>
     ''' 

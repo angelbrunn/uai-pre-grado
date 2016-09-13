@@ -46,7 +46,6 @@ Partial Class frm_presupuesto
         Me.btn_obtPaqProm = New System.Windows.Forms.Button()
         Me.btn_generapresu = New System.Windows.Forms.Button()
         Me.btn_terminaop = New System.Windows.Forms.Button()
-        Me.btn_asignar = New System.Windows.Forms.Button()
         Me.btn_obtPaqNoProm = New System.Windows.Forms.Button()
         Me.lbl_origen = New System.Windows.Forms.Label()
         Me.lbl_destino = New System.Windows.Forms.Label()
@@ -190,7 +189,6 @@ Partial Class frm_presupuesto
         Me.box_presupuesto.Controls.Add(Me.btn_obtPaqProm)
         Me.box_presupuesto.Controls.Add(Me.btn_generapresu)
         Me.box_presupuesto.Controls.Add(Me.btn_terminaop)
-        Me.box_presupuesto.Controls.Add(Me.btn_asignar)
         Me.box_presupuesto.Controls.Add(Me.btn_obtPaqNoProm)
         Me.box_presupuesto.Controls.Add(Me.lbl_origen)
         Me.box_presupuesto.Controls.Add(Me.lbl_destino)
@@ -299,21 +297,12 @@ Partial Class frm_presupuesto
         '
         'btn_terminaop
         '
-        Me.btn_terminaop.Location = New System.Drawing.Point(270, 217)
+        Me.btn_terminaop.Location = New System.Drawing.Point(183, 217)
         Me.btn_terminaop.Name = "btn_terminaop"
-        Me.btn_terminaop.Size = New System.Drawing.Size(108, 22)
+        Me.btn_terminaop.Size = New System.Drawing.Size(195, 22)
         Me.btn_terminaop.TabIndex = 21
         Me.btn_terminaop.Text = "Terminar OP"
         Me.btn_terminaop.UseVisualStyleBackColor = True
-        '
-        'btn_asignar
-        '
-        Me.btn_asignar.Location = New System.Drawing.Point(182, 215)
-        Me.btn_asignar.Name = "btn_asignar"
-        Me.btn_asignar.Size = New System.Drawing.Size(82, 23)
-        Me.btn_asignar.TabIndex = 20
-        Me.btn_asignar.Text = "Asignar"
-        Me.btn_asignar.UseVisualStyleBackColor = True
         '
         'btn_obtPaqNoProm
         '
@@ -485,7 +474,6 @@ Partial Class frm_presupuesto
     Friend WithEvents btn_obtPaqProm As System.Windows.Forms.Button
     Friend WithEvents btn_generapresu As System.Windows.Forms.Button
     Friend WithEvents btn_terminaop As System.Windows.Forms.Button
-    Friend WithEvents btn_asignar As System.Windows.Forms.Button
     Friend WithEvents btn_obtPaqNoProm As System.Windows.Forms.Button
     Friend WithEvents lbl_origen As System.Windows.Forms.Label
     Friend WithEvents lbl_destino As System.Windows.Forms.Label

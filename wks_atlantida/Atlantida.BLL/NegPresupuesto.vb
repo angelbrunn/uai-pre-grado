@@ -154,7 +154,50 @@ Namespace SIS.BLL
         Function insertarPresupuesto(ByVal _presupuesto As Presupuesto)
             Dim oDalPresupuesto As New DALPresupuesto
             Try
-                oDalPresupuesto.insertarPresupuesto(_presupuesto)
+                oDalPresupuesto.insertarPresupuesto(_presupuesto, 0)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_presupuesto"></param>
+        ''' <param name="_idHospedaje"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function insertarPresupuesto(ByVal _presupuesto As Presupuesto, ByVal _idHospedaje As Integer)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                oDalPresupuesto.insertarPresupuesto(_presupuesto, _idHospedaje)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idProvHos"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function insertarPresupuestoHospedaje(ByVal idProvHos As Integer)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                oDalPresupuesto.insertarPresupuestoHospedaje(idProvHos)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idProvTrans"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function insertarPresupuestoTransporte(ByVal idProvTrans As Integer)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                oDalPresupuesto.insertarPresupuestoTransporte(idProvTrans)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
@@ -188,7 +231,7 @@ Namespace SIS.BLL
             Dim oDalPresupuesto As New DALPresupuesto
             Dim _cantidadPasajerosTmp As Integer
             Try
-                _cantidadPasajerosTmp = _presupuesto.destPres
+                _cantidadPasajerosTmp = _presupuesto.dispPresu
                 _presupuesto.destPres = _cantidadPasajerosTmp - cantidadPasajeros
                 oDalPresupuesto.descontarPaqueteNoPromo(_presupuesto)
             Catch ex As Exception
@@ -211,6 +254,23 @@ Namespace SIS.BLL
             End Try
 
             Return listadoHospedaje
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerPresupuesto() As DataTable
+            Dim listadoPeresupuesto As DataTable
+            listadoPeresupuesto = Nothing
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                listadoPeresupuesto = oDalPresupuesto.getPresupueto()
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return listadoPeresupuesto
         End Function
         ''' <summary>
         ''' 

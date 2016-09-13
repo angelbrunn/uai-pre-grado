@@ -49,6 +49,11 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
+        Private idTransporte As Integer
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
         Private fechaCreacion As Date
         ''' <summary>
         ''' 
@@ -245,6 +250,20 @@
             End Get
             Set(ByVal value As String)
                 tipo = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property IdTransp() As String
+            Get
+                Return idTransporte
+            End Get
+            Set(ByVal value As String)
+                idTransporte = value
             End Set
         End Property
     End Class
