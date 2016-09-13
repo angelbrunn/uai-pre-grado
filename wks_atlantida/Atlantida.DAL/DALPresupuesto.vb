@@ -266,7 +266,7 @@ Namespace SIS.DAL
 
             iPar.ParameterName = "idOp"
             iPar.DbType = DbType.Int32
-            iPar.Value = oPresupuesto.idPaqNoPromocionable
+            iPar.Value = oPresupuesto.idPaqueteNoPromocionable
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter

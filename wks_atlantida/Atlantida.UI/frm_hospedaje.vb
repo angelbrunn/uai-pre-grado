@@ -16,6 +16,11 @@ Public Class frm_hospedaje
     ''' 
     ''' </summary>
     ''' <remarks></remarks>
+    Dim hospedajeTemporal As Hospedaje
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
     Dim interfazPresupuesto As NegPresupuesto = New NegPresupuesto
     ''' <summary>
     ''' 
@@ -53,6 +58,38 @@ Public Class frm_hospedaje
             End If
         End While
     End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_seleccionar_Click(sender As Object, e As EventArgs) Handles btn_seleccionar.Click
+        Me.Hide()
+        frm_presupuesto.doAssemblerMachHotel(hospedajeTemporal)
+        frm_presupuesto.Show()
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub dataGridViewVisualizar(sender As Object, e As DataGridViewCellEventArgs) Handles dgw_hospedaje.CellContentClick, dgw_hospedaje.CellDoubleClick
+        'Guardo un presupuesto temporal en tiempo de ejecucion
+        hospedajeTemporal = New Hospedaje()
+        Dim idx As Integer
+        idx = e.RowIndex
+        Dim selectedRow As DataGridViewRow
+        selectedRow = dgw_hospedaje.Rows(idx)
+
+        hospedajeTemporal.idHospedaje = selectedRow.Cells(0).Value.ToString()
+        hospedajeTemporal.razSocial = selectedRow.Cells(1).Value.ToString()
+        hospedajeTemporal.monPagar = selectedRow.Cells(2).Value.ToString()
+        hospedajeTemporal.cat = selectedRow.Cells(3).Value.ToString()
+        hospedajeTemporal.desc = selectedRow.Cells(4).Value.ToString()
+    End Sub
+
     ''' <summary>
     ''' 
     ''' </summary>

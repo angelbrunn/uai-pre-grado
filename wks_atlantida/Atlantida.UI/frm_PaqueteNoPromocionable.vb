@@ -15,6 +15,11 @@ Public Class frm_PaqueteNoPromocionable
     ''' <summary>
     ''' 
     ''' </summary>
+    ''' <remarks></remarks>
+    Dim presupuestoTemporal As Presupuesto
+    ''' <summary>
+    ''' 
+    ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
@@ -52,9 +57,46 @@ Public Class frm_PaqueteNoPromocionable
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btn_seleccionar_Click(sender As Object, e As EventArgs) Handles btn_seleccionar.Click
-        'frm_presupuesto.dgw_PaqProm.DataSource = dgw_PaqNotProm
-        'frm_presupuesto.Show()
-        Me.Close()
+        Me.Hide()
+        frm_presupuesto.doAssembler(presupuestoTemporal)
+        frm_presupuesto.Show()
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub dataGridViewVisualizar(sender As Object, e As DataGridViewCellEventArgs) Handles dgw_PaqNotProm.CellContentClick, dgw_PaqNotProm.CellDoubleClick
+        'Guardo un presupuesto temporal en tiempo de ejecucion
+        presupuestoTemporal = New Presupuesto()
+        Dim idx As Integer
+        idx = e.RowIndex
+        Dim selectedRow As DataGridViewRow
+        selectedRow = dgw_PaqNotProm.Rows(idx)
+
+        'Creo el objeto Presupuesto
+        Dim idPaquete As Integer
+        Dim idOper As Integer
+        Dim tipoPaq As String
+        'Guardo tipo de paquete PROMO|NO PROMO
+        tipoPaq = selectedRow.Cells(8).Value.ToString()
+
+        If tipoPaq = "PROMO" Then
+            idPaquete = selectedRow.Cells(0).Value.ToString()
+        ElseIf tipoPaq = "NO PROMO" Then
+            idPaquete = 0
+            idOper = selectedRow.Cells(0).Value.ToString()
+            presupuestoTemporal.idPaqueteNoPromocionable = idOper
+        End If
+        'Guardo el tipo de paquete 
+        presupuestoTemporal.TipoPaquete = tipoPaq
+
+        presupuestoTemporal.destPres = selectedRow.Cells(2).Value.ToString()
+        presupuestoTemporal.FechPartida = selectedRow.Cells(3).Value.ToString()
+        presupuestoTemporal.FechRegreso = selectedRow.Cells(4).Value.ToString()
+        presupuestoTemporal.idPaqPromocionable = idPaquete.ToString()
+        presupuestoTemporal.dispPresu = selectedRow.Cells(6).Value
     End Sub
     ''' <summary>
     ''' 

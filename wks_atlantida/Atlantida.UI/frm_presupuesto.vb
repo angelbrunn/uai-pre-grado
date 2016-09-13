@@ -2,6 +2,9 @@
 Imports Atlantida.Entidades.SIS.Entidades
 Imports Atlantida.BLL.SIS.BLL
 
+Imports System.Data.SqlClient
+Imports System.Data
+
 Public Class frm_presupuesto
     ''' <summary>
     ''' Creo obj tipo cliente
@@ -23,6 +26,16 @@ Public Class frm_presupuesto
     ''' </summary>
     ''' <remarks></remarks>
     Private idioma As String
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Dim presupuestoTemporal As Presupuesto
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Dim hospedajeTemporal As Hospedaje
     ''' <summary>
     ''' 
     ''' </summary>
@@ -266,20 +279,15 @@ Public Class frm_presupuesto
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btn_hospedaje_Click(sender As Object, e As EventArgs) Handles btn_hospedaje.Click
-        'Dim listadoHospedaje As DataTable
-        'listadoHospedaje = interfazPresupuesto.obtenerHospedajesDisponibles()
-        'dgw_hospedaje.DataSource = listadoHospedaje
         frm_hospedaje.Show()
     End Sub
-
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btn_generapresu_Click(sender As Object, e As EventArgs) Handles btn_generapresu.Click
-
-        'IMPLEMENTAR CODE GRABAR PRESUPUESTO
-
-    End Sub
-
-
-    Private Sub dataGridViewVisualizar(sender As Object, e As DataGridViewCellEventArgs) Handles dgw_PaqProm.CellContentClick, dgw_PaqProm.CellDoubleClick
         'Tomar del datagridview los valores necesarios para armar el presupuesto
         Dim oPresupuesto As Presupuesto
         oPresupuesto = New Presupuesto()
@@ -293,7 +301,7 @@ Public Class frm_presupuesto
         Dim tx4 As String
         Dim tx5 As String
 
-        'Obtener la cantidad de pasajeros | Ingresamos Pasajeros
+        ''Obtener la cantidad de pasajeros | Ingresamos Pasajeros
         Dim cantPasajeros As Integer
         cantPasajeros = 0
 
@@ -302,7 +310,7 @@ Public Class frm_presupuesto
             tx1 = txt_cliente1.Text
             _dni = tx1.Substring(0, 8)
             _nomYape = tx1.Substring(9, tx1.Length - 9)
-            _Pasajeros = _Pasajeros + " | " + _nomYape
+            _Pasajeros = _Pasajeros + _nomYape
             cantPasajeros = cantPasajeros + 1
         End If
 
@@ -354,6 +362,69 @@ Public Class frm_presupuesto
         Dim _FCre As DateTime
         _FCre = DateTime.Now
 
+        'Creo el objeto Presupuesto
+        'Dim idPaquete As Integer
+        'Dim idOper As Integer
+        Dim tipoPaq As String
+        'Guardo tipo de paquete PROMO|NO PROMO
+        tipoPaq = presupuestoTemporal.TipoPaquete
+
+        'If tipoPaq = "PROMO" Then
+        '    idPaquete = selectedRow.Cells(0).Value.ToString()
+        'ElseIf tipoPaq = "NO PROMO" Then
+        '    idPaquete = 0
+        '    idOper = selectedRow.Cells(0).Value.ToString()
+        'End If
+
+        Dim estadoInicialPresu As String
+        estadoInicialPresu = "SRES"
+
+        oPresupuesto.codCliente = codigoClienteFact.ToString()
+        oPresupuesto.legPresu = oUsuario.legajo.ToString()
+        oPresupuesto.destPres = presupuestoTemporal.destPres.ToString()
+        oPresupuesto.FechPartida = presupuestoTemporal.FechPartida.ToString()
+        oPresupuesto.FechRegreso = presupuestoTemporal.FechRegreso.ToString()
+        oPresupuesto.PasajerosPresu = _Pasajeros.ToString()
+        oPresupuesto.idPaqPromocionable = presupuestoTemporal.idPaqPromocionable()
+        oPresupuesto.FechCreacion = _FCre
+        oPresupuesto.EstadoPresu = estadoInicialPresu.ToString()
+        'Gravar presupuesto en estado sin reserva ni pago
+
+        If presupuestoTemporal.TipoPaquete = "NO PROMO" Then
+            'Generar un presupuestoTransporte en estado inpago
+
+            'Actualizas estado del presupuesto | estado: SRES-INT
+            estadoInicialPresu = estadoInicialPresu + "-INT"
+        End If
+
+        If presupuestoTemporal.TipoPaquete = "NO PROMO" Then
+            'Generar un presupuestoHotel en estado inpago en caso de elegir hotel
+
+            'Actualizas estado del presupuesto | estado: SRES-INH
+            estadoInicialPresu = estadoInicialPresu + "-INH"
+        End If
+
+        'ESTADOS: SRES - RES - PAG - CAN
+        interfazPresupuesto.insertarPresupuesto(oPresupuesto)
+        'Descontar disponibilidad para ese paquete
+        oPresupuesto.dispPresu = presupuestoTemporal.dispPresu
+        If presupuestoTemporal.idPaqPromocionable = 1 Then
+            interfazPresupuesto.descontarPaquete(oPresupuesto, cantPasajeros)
+        ElseIf presupuestoTemporal.idPaqPromocionable = 0 Then
+            oPresupuesto.idPaqPromocionable = 0
+            oPresupuesto.idPaqueteNoPromocionable = presupuestoTemporal.idPaqueteNoPromocionable
+            interfazPresupuesto.descontarOperacion(oPresupuesto, cantPasajeros)
+        End If
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub dataGridViewVisualizar(sender As Object, e As DataGridViewCellEventArgs) Handles dgw_PaqProm.CellContentClick, dgw_PaqProm.CellDoubleClick
+        'Guardo un presupuesto temporal en tiempo de ejecucion
+        presupuestoTemporal = New Presupuesto()
         Dim idx As Integer
         idx = e.RowIndex
         Dim selectedRow As DataGridViewRow
@@ -371,61 +442,102 @@ Public Class frm_presupuesto
         ElseIf tipoPaq = "NO PROMO" Then
             idPaquete = 0
             idOper = selectedRow.Cells(0).Value.ToString()
+            presupuestoTemporal.idPaqueteNoPromocionable = idOper
         End If
+        'Guardo el tipo de paquete 
+        presupuestoTemporal.TipoPaquete = tipoPaq
 
-        Dim estadoInicialPresu As String
-        estadoInicialPresu = "SRES"
+        presupuestoTemporal.destPres = selectedRow.Cells(2).Value.ToString()
+        presupuestoTemporal.FechPartida = selectedRow.Cells(3).Value.ToString()
+        presupuestoTemporal.FechRegreso = selectedRow.Cells(4).Value.ToString()
+        presupuestoTemporal.idPaqPromocionable = idPaquete.ToString()
+        presupuestoTemporal.dispPresu = selectedRow.Cells(6).Value
 
-        oPresupuesto.codCliente = codigoClienteFact.ToString()
-        oPresupuesto.legPresu = oUsuario.legajo.ToString()
-        oPresupuesto.destPres = selectedRow.Cells(1).Value.ToString()
-        oPresupuesto.FechPartida = selectedRow.Cells(3).Value.ToString()
-        oPresupuesto.FechRegreso = selectedRow.Cells(4).Value.ToString()
-        oPresupuesto.PasajerosPresu = _Pasajeros.ToString()
-        oPresupuesto.idPaqPromocionable = idPaquete.ToString()
-        oPresupuesto.FechCreacion = _FCre
-        oPresupuesto.EstadoPresu = estadoInicialPresu.ToString()
-        'Gravar presupuesto en estado sin reserva ni pago
-
-
-
-        If tipoPaq = "NO PROMO" Then
-            'Generar un presupuestoTransporte en estado inpago
-
-            'Actualizas estado del presupuesto | estado: SRES-INT
-            estadoInicialPresu = estadoInicialPresu + "-INT"
-        End If
-
-        If tipoPaq = "NO PROMO" Then
-            'Generar un presupuestoHotel en estado inpago en caso de elegir hotel
-
-            'Actualizas estado del presupuesto | estado: SRES-INH
-            estadoInicialPresu = estadoInicialPresu + "-INH"
-        End If
-
-
-        'ESTADOS: SRES - RES - PAG - CAN
-        interfazPresupuesto.insertarPresupuesto(oPresupuesto)
-        'Descontar disponibilidad para ese paquete
-        oPresupuesto.dispPresu = selectedRow.Cells(6).Value
-        If idPaquete = 1 Then
-            interfazPresupuesto.descontarPaquete(oPresupuesto, cantPasajeros)
-        ElseIf idPaquete = 0 Then
-            oPresupuesto.idPaqPromocionable = 0
-            oPresupuesto.idPaqNoPromocionable = idOper
-            interfazPresupuesto.descontarOperacion(oPresupuesto, cantPasajeros)
-        End If
-
-
-
-
-
-
-
-
-        'Cargar el presupuesto | dgw_presupuesto
-        dgw_PaqProm.Refresh()
     End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="presupuesto"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Function doAssembler(ByVal presupuesto As Presupuesto)
+        'Armo el presupuesto Temporal
+        hospedajeTemporal = New Hospedaje()
+        presupuestoTemporal = New Presupuesto()
+        presupuestoTemporal.idPaqPromocionable = 0
+        presupuestoTemporal.idPaqueteNoPromocionable = presupuesto.idPaqueteNoPromocionable
+        presupuestoTemporal.TipoPaquete = presupuesto.TipoPaquete
+
+        presupuestoTemporal.destPres = presupuesto.destPres
+        presupuestoTemporal.FechPartida = presupuesto.FechPartida
+        presupuestoTemporal.FechRegreso = presupuesto.FechRegreso
+        presupuestoTemporal.idPaqPromocionable = presupuesto.idPaqPromocionable
+        presupuestoTemporal.dispPresu = presupuesto.dispPresu
+        setDataGridView()
+
+    End Function
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="hospedaje"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Function doAssemblerMachHotel(ByVal hospedaje As Hospedaje)
+        'Agrego el hospedaje al presupuesto Temporal
+        hospedajeTemporal = New Hospedaje()
+        hospedajeTemporal.idHospedaje = hospedaje.idHospedaje
+        hospedajeTemporal.razSocial = hospedaje.razSocial
+        hospedajeTemporal.monPagar = hospedaje.monPagar
+        hospedajeTemporal.cat = hospedaje.cat
+        hospedajeTemporal.desc = hospedaje.desc
+        setDataGridView()
+    End Function
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Function setDataGridView()
+        Dim DS As DataSet = New DataSet("PaqueteNoPromo")
+        Dim Tabla As DataTable = DS.Tables.Add("PaqueteNoPromo")
+
+        Tabla.Columns.Add("IDPAX", Type.GetType("System.String"))
+        'Tabla.Columns.Add("CCO", Type.GetType()
+        Tabla.Columns.Add("CCD", Type.GetType("System.String"))
+        Tabla.Columns.Add("FP", Type.GetType("System.String"))
+        Tabla.Columns.Add("FR", Type.GetType("System.String"))
+        'Tabla.Columns.Add("EMP", Type.GetType("tipo_de datos que contendrá la columna"))
+        Tabla.Columns.Add("AD", Type.GetType("System.String"))
+        'Tabla.Columns.Add("MT", Type.GetType("tipo_de datos que contendrá la columna"))
+        Tabla.Columns.Add("TPA", Type.GetType("System.String"))
+
+        If hospedajeTemporal.idHospedaje <> 0 Then
+            Tabla.Columns.Add("IDH", Type.GetType("System.String"))
+            Tabla.Columns.Add("NOH", Type.GetType("System.String"))
+            Tabla.Columns.Add("DOH", Type.GetType("System.String"))
+        End If
+
+        Dim Fila As DataRow = Tabla.NewRow
+
+        'Fila = DS.Tables("PaqueteNoPromo").NewRow()
+        Fila("IDPAX") = presupuestoTemporal.idPaqueteNoPromocionable.ToString()
+        Fila("CCD") = presupuestoTemporal.destPres.ToString()
+        Fila("FP") = presupuestoTemporal.FechPartida.ToString()
+        Fila("FR") = presupuestoTemporal.FechRegreso.ToString()
+        Fila("AD") = presupuestoTemporal.dispPresu.ToString()
+        Fila("TPA") = presupuestoTemporal.TipoPaquete.ToString()
+
+        If hospedajeTemporal.idHospedaje <> 0 Then
+            Fila("IDH") = hospedajeTemporal.idHospedaje.ToString()
+            Fila("NOH") = hospedajeTemporal.razSocial.ToString()
+            Fila("DOH") = hospedajeTemporal.desc.ToString()
+        End If
+
+        Tabla.Rows.Add(Fila)
+
+        dgw_PaqProm.DataSource = Tabla
+
+    End Function
     ''' <summary>
     ''' 
     ''' </summary>
@@ -463,11 +575,4 @@ Public Class frm_presupuesto
     Private Sub btn_cancelar_Click(sender As Object, e As EventArgs) Handles btn_cancelar.Click
         'Cambiar el estado del presupuesto a cancelado
     End Sub
-
-
-
-    'Private Sub dgw_PaqProm_MouseClick(sender As Object, e As MouseEventArgs) Handles dgw_PaqProm.MouseClick
-    '    'Cargar un objeto o una lista o variables con los datos del dgw
-    '    'Cuando hago un click guardo los valores de manera temporal del registro que tengo seleccionado
-    'End Sub
 End Class

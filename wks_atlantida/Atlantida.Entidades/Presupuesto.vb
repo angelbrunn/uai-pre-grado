@@ -44,7 +44,7 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private idPaqueteNoPromocionable As Integer
+        Private idPaqNoProm As Integer
         ''' <summary>
         ''' 
         ''' </summary>
@@ -60,6 +60,11 @@
         ''' </summary>
         ''' <remarks></remarks>
         Private estado As String
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private tipo As String
         ''' <summary>
         ''' 
         ''' </summary>
@@ -164,12 +169,12 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property idPaqNoPromocionable() As Integer
+        Public Property idPaqueteNoPromocionable() As Integer
             Get
-                Return idPaquetePromocionable
+                Return idPaqNoProm
             End Get
             Set(ByVal value As Integer)
-                idPaquetePromocionable = value
+                idPaqNoProm = value
             End Set
         End Property
         ''' <summary>
@@ -226,6 +231,20 @@
             End Get
             Set(ByVal value As String)
                 pasajeros = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property TipoPaquete() As String
+            Get
+                Return tipo
+            End Get
+            Set(ByVal value As String)
+                tipo = value
             End Set
         End Property
     End Class
