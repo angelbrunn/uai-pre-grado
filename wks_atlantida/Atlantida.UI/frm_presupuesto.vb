@@ -230,6 +230,9 @@ Public Class frm_presupuesto
             If enu.Current.componente = "lbl_idPres" Then
                 Me.lbl_idPres.Text = enu.Current.value
             End If
+            If enu.Current.componente = "btn_Buscar" Then
+                Me.btn_Buscar.Text = enu.Current.value
+            End If
             If enu.Current.componente = "btn_cancelar" Then
                 Me.btn_cancelar.Text = enu.Current.value
             End If
@@ -360,8 +363,6 @@ Public Class frm_presupuesto
         _FCre = DateTime.Now
 
         'Creo el objeto Presupuesto
-        'Dim idPaquete As Integer
-        'Dim idOper As Integer
         Dim tipoPaq As String
         'Guardo tipo de paquete PROMO|NO PROMO
         tipoPaq = presupuestoTemporal.TipoPaquete
@@ -378,6 +379,7 @@ Public Class frm_presupuesto
         oPresupuesto.idPaqPromocionable = presupuestoTemporal.idPaqPromocionable()
         oPresupuesto.FechCreacion = _FCre
         oPresupuesto.EstadoPresu = estadoInicialPresu.ToString()
+        oPresupuesto.IdTransp = presupuestoTemporal.IdTransp.ToString()
         'Gravar presupuesto en estado sin reserva ni pago
 
         If presupuestoTemporal.TipoPaquete = "NO PROMO" Then
@@ -387,7 +389,7 @@ Public Class frm_presupuesto
             estadoInicialPresu = estadoInicialPresu + "-INT"
         End If
 
-        If (presupuestoTemporal.TipoPaquete = "NO PROMO" & hospedajeTemporal.idHospedaje <> 0) Then
+        If (presupuestoTemporal.TipoPaquete = "NO PROMO" And hospedajeTemporal.idHospedaje <> 0) Then
             'Generar un presupuestoHotel en estado inpago en caso de elegir hotel
 
             interfazPresupuesto.insertarPresupuestoHospedaje(hospedajeTemporal.idHospedaje)
@@ -401,9 +403,13 @@ Public Class frm_presupuesto
             interfazPresupuesto.insertarPresupuesto(oPresupuesto, hospedajeTemporal.idHospedaje)
         End If
 
-        'ESTADOS: SRES - RES - PAG - CAN
-        interfazPresupuesto.insertarPresupuesto(oPresupuesto)
+        If hospedajeTemporal.idHospedaje = 0 Then
+            'ESTADOS: SRES - RES - PAG - CAN
+            interfazPresupuesto.insertarPresupuesto(oPresupuesto)
+        End If
 
+        'Gravo estado final parcial
+        oPresupuesto.EstadoPresu = estadoInicialPresu
         'Descontar disponibilidad para ese paquete
         oPresupuesto.dispPresu = presupuestoTemporal.dispPresu
         If presupuestoTemporal.idPaqPromocionable = 1 Then
@@ -575,5 +581,31 @@ Public Class frm_presupuesto
     ''' <remarks></remarks>
     Private Sub btn_cancelar_Click(sender As Object, e As EventArgs) Handles btn_cancelar.Click
         'Cambiar el estado del presupuesto a cancelado
+        Dim idPaq As String
+        idPaq = txt_idPaquete.Text
+        Dim oPresupuesto = New Presupuesto()
+
+        'Obtener paquete por id
+        oPresupuesto = interfazPresupuesto.obtenerPresPorId(idPaq)
+
+        'Cambio el estado del presupuesto a CAN | CAN:CANCELADO
+
+        Dim estado As String = "CAN"
+        interfazPresupuesto.setEstadoPresupuesto(idPaq, estado)
+
+
+        'Cargar presupuesto en la view
+        Dim idx_value As Integer = Integer.Parse(idPaq)
+        dgw_presupuesto.DataSource = interfazPresupuesto.obtenerPresupuestoById(idx_value)
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_Buscar_Click(sender As Object, e As EventArgs) Handles btn_Buscar.Click
+        Dim idx_value As Integer = Integer.Parse(txt_idPaquete.Text)
+        dgw_presupuesto.DataSource = interfazPresupuesto.obtenerPresupuestoById(idx_value)
     End Sub
 End Class

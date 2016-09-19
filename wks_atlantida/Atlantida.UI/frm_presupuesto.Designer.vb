@@ -58,8 +58,9 @@ Partial Class frm_presupuesto
         Me.box_result = New System.Windows.Forms.GroupBox()
         Me.dgw_presupuesto = New System.Windows.Forms.DataGridView()
         Me.lbl_idPres = New System.Windows.Forms.Label()
-        Me.txt_idProveedor = New System.Windows.Forms.TextBox()
+        Me.txt_idPaquete = New System.Windows.Forms.TextBox()
         Me.btn_cancelar = New System.Windows.Forms.Button()
+        Me.btn_Buscar = New System.Windows.Forms.Button()
         Me.box_cliente.SuspendLayout()
         Me.box_presupuesto.SuspendLayout()
         Me.box_resultadodisp.SuspendLayout()
@@ -368,7 +369,7 @@ Partial Class frm_presupuesto
         'box_resultadodisp
         '
         Me.box_resultadodisp.Controls.Add(Me.dgw_PaqProm)
-        Me.box_resultadodisp.Location = New System.Drawing.Point(12, 264)
+        Me.box_resultadodisp.Location = New System.Drawing.Point(12, 283)
         Me.box_resultadodisp.Name = "box_resultadodisp"
         Me.box_resultadodisp.Size = New System.Drawing.Size(790, 166)
         Me.box_resultadodisp.TabIndex = 9
@@ -386,7 +387,7 @@ Partial Class frm_presupuesto
         'box_result
         '
         Me.box_result.Controls.Add(Me.dgw_presupuesto)
-        Me.box_result.Location = New System.Drawing.Point(12, 436)
+        Me.box_result.Location = New System.Drawing.Point(12, 449)
         Me.box_result.Name = "box_result"
         Me.box_result.Size = New System.Drawing.Size(790, 119)
         Me.box_result.TabIndex = 11
@@ -410,29 +411,39 @@ Partial Class frm_presupuesto
         Me.lbl_idPres.TabIndex = 12
         Me.lbl_idPres.Text = "Id.Presupuesto"
         '
-        'txt_idProveedor
+        'txt_idPaquete
         '
-        Me.txt_idProveedor.Location = New System.Drawing.Point(142, 227)
-        Me.txt_idProveedor.Name = "txt_idProveedor"
-        Me.txt_idProveedor.Size = New System.Drawing.Size(176, 20)
-        Me.txt_idProveedor.TabIndex = 13
+        Me.txt_idPaquete.Location = New System.Drawing.Point(142, 227)
+        Me.txt_idPaquete.Name = "txt_idPaquete"
+        Me.txt_idPaquete.Size = New System.Drawing.Size(176, 20)
+        Me.txt_idPaquete.TabIndex = 13
         '
         'btn_cancelar
         '
-        Me.btn_cancelar.Location = New System.Drawing.Point(323, 227)
+        Me.btn_cancelar.Location = New System.Drawing.Point(323, 254)
         Me.btn_cancelar.Name = "btn_cancelar"
         Me.btn_cancelar.Size = New System.Drawing.Size(75, 23)
         Me.btn_cancelar.TabIndex = 14
         Me.btn_cancelar.Text = "Cancelar"
         Me.btn_cancelar.UseVisualStyleBackColor = True
         '
+        'btn_Buscar
+        '
+        Me.btn_Buscar.Location = New System.Drawing.Point(323, 227)
+        Me.btn_Buscar.Name = "btn_Buscar"
+        Me.btn_Buscar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Buscar.TabIndex = 15
+        Me.btn_Buscar.Text = "Buscar"
+        Me.btn_Buscar.UseVisualStyleBackColor = True
+        '
         'frm_presupuesto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(814, 566)
+        Me.ClientSize = New System.Drawing.Size(814, 575)
+        Me.Controls.Add(Me.btn_Buscar)
         Me.Controls.Add(Me.btn_cancelar)
-        Me.Controls.Add(Me.txt_idProveedor)
+        Me.Controls.Add(Me.txt_idPaquete)
         Me.Controls.Add(Me.lbl_idPres)
         Me.Controls.Add(Me.box_result)
         Me.Controls.Add(Me.box_resultadodisp)
@@ -485,9 +496,10 @@ Partial Class frm_presupuesto
     Friend WithEvents dgw_PaqProm As System.Windows.Forms.DataGridView
     Friend WithEvents box_result As System.Windows.Forms.GroupBox
     Friend WithEvents lbl_idPres As System.Windows.Forms.Label
-    Friend WithEvents txt_idProveedor As System.Windows.Forms.TextBox
+    Friend WithEvents txt_idPaquete As System.Windows.Forms.TextBox
     Friend WithEvents btn_cancelar As System.Windows.Forms.Button
     Friend WithEvents lst_destino As System.Windows.Forms.ListBox
     Friend WithEvents lst_origen As System.Windows.Forms.ListBox
     Friend WithEvents dgw_presupuesto As System.Windows.Forms.DataGridView
+    Friend WithEvents btn_Buscar As System.Windows.Forms.Button
 End Class

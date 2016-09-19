@@ -126,6 +126,24 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="_id"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerPresPorId(ByVal _id As Integer) As Presupuesto
+            Dim _presupuesto As Presupuesto
+            _presupuesto = Nothing
+            Dim oPresupuesto As New DALPresupuesto
+            Try
+                _presupuesto = oPresupuesto.obtenerPresupuestoPorId(_id)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return _presupuesto
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="origen"></param>
         ''' <param name="destino"></param>
         ''' <param name="fechIda"></param>
@@ -232,7 +250,7 @@ Namespace SIS.BLL
             Dim _cantidadPasajerosTmp As Integer
             Try
                 _cantidadPasajerosTmp = _presupuesto.dispPresu
-                _presupuesto.destPres = _cantidadPasajerosTmp - cantidadPasajeros
+                _presupuesto.dispPresu = _cantidadPasajerosTmp - cantidadPasajeros
                 oDalPresupuesto.descontarPaqueteNoPromo(_presupuesto)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
@@ -254,6 +272,41 @@ Namespace SIS.BLL
             End Try
 
             Return listadoHospedaje
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idx"></param>
+        ''' <param name="estado"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function setEstadoPresupuesto(ByVal idx As Integer, ByVal estado As String)
+            Dim listadoPeresupuesto As DataTable
+            listadoPeresupuesto = Nothing
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                listadoPeresupuesto = oDalPresupuesto.setEstadoPresupuesto(idx, estado)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idx"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerPresupuestoById(ByVal idx As Integer) As DataTable
+            Dim listadoPeresupuesto As DataTable
+            listadoPeresupuesto = Nothing
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                listadoPeresupuesto = oDalPresupuesto.getPresupuetoById(idx)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return listadoPeresupuesto
         End Function
         ''' <summary>
         ''' 
