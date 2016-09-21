@@ -64,6 +64,11 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
+        Private monto As Integer
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
         Private estado As String
         ''' <summary>
         ''' 
@@ -264,6 +269,20 @@
             End Get
             Set(ByVal value As String)
                 idTransporte = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property MontoAPagar() As Integer
+            Get
+                Return monto
+            End Get
+            Set(ByVal value As Integer)
+                monto = value
             End Set
         End Property
     End Class

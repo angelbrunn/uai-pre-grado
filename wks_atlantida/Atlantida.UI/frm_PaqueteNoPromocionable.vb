@@ -98,6 +98,7 @@ Public Class frm_PaqueteNoPromocionable
         presupuestoTemporal.IdTransp = selectedRow.Cells(5).Value.ToString()
         presupuestoTemporal.idPaqPromocionable = idPaquete.ToString()
         presupuestoTemporal.dispPresu = selectedRow.Cells(7).Value
+        presupuestoTemporal.MontoAPagar = selectedRow.Cells(8).Value
     End Sub
     ''' <summary>
     ''' 

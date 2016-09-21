@@ -49,7 +49,7 @@ Namespace SIS.DAL
         ''' <remarks></remarks>
         Public Sub insertarPago(ByVal oPago As Pago)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO Pago([idPago],[confirmacionPagoRealizado],[fechaPago],[idPresupuesto]) VALUES (@idPago,@confirmacionPagoRealizado,@fechaPago,@idPresupuesto)"
+            Dim sqlQuery As String = "INSERT INTO Pago(confirmacionPagoRealizado,idPresupuesto,fechaPago) VALUES (@confirmacionPagoRealizado,@idPresupuesto,@fechaPago)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -60,15 +60,16 @@ Namespace SIS.DAL
 
             Dim iPar As IDataParameter = comando.CreateParameter
 
-            iPar.ParameterName = "idPago"
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "confirmacionPagoRealizado"
             iPar.DbType = DbType.Int32
-            iPar.Value = oPago.idPagos
+            iPar.Value = oPago.confPago
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
-            iPar.ParameterName = "confirmacionPagoRealizado"
-            iPar.DbType = DbType.Boolean
-            iPar.Value = oPago.confPago
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oPago.idPresu
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
@@ -77,10 +78,40 @@ Namespace SIS.DAL
             iPar.Value = oPago.FechPago
             comando.Parameters.Add(iPar)
 
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idx"></param>
+        ''' <remarks></remarks>
+        Public Sub cancelarPago(ByVal idx As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Pago SET [confirmacionPagoRealizado]=@confirmacionPagoRealizado WHERE idPresupuesto=@idPresupuesto"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+            '0:Pago Pendiente pero Activo |1:Pago realizado correctamente |2:Pago cancelado
+            iPar.ParameterName = "confirmacionPagoRealizado"
+            iPar.DbType = DbType.Int32
+            iPar.Value = 2
+            comando.Parameters.Add(iPar)
+
             iPar = comando.CreateParameter
             iPar.ParameterName = "idPresupuesto"
             iPar.DbType = DbType.Int32
-            iPar.Value = oPago.idPresu
+            iPar.Value = idx
             comando.Parameters.Add(iPar)
 
             Try

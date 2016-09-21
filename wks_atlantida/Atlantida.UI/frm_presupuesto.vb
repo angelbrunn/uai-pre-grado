@@ -49,6 +49,16 @@ Public Class frm_presupuesto
     ''' <summary>
     ''' 
     ''' </summary>
+    ''' <remarks></remarks>
+    Dim interfazCobro As NegCobro = New NegCobro
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Dim interfazPago As NegPago = New NegPago
+    ''' <summary>
+    ''' 
+    ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
@@ -398,6 +408,9 @@ Public Class frm_presupuesto
             estadoInicialPresu = estadoInicialPresu + "-INH"
         End If
 
+        'Gravo estado final parcial
+        oPresupuesto.EstadoPresu = estadoInicialPresu
+
         If hospedajeTemporal.idHospedaje <> 0 Then
             'SI SE AGREGO HOTEL ENTONCES SE GRABA EL ID DE ESE HOTEL
             interfazPresupuesto.insertarPresupuesto(oPresupuesto, hospedajeTemporal.idHospedaje)
@@ -408,8 +421,6 @@ Public Class frm_presupuesto
             interfazPresupuesto.insertarPresupuesto(oPresupuesto)
         End If
 
-        'Gravo estado final parcial
-        oPresupuesto.EstadoPresu = estadoInicialPresu
         'Descontar disponibilidad para ese paquete
         oPresupuesto.dispPresu = presupuestoTemporal.dispPresu
         If presupuestoTemporal.idPaqPromocionable = 1 Then
@@ -421,7 +432,10 @@ Public Class frm_presupuesto
         End If
 
         'Cargar presupuesto en la view
-        dgw_presupuesto.DataSource = interfazPresupuesto.obtenerPresupuesto()
+        Dim dtPeresupuesto As DataTable
+        dtPeresupuesto = interfazPresupuesto.obtenerPresupuesto()
+        presupuestoTemporal.idPresu = dtPeresupuesto(0)("IDP").ToString()
+        dgw_presupuesto.DataSource = dtPeresupuesto
     End Sub
     ''' <summary>
     ''' 
@@ -481,6 +495,7 @@ Public Class frm_presupuesto
         presupuestoTemporal.IdTransp = presupuesto.IdTransp
         presupuestoTemporal.idPaqPromocionable = presupuesto.idPaqPromocionable
         presupuestoTemporal.dispPresu = presupuesto.dispPresu
+        presupuestoTemporal.MontoAPagar = presupuesto.MontoAPagar
         setDataGridView()
     End Function
     ''' <summary>
@@ -515,7 +530,7 @@ Public Class frm_presupuesto
         Tabla.Columns.Add("FR", Type.GetType("System.String"))
         'Tabla.Columns.Add("EMP", Type.GetType("tipo_de datos que contendrá la columna"))
         Tabla.Columns.Add("AD", Type.GetType("System.String"))
-        'Tabla.Columns.Add("MT", Type.GetType("tipo_de datos que contendrá la columna"))
+        Tabla.Columns.Add("MT", Type.GetType("System.String"))
         Tabla.Columns.Add("TPA", Type.GetType("System.String"))
 
         If hospedajeTemporal.idHospedaje <> 0 Then
@@ -532,9 +547,11 @@ Public Class frm_presupuesto
         Fila("FP") = presupuestoTemporal.FechPartida.ToString()
         Fila("FR") = presupuestoTemporal.FechRegreso.ToString()
         Fila("AD") = presupuestoTemporal.dispPresu.ToString()
+        Fila("MT") = presupuestoTemporal.MontoAPagar.ToString()
         Fila("TPA") = presupuestoTemporal.TipoPaquete.ToString()
 
         If hospedajeTemporal.idHospedaje <> 0 Then
+            Fila("MT") = (presupuestoTemporal.MontoAPagar + hospedajeTemporal.monPagar).ToString
             Fila("IDH") = hospedajeTemporal.idHospedaje.ToString()
             Fila("NOH") = hospedajeTemporal.razSocial.ToString()
             Fila("DOH") = hospedajeTemporal.desc.ToString()
@@ -593,6 +610,12 @@ Public Class frm_presupuesto
         Dim estado As String = "CAN"
         interfazPresupuesto.setEstadoPresupuesto(idPaq, estado)
 
+        'Cancelar el cobro
+        interfazCobro.cancelarCobro(idPaq)
+
+        'Cancelar el pago
+        interfazPago.cancelarPago(idPaq)
+
 
         'Cargar presupuesto en la view
         Dim idx_value As Integer = Integer.Parse(idPaq)
@@ -607,5 +630,40 @@ Public Class frm_presupuesto
     Private Sub btn_Buscar_Click(sender As Object, e As EventArgs) Handles btn_Buscar.Click
         Dim idx_value As Integer = Integer.Parse(txt_idPaquete.Text)
         dgw_presupuesto.DataSource = interfazPresupuesto.obtenerPresupuestoById(idx_value)
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_terminaop_Click(sender As Object, e As EventArgs) Handles btn_terminaop.Click
+        Dim oCobro As Cobro = New Cobro()
+        Dim oPago As Pago = New Pago()
+
+        Dim monto As String = (presupuestoTemporal.MontoAPagar + hospedajeTemporal.monPagar).ToString
+
+        oCobro.idPresu = presupuestoTemporal.idPresu.ToString()
+
+        Dim ultimaFactura As Integer = interfazCobro.obtenerUltimaFactura()
+
+        oCobro.montos = monto.ToString()
+        oCobro.ventaCancel = 0
+        oCobro.numeroFactura = ultimaFactura + 1
+
+        oCobro.FechCobro = "2016-01-01 00:00:00.000"
+        'Generar un presupuesto de cobro
+        interfazCobro.registrarCobro(oCobro)
+
+
+        oPago.confPago = 0
+        oPago.FechPago = "2016-01-01 00:00:00.000"
+        oPago.idPresu = presupuestoTemporal.idPresu.ToString()
+        'Generar un presupuesto de Pago
+        interfazPago.insertarPago(oPago)
+
+        'OPERACION EXITOSA
+        MsgBox("OPERACION EXITOSA!")
+        'CLEAN ALL
     End Sub
 End Class

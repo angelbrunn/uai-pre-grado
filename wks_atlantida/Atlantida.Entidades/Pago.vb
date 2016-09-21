@@ -9,7 +9,7 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private confirmacionPagoRealizado As Boolean
+        Private confirmacionPagoRealizado As Integer
         ''' <summary>
         ''' 
         ''' </summary>
@@ -40,11 +40,11 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property confPago() As Boolean
+        Public Property confPago() As Integer
             Get
                 Return confirmacionPagoRealizado
             End Get
-            Set(ByVal value As Boolean)
+            Set(ByVal value As Integer)
                 confirmacionPagoRealizado = value
             End Set
         End Property

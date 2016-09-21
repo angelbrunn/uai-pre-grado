@@ -14,7 +14,7 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private monto As Double
+        Private monto As Integer
         ''' <summary>
         ''' 
         ''' </summary>
@@ -24,7 +24,7 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private ventaCancelada As Boolean
+        Private ventaCancelada As String
         ''' <summary>
         ''' 
         ''' </summary>
@@ -64,11 +64,11 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property montos() As Double
+        Public Property montos() As Integer
             Get
                 Return monto
             End Get
-            Set(ByVal value As Double)
+            Set(ByVal value As Integer)
                 monto = value
             End Set
         End Property
@@ -92,11 +92,11 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property ventaCancel() As Boolean
+        Public Property ventaCancel() As String
             Get
                 Return ventaCancelada
             End Get
-            Set(ByVal value As Boolean)
+            Set(ByVal value As String)
                 ventaCancelada = value
             End Set
         End Property
