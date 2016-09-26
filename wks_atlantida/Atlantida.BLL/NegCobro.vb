@@ -32,6 +32,24 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="dni"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerDeudaCliente(ByVal dni As Integer) As DataTable
+            Dim listadoCobro As DataTable
+            listadoCobro = Nothing
+            Dim oDalCobro As New DALCobro
+            Try
+                listadoCobro = oDalCobro.obtenerDeudaCliente(dni)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return listadoCobro
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="_idx"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>

@@ -25,11 +25,18 @@ Public Class frm_cobro
     ''' <summary>
     ''' 
     ''' </summary>
+    ''' <remarks></remarks>
+    Dim interfazCobro As NegCobro = New NegCobro
+    ''' <summary>
+    ''' 
+    ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_validar.Click
         'Por medio del nro dni voy a buscar todos las operaciones abiertas en estado pendiente de pago
+        Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
+        dgw_resultDeuda.DataSource = interfazCobro.obtenerDeudaCliente(_dni)
     End Sub
     ''' <summary>
     ''' 
@@ -65,6 +72,27 @@ Public Class frm_cobro
     ''' <remarks></remarks>
     Private Sub box_central_Enter(sender As Object, e As EventArgs) Handles box_central.Enter
         modificarIdiomaSegunPreferencias(UsuarioIdioma)
+
+        Dim listadoFormasPago As New List(Of String)
+        listadoFormasPago.Add("Efectivo")
+        listadoFormasPago.Add("Debito")
+        listadoFormasPago.Add("Credito")
+
+        Dim listadoCantidad As New List(Of String)
+        listadoCantidad.Add("1")
+        listadoCantidad.Add("3")
+        listadoCantidad.Add("6")
+        listadoCantidad.Add("12")
+
+        Dim enumerator_A As IEnumerator(Of String) = listadoFormasPago.GetEnumerator
+        While enumerator_A.MoveNext
+            cbx_formasPago.Items.Add(enumerator_A.Current)
+        End While
+        Dim enumerator_B As IEnumerator(Of String) = listadoCantidad.GetEnumerator
+        While enumerator_B.MoveNext
+            cbx_cantidad.Items.Add(enumerator_B.Current)
+        End While
+
     End Sub
     ''' <summary>
     ''' 
