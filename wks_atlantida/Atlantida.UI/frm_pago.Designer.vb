@@ -43,7 +43,7 @@ Partial Class frm_pago
         Me.box_pagos_pend.Controls.Add(Me.dgw_pagos_pend)
         Me.box_pagos_pend.Location = New System.Drawing.Point(12, 12)
         Me.box_pagos_pend.Name = "box_pagos_pend"
-        Me.box_pagos_pend.Size = New System.Drawing.Size(867, 324)
+        Me.box_pagos_pend.Size = New System.Drawing.Size(760, 324)
         Me.box_pagos_pend.TabIndex = 8
         Me.box_pagos_pend.TabStop = False
         Me.box_pagos_pend.Text = "Pagos Pendientes"
@@ -53,7 +53,7 @@ Partial Class frm_pago
         Me.dgw_pagos_pend.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgw_pagos_pend.Location = New System.Drawing.Point(9, 19)
         Me.dgw_pagos_pend.Name = "dgw_pagos_pend"
-        Me.dgw_pagos_pend.Size = New System.Drawing.Size(852, 298)
+        Me.dgw_pagos_pend.Size = New System.Drawing.Size(745, 298)
         Me.dgw_pagos_pend.TabIndex = 1
         '
         'box_acciones
@@ -117,15 +117,15 @@ Partial Class frm_pago
         '
         'txt_idProveedor
         '
-        Me.txt_idProveedor.Location = New System.Drawing.Point(676, 361)
+        Me.txt_idProveedor.Location = New System.Drawing.Point(660, 361)
         Me.txt_idProveedor.Name = "txt_idProveedor"
-        Me.txt_idProveedor.Size = New System.Drawing.Size(176, 20)
+        Me.txt_idProveedor.Size = New System.Drawing.Size(106, 20)
         Me.txt_idProveedor.TabIndex = 10
         '
         'lbl_idPres
         '
         Me.lbl_idPres.AutoSize = True
-        Me.lbl_idPres.Location = New System.Drawing.Point(592, 368)
+        Me.lbl_idPres.Location = New System.Drawing.Point(576, 361)
         Me.lbl_idPres.Name = "lbl_idPres"
         Me.lbl_idPres.Size = New System.Drawing.Size(78, 13)
         Me.lbl_idPres.TabIndex = 11
@@ -135,7 +135,7 @@ Partial Class frm_pago
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(891, 430)
+        Me.ClientSize = New System.Drawing.Size(784, 430)
         Me.Controls.Add(Me.lbl_idPres)
         Me.Controls.Add(Me.txt_idProveedor)
         Me.Controls.Add(Me.box_acciones)

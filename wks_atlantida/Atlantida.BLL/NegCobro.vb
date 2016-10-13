@@ -29,6 +29,15 @@ Namespace SIS.BLL
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
         End Function
+
+        Function registrarPresupuestoCobro(ByVal _cobro As Cobro)
+            Dim oDalCobro As New DALCobro
+            Try
+                oDalCobro.insertarPresupuestoCobro(_cobro)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
         ''' <summary>
         ''' 
         ''' </summary>

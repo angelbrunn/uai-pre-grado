@@ -102,6 +102,43 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="oCobro"></param>
+        ''' <remarks></remarks>
+        Public Sub insertarPresupuestoCobro(ByVal oCobro As Cobro)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "INSERT INTO PresupuestoCobros(idCobros,idPresupuesto) VALUES (@idCobros,@idPresupuesto)"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idCobros"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oCobro.idCobros
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oCobro.idPresu
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="idx"></param>
         ''' <remarks></remarks>
         Public Sub cancelarCobro(ByVal idx As Integer)
@@ -116,7 +153,7 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:significa que el cobro estaactivo |1:significa cobro cancelado
+            '0:significa que el cobro esta activo |1:significa cobro cancelado
             iPar.ParameterName = "ventaCancelada"
             iPar.DbType = DbType.Int32
             iPar.Value = 1

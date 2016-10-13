@@ -358,9 +358,9 @@ Namespace SIS.DAL
         ''' </summary>
         ''' <param name="idProvHos"></param>
         ''' <remarks></remarks>
-        Public Sub insertarPresupuestoHospedaje(ByVal idProvHos As Integer)
+        Public Sub insertarPresupuestoHospedaje(ByVal idPresupuesto As Integer, ByVal idProvHos As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO PresupuestoHospedaje([idProvHos]) VALUES (@idProvHos)"
+            Dim sqlQuery As String = "INSERT INTO PresupuestoHospedaje([idPresupuesto],[idProvHos]) VALUES (@idPresupuesto,@idProvHos)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -370,6 +370,12 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
             iPar.ParameterName = "idProvHos"
@@ -389,9 +395,9 @@ Namespace SIS.DAL
         ''' </summary>
         ''' <param name="idProvTrans"></param>
         ''' <remarks></remarks>
-        Public Sub insertarPresupuestoTransporte(ByVal idProvTrans As Integer)
+        Public Sub insertarPresupuestoTransporte(ByVal idPresupuesto As Integer, ByVal idProvTrans As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO PresupuestoTransporte([idProvTrans]) VALUES (@idProvTrans)"
+            Dim sqlQuery As String = "INSERT INTO PresupuestoTransporte([idPresupuesto],[idProvTrans]) VALUES (@idPresupuesto,@idProvTrans)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -401,6 +407,12 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
             iPar.ParameterName = "idProvTrans"

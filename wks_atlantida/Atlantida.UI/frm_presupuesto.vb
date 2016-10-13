@@ -393,17 +393,13 @@ Public Class frm_presupuesto
         'Gravar presupuesto en estado sin reserva ni pago
 
         If presupuestoTemporal.TipoPaquete = "NO PROMO" Then
-            'Generar un presupuestoTransporte en estado inpago
-            interfazPresupuesto.insertarPresupuestoTransporte(presupuestoTemporal.IdTransp)
+            'Generar un presupuestoTransporte en estado inpago - ini
             'Actualizas estado del presupuesto | estado: SRES-INT
             estadoInicialPresu = estadoInicialPresu + "-INT"
         End If
 
         If (presupuestoTemporal.TipoPaquete = "NO PROMO" And hospedajeTemporal.idHospedaje <> 0) Then
-            'Generar un presupuestoHotel en estado inpago en caso de elegir hotel
-
-            interfazPresupuesto.insertarPresupuestoHospedaje(hospedajeTemporal.idHospedaje)
-
+            'Generar un presupuestoHotel en estado inpago en caso de elegir hotel - ini
             'Actualizas estado del presupuesto | estado: SRES-INH
             estadoInicialPresu = estadoInicialPresu + "-INH"
         End If
@@ -654,13 +650,28 @@ Public Class frm_presupuesto
         oCobro.FechCobro = "2016-01-01 00:00:00.000"
         'Generar un presupuesto de cobro
         interfazCobro.registrarCobro(oCobro)
-
+        interfazCobro.registrarPresupuestoCobro(oCobro)
 
         oPago.confPago = 0
         oPago.FechPago = "2016-01-01 00:00:00.000"
         oPago.idPresu = presupuestoTemporal.idPresu.ToString()
         'Generar un presupuesto de Pago
         interfazPago.insertarPago(oPago)
+
+
+        'OBTENER ID DEL PRESUPUESTO
+        Dim idPresupuesto As String = presupuestoTemporal.idPresu.ToString()
+        'REGISTRAR PRESUPUESTO PARA TRANSP Y HOSPEDAJE
+        If Not presupuestoTemporal.IdTransp Is Nothing Then
+            'Generar un presupuestoTransporte en estado inpago - implementacion
+            interfazPresupuesto.insertarPresupuestoTransporte(idPresupuesto, presupuestoTemporal.IdTransp)
+        End If
+
+        If Not CStr(hospedajeTemporal.idHospedaje) Is Nothing Then
+            'Generar un presupuestoHotel en estado inpago en caso de elegir hotel - implementacion
+            interfazPresupuesto.insertarPresupuestoHospedaje(idPresupuesto, hospedajeTemporal.idHospedaje)
+        End If
+
 
         'OPERACION EXITOSA
         MsgBox("OPERACION EXITOSA!")
