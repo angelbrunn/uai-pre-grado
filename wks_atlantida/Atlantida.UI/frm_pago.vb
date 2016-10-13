@@ -19,11 +19,19 @@ Public Class frm_pago
     ''' <summary>
     ''' 
     ''' </summary>
+    ''' <remarks></remarks>
+    Private interfazPago As NegPago = New NegPago
+    ''' <summary>
+    ''' 
+    ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frm_pago_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         modificarIdiomaSegunPreferencias(UsuarioIdioma)
+
+        dgw_pagos_pend.DataSource = interfazPago.obtenerPagos()
+
     End Sub
     ''' <summary>
     ''' 

@@ -32,6 +32,23 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerPagos() As DataTable
+            Dim listadoPago As DataTable
+            listadoPago = Nothing
+            Dim oDalPago As New DALPago
+            Try
+                listadoPago = oDalPago.obtenerPagosActivos()
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return listadoPago
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="_idx"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>

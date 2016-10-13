@@ -26,7 +26,27 @@ Public Class frm_cobro
     ''' 
     ''' </summary>
     ''' <remarks></remarks>
-    Dim interfazCobro As NegCobro = New NegCobro
+    Private numeroFactura As Integer
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private montoCobro As Integer
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private valorSeña As Integer
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private interfazCobro As NegCobro = New NegCobro
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private cobroTemporal As Cobro
     ''' <summary>
     ''' 
     ''' </summary>
@@ -63,6 +83,15 @@ Public Class frm_cobro
                 Me.txt_cuenta.Text = popUpcuen.cue.des_tipocuenta + " " + popUpcuen.cue.des_banco + " " + popUpcuen.cue.des_numerocuenta + " " + popUpcuen.cue.des_nombre + " " + popUpcuen.cue.des_email
             End If
         End If
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_sena_Click(sender As Object, e As EventArgs) Handles btn_sena.Click
+        txt_sena.Text = valorSeña
     End Sub
     ''' <summary>
     ''' 
@@ -116,9 +145,6 @@ Public Class frm_cobro
             If enu.Current.componente = "box_resultado_deuda" Then
                 Me.box_resultado_deuda.Text = enu.Current.value
             End If
-            ''If enu.Current.componente = "btn_carga" Then
-            ''Me.btn_carga.Text = enu.Current.value
-            ''End If
             If enu.Current.componente = "btn_imprimir_voucher" Then
                 Me.btn_imprimir_voucher.Text = enu.Current.value
             End If
@@ -168,6 +194,66 @@ Public Class frm_cobro
                 Me.Text = enu.Current.value
             End If
         End While
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub dgw_resultDeuda_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgw_resultDeuda.CellDoubleClick
+        cobroTemporal = New Cobro
+        Dim idx As Integer
+        idx = e.RowIndex
+        Dim selectedRow As DataGridViewRow
+        selectedRow = dgw_resultDeuda.Rows(idx)
+
+        cobroTemporal.numeroFactura = selectedRow.Cells(1).Value.ToString()
+        numeroFactura = cobroTemporal.numeroFactura
+        cobroTemporal.montos = selectedRow.Cells(4).Value.ToString()
+        montoCobro = cobroTemporal.montos
+
+        Dim seña As Integer
+        seña = CInt(cobroTemporal.montos) * 0.3
+        seña = CStr(seña)
+        MsgBox("La seña es de: $" + seña.ToString)
+
+        valorSeña = seña
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_pagar_Click(sender As Object, e As EventArgs) Handles btn_pagar.Click
+        If ChkReserva.Checked = True Then
+            generarReserva(numeroFactura, CInt(txt_sena.Text))
+        End If
+
+        If ChkPagoToT.Checked = True Then
+            generarCobro(numeroFactura)
+        End If
+
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="idFactura"></param>
+    ''' <param name="_montoReserva"></param>
+    ''' <remarks></remarks>
+    Private Sub generarReserva(ByVal idFactura As Integer, ByVal _montoReserva As Integer)
+        Dim montoCReserva As Integer
+        montoCReserva = montoCobro - _montoReserva
+        interfazCobro.registrarReserva(idFactura, montoCReserva)
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="idFactura"></param>
+    ''' <remarks></remarks>
+    Private Sub generarCobro(ByVal idFactura As String)
+        interfazCobro.registrarCobro(idFactura)
     End Sub
     ''' <summary>
     ''' 

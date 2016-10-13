@@ -138,6 +138,78 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="numFactura"></param>
+        ''' <remarks></remarks>
+        Public Sub registrarCobro(ByVal nroFactura As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Cobro SET [ventaCancelada]=@ventaCancelada WHERE nroFactura=@nroFactura"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado
+            iPar.ParameterName = "ventaCancelada"
+            iPar.DbType = DbType.Int32
+            iPar.Value = 2
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "nroFactura"
+            iPar.DbType = DbType.Int32
+            iPar.Value = nroFactura
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="numFactura"></param>
+        ''' <param name="ud_monto"></param>
+        ''' <remarks></remarks>
+        Public Sub registarReserva(ByVal numFactura As Integer, ByVal ud_monto As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Cobro SET [monto]=@ud_monto WHERE nroFactura=@numFactura"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+            iPar.ParameterName = "ud_monto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = ud_monto
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "numFactura"
+            iPar.DbType = DbType.Int32
+            iPar.Value = numFactura
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function obtenerUltimaFactura() As Cobro

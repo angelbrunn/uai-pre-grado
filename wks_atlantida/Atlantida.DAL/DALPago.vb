@@ -45,6 +45,29 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function obtenerPagosActivos() As DataTable
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim command As New SqlCommand("sp_get_pagosActivos")
+
+            Dim connection As New SqlConnection(conexString)
+            command.Connection = connection
+            command.CommandType = CommandType.StoredProcedure
+            '0:Pago Pendiente pero Activo |1:Pago realizado correctamente |2:Pago cancelado
+            Dim adapter As New SqlDataAdapter(command)
+            adapter.SelectCommand.CommandTimeout = 300
+
+
+            Dim Ada As New SqlDataAdapter(command)
+            Dim Dt As New DataTable()
+            Ada.Fill(Dt)
+            connection.Close()
+            Return Dt
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="oPago"></param>
         ''' <remarks></remarks>
         Public Sub insertarPago(ByVal oPago As Pago)

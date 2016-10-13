@@ -32,6 +32,35 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="_idFact"></param>
+        ''' <param name="_upmonto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function registrarReserva(ByVal _idFact As Integer, ByVal _upmonto As Integer)
+            Dim oDalCobro As New DALCobro
+            Try
+                oDalCobro.registarReserva(_idFact, _upmonto)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_idFact"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function registrarCobro(ByVal _idFact As Integer)
+            Dim oDalCobro As New DALCobro
+            Try
+                oDalCobro.registrarCobro(_idFact)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="dni"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
