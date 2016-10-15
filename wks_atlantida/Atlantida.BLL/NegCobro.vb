@@ -32,13 +32,13 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
-        ''' <param name="_cobro"></param>
+        ''' <param name="idPres"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function registrarPresupuestoCobro(ByVal _cobro As Cobro)
+        Function registrarPresupuestoCobro(ByVal idPres As Integer)
             Dim oDalCobro As New DALCobro
             Try
-                oDalCobro.insertarPresupuestoCobro(_cobro)
+                oDalCobro.insertarPresupuestoCobro(idPres)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try

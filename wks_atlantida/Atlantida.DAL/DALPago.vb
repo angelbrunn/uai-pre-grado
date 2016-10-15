@@ -70,9 +70,9 @@ Namespace SIS.DAL
         ''' </summary>
         ''' <param name="oPago"></param>
         ''' <remarks></remarks>
-        Public Sub insertarPago(ByVal oPago As Pago)
+        Public Sub registrarPago(ByVal oPago As Pago)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO Pago(confirmacionPagoRealizado,idPresupuesto,fechaPago) VALUES (@confirmacionPagoRealizado,@idPresupuesto,@fechaPago)"
+            Dim sqlQuery As String = "INSERT INTO Pago(confirmacionPagoRealizado,idPresupuesto,montoTransporte,montoHospedaje,fechaPago) VALUES (@confirmacionPagoRealizado,@idPresupuesto,@montoTransporte,@montoHospedaje,@fechaPago)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -82,7 +82,7 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-
+            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado
             iPar = comando.CreateParameter
             iPar.ParameterName = "confirmacionPagoRealizado"
             iPar.DbType = DbType.Int32
@@ -93,6 +93,18 @@ Namespace SIS.DAL
             iPar.ParameterName = "idPresupuesto"
             iPar.DbType = DbType.Int32
             iPar.Value = oPago.idPresu
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "montoTransporte"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oPago.montoAPagarTransporte
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "montoHospedaje"
+            iPar.DbType = DbType.Int32
+            iPar.Value = oPago.montoAPagarHospedaje
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
@@ -111,13 +123,11 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
-        ''' <returns></returns>
+        ''' <param name="idPresupuesto"></param>
         ''' <remarks></remarks>
-        Public Function obtenerCotizacionMoneda(ByVal idDivisa As Integer) As Integer
-            Dim ultimaCotizacion As Integer
-
+        Public Sub insertarPresupuestoPago(ByVal idPresupuesto As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "SELECT TOP 1 valorActual FROM Divisa WHERE idDivisa=@idDivisa"
+            Dim sqlQuery As String = "INSERT INTO PresupuestoPago(idPresupuesto) VALUES (@idPresupuesto)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -129,21 +139,18 @@ Namespace SIS.DAL
             Dim iPar As IDataParameter = comando.CreateParameter
 
             iPar = comando.CreateParameter
-            iPar.ParameterName = "idDivisa"
+            iPar.ParameterName = "idPresupuesto"
             iPar.DbType = DbType.Int32
-            iPar.Value = idDivisa
+            iPar.Value = idPresupuesto
             comando.Parameters.Add(iPar)
 
             Try
                 conex.Open()
-                ultimaCotizacion = comando.ExecuteScalar
+                comando.ExecuteNonQuery()
                 conex.Close()
-
-            Catch ex As SqlException
-                Throw New DALExcepcion(ex.Message)
+            Catch ex As Exception
             End Try
-            Return ultimaCotizacion
-        End Function
+        End Sub
         ''' <summary>
         ''' 
         ''' </summary>
@@ -161,10 +168,10 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:Pago Pendiente pero Activo |1:Pago realizado correctamente |2:Pago cancelado
+            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado
             iPar.ParameterName = "confirmacionPagoRealizado"
             iPar.DbType = DbType.Int32
-            iPar.Value = 2
+            iPar.Value = 3
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
@@ -180,14 +187,13 @@ Namespace SIS.DAL
             Catch ex As Exception
             End Try
         End Sub
-
-
-
-
-
-
-
-        Public Sub actualizarPago(ByVal idPresupuesto As Integer, ByVal monto As Integer)
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <param name="estado"></param>
+        ''' <remarks></remarks>
+        Public Sub actualizarEstadoPago(ByVal idPresupuesto As Integer, ByVal estado As String)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
             Dim sqlQuery As String = "UPDATE Pago SET [confirmacionPagoRealizado]=@confirmacionPagoRealizado WHERE idPresupuesto=@idPresupuesto"
 
@@ -199,16 +205,16 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:Pago Pendiente pero Activo |1:Pago realizado correctamente |2:Pago cancelado
+
             iPar.ParameterName = "idPresupuesto"
             iPar.DbType = DbType.Int32
             iPar.Value = idPresupuesto
             comando.Parameters.Add(iPar)
-
+            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado
             iPar = comando.CreateParameter
-            iPar.ParameterName = "monto"
-            iPar.DbType = DbType.Int32
-            iPar.Value = monto
+            iPar.ParameterName = "confirmacionPagoRealizado"
+            iPar.DbType = DbType.String
+            iPar.Value = estado
             comando.Parameters.Add(iPar)
 
             Try
@@ -218,9 +224,5 @@ Namespace SIS.DAL
             Catch ex As Exception
             End Try
         End Sub
-
-
-
-
     End Class
 End Namespace

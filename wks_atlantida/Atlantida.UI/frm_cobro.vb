@@ -51,6 +51,11 @@ Public Class frm_cobro
     ''' 
     ''' </summary>
     ''' <remarks></remarks>
+    Dim interfazPago As NegPago = New NegPago
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
     Private cobroTemporal As Cobro
     ''' <summary>
     ''' 
@@ -108,7 +113,7 @@ Public Class frm_cobro
         'VALIDACION PARA LOS DGW
         If cobroTemporal IsNot Nothing Then
             validarSeñaCobrada = interfazCobro.obtenerEstadoCobro(cobroTemporal.numeroFactura)
-            If validarSeñaCobrada = 1 Then
+            If validarSeñaCobrada = 0 Then
                 txt_sena.Text = valorSeña
             Else
                 MsgBox("Ya se le ha cobrado una seña a este cliente!")
@@ -301,18 +306,24 @@ Public Class frm_cobro
                     incrementarCuenta(CStr(importe))
                     'CAMBIAR ESTADO EN PRESUPUESTO - CRES
                     interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "CRES")
+                    'CAMBIAR EL ESTADO DEL PAGO A PAGO POR RESERVA: 1
+                    interfazPago.actualizarEstadoPago(cobroTemporal.idPresu, 1)
                     check = True
                 ElseIf selectedItem = "Debito" Then
                     generarReservaConTarjeta(numeroFactura, CInt(txt_sena.Text), 0, 1, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
                     incrementarCuenta(txt_sena.Text)
                     'CAMBIAR ESTADO EN PRESUPUESTO - CRES
                     interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "CRES")
+                    'CAMBIAR EL ESTADO DEL PAGO A PAGO POR RESERVA: 1
+                    interfazPago.actualizarEstadoPago(cobroTemporal.idPresu, 1)
                     check = True
                 ElseIf selectedItem = "Efectivo" Then
                     generarReserva(numeroFactura, CInt(txt_sena.Text))
                     incrementarCuenta(txt_sena.Text)
                     'CAMBIAR ESTADO EN PRESUPUESTO - CRES
                     interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "CRES")
+                    'CAMBIAR EL ESTADO DEL PAGO A PAGO POR RESERVA: 1
+                    interfazPago.actualizarEstadoPago(cobroTemporal.idPresu, 1)
                     check = True
                 End If
             End If
@@ -334,18 +345,24 @@ Public Class frm_cobro
                     incrementarCuenta(CStr(importe))
                     'CAMBIAR ESTADO EN PRESUPUESTO - PAGO
                     interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "PAGO")
+                    'CAMBIAR EL ESTADO DEL PAGO A PAGO POR TOTAL: 2
+                    interfazPago.actualizarEstadoPago(cobroTemporal.idPresu, 2)
                     check = True
                 ElseIf selectedItem = "Debito" Then
                     generarCobroConTarjeta(numeroFactura, 0, 1, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
                     incrementarCuenta(txt_importe.Text)
                     'CAMBIAR ESTADO EN PRESUPUESTO - PAGO
                     interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "PAGO")
+                    'CAMBIAR EL ESTADO DEL PAGO A PAGO POR TOTAL: 2
+                    interfazPago.actualizarEstadoPago(cobroTemporal.idPresu, 2)
                     check = True
                 ElseIf selectedItem = "Efectivo" Then
                     generarCobro(numeroFactura)
                     incrementarCuenta(txt_importe.Text)
                     'CAMBIAR ESTADO EN PRESUPUESTO - PAGO
                     interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "PAGO")
+                    'CAMBIAR EL ESTADO DEL PAGO A PAGO POR TOTAL: 2
+                    interfazPago.actualizarEstadoPago(cobroTemporal.idPresu, 2)
                     check = True
                 End If
             End If

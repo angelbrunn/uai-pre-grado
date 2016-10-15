@@ -59,6 +59,16 @@ Public Class frm_presupuesto
     ''' <summary>
     ''' 
     ''' </summary>
+    ''' <remarks></remarks>
+    Dim montoPagoTransporteTemporal As Integer = 0
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Dim montoPagoHospeajeTemporal As Integer = 0
+    ''' <summary>
+    ''' 
+    ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
@@ -492,6 +502,7 @@ Public Class frm_presupuesto
         presupuestoTemporal.idPaqPromocionable = presupuesto.idPaqPromocionable
         presupuestoTemporal.dispPresu = presupuesto.dispPresu
         'SUMO LA COMISION DE ALTANTIDA Q ES DE 0.20
+        montoPagoTransporteTemporal = montoPagoTransporteTemporal + presupuesto.MontoAPagar
         presupuestoTemporal.MontoAPagar = presupuesto.MontoAPagar * 1.2
         setDataGridView()
     End Function
@@ -507,6 +518,7 @@ Public Class frm_presupuesto
         hospedajeTemporal.idHospedaje = hospedaje.idHospedaje
         hospedajeTemporal.razSocial = hospedaje.razSocial
         'SUMO LA COMISION DE ALTANTIDA Q ES DE 0.20
+        montoPagoHospeajeTemporal = montoPagoHospeajeTemporal + hospedaje.monPagar
         hospedajeTemporal.monPagar = hospedaje.monPagar * 1.2
         hospedajeTemporal.cat = hospedaje.cat
         hospedajeTemporal.desc = hospedaje.desc
@@ -645,21 +657,26 @@ Public Class frm_presupuesto
 
         Dim ultimaFactura As Integer = interfazCobro.obtenerUltimaFactura()
 
+        'COBRO
         oCobro.montos = monto.ToString()
         oCobro.ventaCancel = 1
         oCobro.numeroFactura = ultimaFactura + 1
-
         oCobro.FechCobro = "2016-01-01 00:00:00.000"
         'Generar un presupuesto de cobro
         interfazCobro.registrarCobro(oCobro)
-        interfazCobro.registrarPresupuestoCobro(oCobro)
+        interfazCobro.registrarPresupuestoCobro(oCobro.idPresu)
 
+
+        'PAGO
+        'confPago:  0 significa presupuesto creado | 1 presupuesto con reserva | 2 presupuesto pago | 3 presupuesto cancelado
         oPago.confPago = 0
         oPago.FechPago = "2016-01-01 00:00:00.000"
         oPago.idPresu = presupuestoTemporal.idPresu.ToString()
+        oPago.montoAPagarTransporte = montoPagoTransporteTemporal
+        oPago.montoAPagarHospedaje = montoPagoHospeajeTemporal
         'Generar un presupuesto de Pago
-        interfazPago.insertarPago(oPago)
-
+        interfazPago.registrarPago(oPago)
+        interfazPago.registrarPresupuestoPago(oPago.idPresu)
 
         'OBTENER ID DEL PRESUPUESTO
         Dim idPresupuesto As String = presupuestoTemporal.idPresu.ToString()
@@ -678,5 +695,7 @@ Public Class frm_presupuesto
         'OPERACION EXITOSA
         MsgBox("OPERACION EXITOSA!")
         'CLEAN ALL
+        montoPagoTransporteTemporal = 0
+        montoPagoHospeajeTemporal = 0
     End Sub
 End Class

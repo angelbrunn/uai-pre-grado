@@ -21,41 +21,38 @@ Namespace SIS.BLL
         ''' <param name="_pago"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function insertarPago(ByVal _pago As Pago)
+        Function registrarPago(ByVal _pago As Pago)
             Dim oDalPago As New DALPago
             Try
-                oDalPago.insertarPago(_pago)
+                oDalPago.registrarPago(_pago)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
-        End Function
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <param name="_id"></param>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Function obtenerCotizacion(ByVal _id As Integer) As Integer
-            Dim _cotizacion As Integer
-            Dim oDalPago As New DALPago
-            Try
-                _cotizacion = oDalPago.obtenerCotizacionMoneda(_id)
-            Catch ex As Exception
-                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
-            End Try
-            Return _cotizacion
         End Function
         ''' <summary>
         ''' 
         ''' </summary>
         ''' <param name="idPres"></param>
-        ''' <param name="monto"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function actualizarPago(ByVal idPres As Integer, ByVal monto As Integer)
+        Function actualizarEstadoPago(ByVal idPres As Integer, ByVal estado As String)
             Dim oDalPago As New DALPago
             Try
-                oDalPago.actualizarPago(idPres, monto)
+                oDalPago.actualizarEstadoPago(idPres, estado)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPres"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function registrarPresupuestoPago(ByVal idPres As Integer)
+            Dim oDalPago As New DALPago
+            Try
+                oDalPago.insertarPresupuestoPago(idPres)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try

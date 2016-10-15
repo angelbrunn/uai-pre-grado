@@ -29,66 +29,13 @@ Public Class frm_pago
     ''' <summary>
     ''' 
     ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub btn_cotizar_Click(sender As Object, e As EventArgs) Handles btn_cotizar.Click
-        Dim cotizacion As Integer
-        Dim idxDiviza As Integer
-
-        If pagoTemporal.tipoDeDiviza = "Peso" Then
-            idxDiviza = 1
-        End If
-        If pagoTemporal.tipoDeDiviza = "Dolar" Then
-            idxDiviza = 2
-        End If
-        If pagoTemporal.tipoDeDiviza = "Euro" Then
-            idxDiviza = 3
-        End If
-
-        If idxDiviza <> 1 Then
-            cotizacion = interfazPago.obtenerCotizacion(idxDiviza)
-            pagoTemporal.montoPago = pagoTemporal.montoPago * cotizacion
-        End If
-
-        'TO-DO:UPDATE DEL PAGO - CAMBIANDO LA DIV DEL PAGO POR PESO Y ACTUALIZANDO EL MAP
-        interfazPago.actualizarPago(pagoTemporal.idPresu, pagoTemporal.montoPago)
-
-        'setDgw
-        'setDataGridView()
-    End Sub
+    Private razonSocialTransp As String
     ''' <summary>
     ''' 
     ''' </summary>
-    ''' <returns></returns>
     ''' <remarks></remarks>
-    Function setDataGridView()
-        Dim DS As DataSet = New DataSet("Pago")
-        Dim Tabla As DataTable = DS.Tables.Add("Pago")
-
-        Tabla.Columns.Add("IDPROV", Type.GetType("System.String"))
-        Tabla.Columns.Add("IDPRESU", Type.GetType("System.String"))
-        Tabla.Columns.Add("CCORR", Type.GetType("System.String"))
-        Tabla.Columns.Add("ESTADO", Type.GetType("System.String"))
-        Tabla.Columns.Add("RAZON SOCIAL", Type.GetType("System.String"))
-        Tabla.Columns.Add("MAP", Type.GetType("System.String"))
-        Tabla.Columns.Add("DIV", Type.GetType("System.String"))
-
-        Dim Fila As DataRow = Tabla.NewRow
-
-        'Fila = DS.Tables("PaqueteNoPromo").NewRow()
-        Fila("IDPROV") = pagoTemporal.idProv.ToString()
-        Fila("IDPRESU") = pagoTemporal.idPresu.ToString()
-        Fila("CCORR") = pagoTemporal.idCuentaCorriente.ToString()
-        Fila("ESTADO") = pagoTemporal.estadoDelPago.ToString()
-        Fila("RAZON SOCIAL") = pagoTemporal.razonSocialCuenta.ToString()
-        Fila("MAP") = pagoTemporal.montoPago.ToString()
-        Fila("DIV") = pagoTemporal.tipoDeDiviza.ToString()
-
-        Tabla.Rows.Add(Fila)
-        dgw_pagos_pend.DataSource = Tabla
-
-    End Function
+    Private razonSocialHospedaje As String
     ''' <summary>
     ''' 
     ''' </summary>
@@ -106,9 +53,10 @@ Public Class frm_pago
         pagoTemporal.idPresu = selectedRow.Cells(1).Value.ToString()
         pagoTemporal.idCuentaCorriente = selectedRow.Cells(2).Value.ToString()
         pagoTemporal.estadoDelPago = selectedRow.Cells(3).Value.ToString()
-        pagoTemporal.razonSocialCuenta = selectedRow.Cells(4).Value.ToString()
-        pagoTemporal.montoPago = selectedRow.Cells(5).Value.ToString()
-        pagoTemporal.tipoDeDiviza = Trim(selectedRow.Cells(6).Value.ToString())
+        pagoTemporal.montoAPagarTransporte = selectedRow.Cells(4).Value.ToString()
+        razonSocialTransp = selectedRow.Cells(5).Value.ToString()
+        pagoTemporal.montoAPagarHospedaje = selectedRow.Cells(6).Value.ToString()
+        razonSocialHospedaje = selectedRow.Cells(7).Value.ToString()
     End Sub
     ''' <summary>
     ''' 
@@ -120,6 +68,15 @@ Public Class frm_pago
         modificarIdiomaSegunPreferencias(UsuarioIdioma)
 
         dgw_pagos_pend.DataSource = interfazPago.obtenerPagos()
+
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_transferencia_Click(sender As Object, e As EventArgs) Handles btn_transferencia.Click
 
     End Sub
     ''' <summary>
@@ -137,9 +94,6 @@ Public Class frm_pago
         While enu.MoveNext
             If enu.Current.componente = "box_acciones" Then
                 Me.box_acciones.Text = enu.Current.value
-            End If
-            If enu.Current.componente = "btn_cotizar" Then
-                Me.btn_cotizar.Text = enu.Current.value
             End If
             If enu.Current.componente = "btn_terminar_op" Then
                 Me.btn_terminar_op.Text = enu.Current.value

@@ -29,7 +29,6 @@ Partial Class frm_pago
         Me.btn_solicitarPax = New System.Windows.Forms.Button()
         Me.btn_confirmar = New System.Windows.Forms.Button()
         Me.btn_terminar_op = New System.Windows.Forms.Button()
-        Me.btn_cotizar = New System.Windows.Forms.Button()
         Me.btn_transferencia = New System.Windows.Forms.Button()
         Me.txt_idProveedor = New System.Windows.Forms.TextBox()
         Me.lbl_idPres = New System.Windows.Forms.Label()
@@ -61,7 +60,6 @@ Partial Class frm_pago
         Me.box_acciones.Controls.Add(Me.btn_solicitarPax)
         Me.box_acciones.Controls.Add(Me.btn_confirmar)
         Me.box_acciones.Controls.Add(Me.btn_terminar_op)
-        Me.box_acciones.Controls.Add(Me.btn_cotizar)
         Me.box_acciones.Controls.Add(Me.btn_transferencia)
         Me.box_acciones.Location = New System.Drawing.Point(12, 342)
         Me.box_acciones.Name = "box_acciones"
@@ -90,21 +88,12 @@ Partial Class frm_pago
         '
         'btn_terminar_op
         '
-        Me.btn_terminar_op.Location = New System.Drawing.Point(186, 19)
+        Me.btn_terminar_op.Location = New System.Drawing.Point(96, 19)
         Me.btn_terminar_op.Name = "btn_terminar_op"
         Me.btn_terminar_op.Size = New System.Drawing.Size(81, 37)
         Me.btn_terminar_op.TabIndex = 2
         Me.btn_terminar_op.Text = "Terminar Operacion"
         Me.btn_terminar_op.UseVisualStyleBackColor = True
-        '
-        'btn_cotizar
-        '
-        Me.btn_cotizar.Location = New System.Drawing.Point(96, 19)
-        Me.btn_cotizar.Name = "btn_cotizar"
-        Me.btn_cotizar.Size = New System.Drawing.Size(81, 37)
-        Me.btn_cotizar.TabIndex = 1
-        Me.btn_cotizar.Text = "Cotizar"
-        Me.btn_cotizar.UseVisualStyleBackColor = True
         '
         'btn_transferencia
         '
@@ -155,7 +144,6 @@ Partial Class frm_pago
     Friend WithEvents box_pagos_pend As System.Windows.Forms.GroupBox
     Friend WithEvents dgw_pagos_pend As System.Windows.Forms.DataGridView
     Friend WithEvents box_acciones As System.Windows.Forms.GroupBox
-    Friend WithEvents btn_cotizar As System.Windows.Forms.Button
     Friend WithEvents btn_transferencia As System.Windows.Forms.Button
     Friend WithEvents btn_terminar_op As System.Windows.Forms.Button
     Friend WithEvents btn_confirmar As System.Windows.Forms.Button

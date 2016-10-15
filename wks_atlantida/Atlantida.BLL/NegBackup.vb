@@ -438,7 +438,7 @@ Namespace SIS.BLL
 
             Dim enu As IEnumerator(Of Pago) = listaPago.GetEnumerator
             While enu.MoveNext
-                oDalPago.insertarPago(enu.Current)
+                oDalPago.registrarPago(enu.Current)
             End While
         End Sub
         ''' <summary>

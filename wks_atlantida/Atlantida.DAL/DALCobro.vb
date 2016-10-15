@@ -146,7 +146,7 @@ Namespace SIS.DAL
             iPar.DbType = DbType.Int32
             iPar.Value = oCobro.montos
             comando.Parameters.Add(iPar)
-
+            '0:significa que el cobro esta activo - no hay actividad |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
             iPar = comando.CreateParameter
             iPar.ParameterName = "ventaCancelada"
             iPar.DbType = DbType.String
@@ -169,11 +169,11 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
-        ''' <param name="oCobro"></param>
+        ''' <param name="idPresupuesto"></param>
         ''' <remarks></remarks>
-        Public Sub insertarPresupuestoCobro(ByVal oCobro As Cobro)
+        Public Sub insertarPresupuestoCobro(ByVal idPresupuesto As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO PresupuestoCobros(idCobros,idPresupuesto) VALUES (@idCobros,@idPresupuesto)"
+            Dim sqlQuery As String = "INSERT INTO PresupuestoCobros(idPresupuesto) VALUES (@idPresupuesto)"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -185,15 +185,9 @@ Namespace SIS.DAL
             Dim iPar As IDataParameter = comando.CreateParameter
 
             iPar = comando.CreateParameter
-            iPar.ParameterName = "idCobros"
-            iPar.DbType = DbType.Int32
-            iPar.Value = oCobro.idCobros
-            comando.Parameters.Add(iPar)
-
-            iPar = comando.CreateParameter
             iPar.ParameterName = "idPresupuesto"
             iPar.DbType = DbType.Int32
-            iPar.Value = oCobro.idPresu
+            iPar.Value = idPresupuesto
             comando.Parameters.Add(iPar)
 
             Try
@@ -286,7 +280,7 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
+            '0:significa que el cobro esta activo - no hay actividad |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
             iPar.ParameterName = "ventaCancelada"
             iPar.DbType = DbType.Int32
             iPar.Value = 3
@@ -333,7 +327,7 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
+            '0:significa que el cobro esta activo - no hay actividad |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
             iPar.ParameterName = "ventaCancelada"
             iPar.DbType = DbType.Int32
             iPar.Value = 3
@@ -405,7 +399,7 @@ Namespace SIS.DAL
             iPar.Value = ud_monto
             comando.Parameters.Add(iPar)
 
-            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
+            '0:significa que el cobro esta activo - no hay actividad |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
             iPar.ParameterName = "ventaCancelada"
             iPar.DbType = DbType.Int32
             iPar.Value = 2

@@ -49,7 +49,12 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private montPago As Integer
+        Private montPagoTransporte As Integer
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private montPagoHospedaje As Integer
         ''' <summary>
         ''' 
         ''' </summary>
@@ -182,12 +187,26 @@
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property montoPago() As Integer
+        Public Property montoAPagarTransporte() As Integer
             Get
-                Return montPago
+                Return montPagoTransporte
             End Get
             Set(ByVal value As Integer)
-                montPago = value
+                montPagoTransporte = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property montoAPagarHospedaje() As Integer
+            Get
+                Return montPagoHospedaje
+            End Get
+            Set(ByVal value As Integer)
+                montPagoHospedaje = value
             End Set
         End Property
     End Class
