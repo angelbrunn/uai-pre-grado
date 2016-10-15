@@ -77,6 +77,80 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="idPresu"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function consultarTipoTransferencia(ByVal idPresu As Integer) As Integer
+            Dim oDalPago As New DALPago
+            Dim tipoTransferencia As Integer
+            Try
+                tipoTransferencia = oDalPago.consultarTipoTransferencia(idPresu)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+            Return tipoTransferencia
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <param name="idCuentaCorriente"></param>
+        ''' <param name="_monto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function incrementarCuentaCorriente(ByVal idPresupuesto As Integer, ByVal idCuentaCorriente As Integer, ByVal _monto As Integer)
+            Dim oDalPago As New DALPago
+            Try
+                oDalPago.incrementarCuentaCorriente(idPresupuesto, idCuentaCorriente, _monto)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_monto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function decrementoCaja(ByVal _monto As Integer)
+            Dim oDalPago As New DALPago
+            Dim oDalCobro As New DALCobro
+            Dim montoTemporal As Integer
+            Try
+                montoTemporal = oDalCobro.obtenerMonto()
+                montoTemporal = montoTemporal - _monto
+                oDalPago.decrementarCaja(_monto)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <param name="_monto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function decrementoPagoPendiente(ByVal idPresupuesto As Integer, ByVal _monto As Integer, ByVal action As String)
+            Dim oDalPago As New DALPago
+            Dim montoTemporal As Integer
+            Try
+                If action = "Transporte" Then
+                    montoTemporal = oDalPago.obtenerMontoTransporte(idPresupuesto)
+                    montoTemporal = montoTemporal - _monto
+                    oDalPago.decrementarPagoTransporte(idPresupuesto, montoTemporal)
+                Else
+                    montoTemporal = oDalPago.obtenerMontoHospedaje(idPresupuesto)
+                    montoTemporal = montoTemporal - _monto
+                    oDalPago.decrementarPagoTransporte(idPresupuesto, montoTemporal)
+                End If
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="_idx"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>

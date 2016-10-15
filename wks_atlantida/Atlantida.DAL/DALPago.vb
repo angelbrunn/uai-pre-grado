@@ -124,6 +124,51 @@ Namespace SIS.DAL
         ''' 
         ''' </summary>
         ''' <param name="idPresupuesto"></param>
+        ''' <param name="idCuentaCorriente"></param>
+        ''' <param name="monto"></param>
+        ''' <remarks></remarks>
+        Public Sub incrementarCuentaCorriente(ByVal idPresupuesto As Integer, ByVal idCuentaCorriente As Integer, ByVal monto As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "INSERT INTO Transferencias(idPresupuesto,idCuentaCorriente,monto) VALUES (@idPresupuesto,@idCuentaCorriente,@monto)"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idCuentaCorriente"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idCuentaCorriente
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "monto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = monto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
         ''' <remarks></remarks>
         Public Sub insertarPresupuestoPago(ByVal idPresupuesto As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
@@ -190,6 +235,180 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="monto"></param>
+        ''' <remarks></remarks>
+        Public Sub decrementarCaja(ByVal monto As String)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Caja SET [monto]=@monto WHERE id=1"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "monto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = monto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <param name="montoTransporte"></param>
+        ''' <remarks></remarks>
+        Public Sub decrementarPagoTransporte(ByVal idPresupuesto As String, ByVal montoTransporte As String)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Pago SET [montoTransporte]=@montoTransporte WHERE idPresupuesto=@idPresupuesto"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            iPar.ParameterName = "montoTransporte"
+            iPar.DbType = DbType.Int32
+            iPar.Value = montoTransporte
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <param name="montoHospedaje"></param>
+        ''' <remarks></remarks>
+        Public Sub decrementarPagoHospedaje(ByVal idPresupuesto As String, ByVal montoHospedaje As String)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Pago SET [montoHospedaje]=@montoHospedaje WHERE idPresupuesto=@idPresupuesto"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            iPar.ParameterName = "montoHospedaje"
+            iPar.DbType = DbType.Int32
+            iPar.Value = montoHospedaje
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function obtenerMontoTransporte(ByVal idPresupuesto As Integer)
+            Dim ultimoMonto As Integer
+
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "SELECT TOP montoTransporte FROM Pago WHERE idPresupuesto=@idPresupuesto"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                ultimoMonto = comando.ExecuteScalar
+                conex.Close()
+
+            Catch ex As SqlException
+                Throw New DALExcepcion(ex.Message)
+            End Try
+            Return ultimoMonto
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function obtenerMontoHospedaje(ByVal idPresupuesto As Integer)
+            Dim ultimoMonto As Integer
+
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "SELECT TOP montoHospedaje FROM Pago WHERE idPresupuesto=@idPresupuesto"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                ultimoMonto = comando.ExecuteScalar
+                conex.Close()
+
+            Catch ex As SqlException
+                Throw New DALExcepcion(ex.Message)
+            End Try
+            Return ultimoMonto
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="idPresupuesto"></param>
         ''' <param name="estado"></param>
         ''' <remarks></remarks>
@@ -224,5 +443,41 @@ Namespace SIS.DAL
             Catch ex As Exception
             End Try
         End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function consultarTipoTransferencia(ByVal idPresupuesto As Integer) As Integer
+            Dim tipoTransferencia As Integer
+
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "SELECT confirmacionPagoRealizado FROM Pago WHERE idPresupuesto=@idPresupuesto"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                tipoTransferencia = comando.ExecuteScalar
+                conex.Close()
+
+            Catch ex As SqlException
+                Throw New DALExcepcion(ex.Message)
+            End Try
+            Return tipoTransferencia
+        End Function
     End Class
 End Namespace
