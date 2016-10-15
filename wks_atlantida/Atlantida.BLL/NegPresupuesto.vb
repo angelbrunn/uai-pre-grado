@@ -328,6 +328,21 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="idPres"></param>
+        ''' <param name="_estado"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function actualizarEstadoPresupuesto(ByVal idPres As Integer, ByVal _estado As String)
+            Dim oDalPresupuesto As New DALPresupuesto
+            Try
+                oDalPresupuesto.actualizarEstadoPresupuesto(idPres, _estado)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>

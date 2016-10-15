@@ -499,6 +499,43 @@ Namespace SIS.DAL
             Catch ex As Exception
             End Try
         End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <param name="estado"></param>
+        ''' <remarks></remarks>
+        Public Sub actualizarEstadoPresupuesto(ByVal idPresupuesto As Integer, ByVal estado As String)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Presupuesto SET [estado]=@estado WHERE idPresupuesto=@idPresupuesto"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "estado"
+            iPar.DbType = DbType.String
+            iPar.Value = estado
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
     End Class
 End Namespace
 

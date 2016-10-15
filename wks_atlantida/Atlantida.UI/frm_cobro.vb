@@ -46,6 +46,11 @@ Public Class frm_cobro
     ''' 
     ''' </summary>
     ''' <remarks></remarks>
+    Dim interfazPresupuesto As NegPresupuesto = New NegPresupuesto
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
     Private cobroTemporal As Cobro
     ''' <summary>
     ''' 
@@ -224,6 +229,7 @@ Public Class frm_cobro
         Dim selectedRow As DataGridViewRow
         selectedRow = dgw_resultDeuda.Rows(idx)
 
+        cobroTemporal.idPresu = selectedRow.Cells(0).Value.ToString()
         cobroTemporal.numeroFactura = selectedRow.Cells(1).Value.ToString()
         numeroFactura = cobroTemporal.numeroFactura
         cobroTemporal.montos = selectedRow.Cells(4).Value.ToString()
@@ -293,14 +299,20 @@ Public Class frm_cobro
                     End If
                     generarReservaConTarjeta(numeroFactura, CInt(txt_sena.Text), interes, cantCuotas, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
                     incrementarCuenta(CStr(importe))
+                    'CAMBIAR ESTADO EN PRESUPUESTO - CRES
+                    interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "CRES")
                     check = True
                 ElseIf selectedItem = "Debito" Then
                     generarReservaConTarjeta(numeroFactura, CInt(txt_sena.Text), 0, 1, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
                     incrementarCuenta(txt_sena.Text)
+                    'CAMBIAR ESTADO EN PRESUPUESTO - CRES
+                    interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "CRES")
                     check = True
                 ElseIf selectedItem = "Efectivo" Then
                     generarReserva(numeroFactura, CInt(txt_sena.Text))
                     incrementarCuenta(txt_sena.Text)
+                    'CAMBIAR ESTADO EN PRESUPUESTO - CRES
+                    interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "CRES")
                     check = True
                 End If
             End If
@@ -320,14 +332,20 @@ Public Class frm_cobro
                     End If
                     generarCobroConTarjeta(numeroFactura, interes, cantCuotas, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
                     incrementarCuenta(CStr(importe))
+                    'CAMBIAR ESTADO EN PRESUPUESTO - PAGO
+                    interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "PAGO")
                     check = True
                 ElseIf selectedItem = "Debito" Then
                     generarCobroConTarjeta(numeroFactura, 0, 1, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
                     incrementarCuenta(txt_importe.Text)
+                    'CAMBIAR ESTADO EN PRESUPUESTO - PAGO
+                    interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "PAGO")
                     check = True
                 ElseIf selectedItem = "Efectivo" Then
                     generarCobro(numeroFactura)
                     incrementarCuenta(txt_importe.Text)
+                    'CAMBIAR ESTADO EN PRESUPUESTO - PAGO
+                    interfazPresupuesto.actualizarEstadoPresupuesto(cobroTemporal.idPresu, "PAGO")
                     check = True
                 End If
             End If

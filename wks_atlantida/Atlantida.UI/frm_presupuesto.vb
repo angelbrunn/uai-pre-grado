@@ -491,7 +491,8 @@ Public Class frm_presupuesto
         presupuestoTemporal.IdTransp = presupuesto.IdTransp
         presupuestoTemporal.idPaqPromocionable = presupuesto.idPaqPromocionable
         presupuestoTemporal.dispPresu = presupuesto.dispPresu
-        presupuestoTemporal.MontoAPagar = presupuesto.MontoAPagar
+        'SUMO LA COMISION DE ALTANTIDA Q ES DE 0.20
+        presupuestoTemporal.MontoAPagar = presupuesto.MontoAPagar * 1.2
         setDataGridView()
     End Function
     ''' <summary>
@@ -505,7 +506,8 @@ Public Class frm_presupuesto
         hospedajeTemporal = New Hospedaje()
         hospedajeTemporal.idHospedaje = hospedaje.idHospedaje
         hospedajeTemporal.razSocial = hospedaje.razSocial
-        hospedajeTemporal.monPagar = hospedaje.monPagar
+        'SUMO LA COMISION DE ALTANTIDA Q ES DE 0.20
+        hospedajeTemporal.monPagar = hospedaje.monPagar * 1.2
         hospedajeTemporal.cat = hospedaje.cat
         hospedajeTemporal.desc = hospedaje.desc
         setDataGridView()
@@ -644,7 +646,7 @@ Public Class frm_presupuesto
         Dim ultimaFactura As Integer = interfazCobro.obtenerUltimaFactura()
 
         oCobro.montos = monto.ToString()
-        oCobro.ventaCancel = 0
+        oCobro.ventaCancel = 1
         oCobro.numeroFactura = ultimaFactura + 1
 
         oCobro.FechCobro = "2016-01-01 00:00:00.000"
