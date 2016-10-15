@@ -32,6 +32,37 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="_id"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerCotizacion(ByVal _id As Integer) As Integer
+            Dim _cotizacion As Integer
+            Dim oDalPago As New DALPago
+            Try
+                _cotizacion = oDalPago.obtenerCotizacionMoneda(_id)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+            Return _cotizacion
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPres"></param>
+        ''' <param name="monto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function actualizarPago(ByVal idPres As Integer, ByVal monto As Integer)
+            Dim oDalPago As New DALPago
+            Try
+                oDalPago.actualizarPago(idPres, monto)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Function obtenerPagos() As DataTable

@@ -111,6 +111,42 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function obtenerCotizacionMoneda(ByVal idDivisa As Integer) As Integer
+            Dim ultimaCotizacion As Integer
+
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "SELECT TOP 1 valorActual FROM Divisa WHERE idDivisa=@idDivisa"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idDivisa"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idDivisa
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                ultimaCotizacion = comando.ExecuteScalar
+                conex.Close()
+
+            Catch ex As SqlException
+                Throw New DALExcepcion(ex.Message)
+            End Try
+            Return ultimaCotizacion
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="idx"></param>
         ''' <remarks></remarks>
         Public Sub cancelarPago(ByVal idx As Integer)
@@ -144,5 +180,47 @@ Namespace SIS.DAL
             Catch ex As Exception
             End Try
         End Sub
+
+
+
+
+
+
+
+        Public Sub actualizarPago(ByVal idPresupuesto As Integer, ByVal monto As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Pago SET [confirmacionPagoRealizado]=@confirmacionPagoRealizado WHERE idPresupuesto=@idPresupuesto"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+            '0:Pago Pendiente pero Activo |1:Pago realizado correctamente |2:Pago cancelado
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "monto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = monto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+
+
+
+
     End Class
 End Namespace

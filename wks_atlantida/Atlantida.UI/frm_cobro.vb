@@ -54,9 +54,16 @@ Public Class frm_cobro
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_validar.Click
+        Dim bandera As Boolean = True
+        If txt_cliente.Text = "" Then
+            MsgBox("Ingrese un numero de dni")
+            bandera = False
+        End If
         'Por medio del nro dni voy a buscar todos las operaciones abiertas en estado pendiente de pago
-        Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
-        dgw_resultDeuda.DataSource = interfazCobro.obtenerDeudaCliente(_dni)
+        If bandera = True Then
+            Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
+            dgw_resultDeuda.DataSource = interfazCobro.obtenerDeudaCliente(_dni)
+        End If
     End Sub
     ''' <summary>
     ''' 
@@ -227,14 +234,50 @@ Public Class frm_cobro
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btn_pagar_Click(sender As Object, e As EventArgs) Handles btn_pagar.Click
-        If ChkReserva.Checked = True Then
-            generarReserva(numeroFactura, CInt(txt_sena.Text))
+        Dim bandera As String = True
+
+        Dim selectedIndex As Integer
+        selectedIndex = cbx_formasPago.SelectedIndex
+        Dim selectedItem As Object
+        selectedItem = cbx_formasPago.SelectedItem
+
+        If selectedItem Is Nothing Then
+            bandera = False
+            MsgBox("Debe Seleccionar un Medio de Pago")
         End If
 
-        If ChkPagoToT.Checked = True Then
-            generarCobro(numeroFactura)
+        'VALIDO SI ES EFECTIVO O SI ES TARJETA DEBITO/CREDITO
+        If selectedItem = "Efectivo" Then
+            If txt_importe.Text = "" Then
+                MsgBox("El importe no puede ser vacio")
+                bandera = False
+            End If
         End If
 
+        If selectedItem = "Credito" Or selectedItem = "Debito" Then
+            'SI ES CREDITO/DEBITO LA CANT DE CUOTAS MIN ES 1 Y HAY QUE DEFINIR DATOS DE LA TARJETA
+            If rdio_cuota.Checked = False Then
+                MsgBox("La cantidad de cuotas minimas para debito y credito es de: 1")
+                bandera = False
+            End If
+            If txt_tarjeta.Text = "" Or txt_cuenta.Text = "" Then
+                MsgBox("Se debe ingresar el numero de tarjeta y de cuenta")
+                bandera = False
+            End If
+        End If
+
+        If bandera = True Then
+            If ChkReserva.Checked = True Then
+                generarReserva(numeroFactura, CInt(txt_sena.Text))
+            End If
+
+            If ChkPagoToT.Checked = True Then
+                generarCobro(numeroFactura)
+                'TO-DO:INCREMENTAR MI CAJA POR LA RESERVA O PAGO TOTAL
+
+            End If
+            MsgBox("Debe seleccionar un tipo de cobro ya sea RESERVA O PAGO TOTAL")
+        End If
     End Sub
     ''' <summary>
     ''' 

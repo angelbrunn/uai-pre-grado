@@ -23,6 +23,36 @@
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <remarks></remarks>
+        Private idProveedor As Integer
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private idCuentaCorr As Integer
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private tipoDiviza As String
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private estadoPago As String
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private razonSocial As String
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private montPago As Integer
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
@@ -74,6 +104,90 @@
             End Get
             Set(ByVal value As Integer)
                 idPresupuesto = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property idCuentaCorriente() As Integer
+            Get
+                Return idCuentaCorr
+            End Get
+            Set(ByVal value As Integer)
+                idCuentaCorr = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property idProv() As Integer
+            Get
+                Return idProveedor
+            End Get
+            Set(ByVal value As Integer)
+                idProveedor = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property tipoDeDiviza() As String
+            Get
+                Return tipoDiviza
+            End Get
+            Set(ByVal value As String)
+                tipoDiviza = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property estadoDelPago() As String
+            Get
+                Return estadoPago
+            End Get
+            Set(ByVal value As String)
+                estadoPago = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property razonSocialCuenta() As String
+            Get
+                Return razonSocial
+            End Get
+            Set(ByVal value As String)
+                razonSocial = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property montoPago() As Integer
+            Get
+                Return montPago
+            End Get
+            Set(ByVal value As Integer)
+                montPago = value
             End Set
         End Property
     End Class
