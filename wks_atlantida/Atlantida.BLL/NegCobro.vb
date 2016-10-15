@@ -185,6 +185,22 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="_nroFactura"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerEstadoCobro(ByVal _nroFactura As Integer) As Integer
+            Dim oDalCobro As New DALCobro
+            Dim estadoCobro As Integer = 0
+            Try
+                estadoCobro = oDalCobro.obtenerEstadoPago(_nroFactura)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+            Return estadoCobro
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>

@@ -77,6 +77,43 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="nroFactura"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function obtenerEstadoPago(ByVal nroFactura As Integer) As Integer
+            Dim estadoPago As Integer
+
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "SELECT TOP 1 ventaCancelada FROM Cobro WHERE nroFactura=@nroFactura"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "nroFactura"
+            iPar.DbType = DbType.Int32
+            iPar.Value = nroFactura
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                estadoPago = comando.ExecuteScalar
+                conex.Close()
+
+            Catch ex As SqlException
+                Throw New DALExcepcion(ex.Message)
+            End Try
+            Return estadoPago
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="oCobro"></param>
         ''' <remarks></remarks>
         Public Sub insertarCobro(ByVal oCobro As Cobro)
@@ -249,10 +286,10 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado
+            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
             iPar.ParameterName = "ventaCancelada"
             iPar.DbType = DbType.Int32
-            iPar.Value = 2
+            iPar.Value = 3
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
@@ -296,10 +333,10 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado
+            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
             iPar.ParameterName = "ventaCancelada"
             iPar.DbType = DbType.Int32
-            iPar.Value = 2
+            iPar.Value = 3
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
@@ -353,7 +390,7 @@ Namespace SIS.DAL
         ''' <remarks></remarks>
         Public Sub registarReserva(ByVal numFactura As Integer, ByVal ud_monto As Integer, ByVal fechaCobro As DateTime)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "UPDATE Cobro SET [monto]=@ud_monto,fechaCobro=@fechaCobro WHERE nroFactura=@numFactura"
+            Dim sqlQuery As String = "UPDATE Cobro SET [monto]=@ud_monto,ventaCancelada=@ventaCancelada,fechaCobro=@fechaCobro WHERE nroFactura=@numFactura"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -366,6 +403,12 @@ Namespace SIS.DAL
             iPar.ParameterName = "ud_monto"
             iPar.DbType = DbType.Int32
             iPar.Value = ud_monto
+            comando.Parameters.Add(iPar)
+
+            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
+            iPar.ParameterName = "ventaCancelada"
+            iPar.DbType = DbType.Int32
+            iPar.Value = 2
             comando.Parameters.Add(iPar)
 
             iPar = comando.CreateParameter
@@ -398,9 +441,9 @@ Namespace SIS.DAL
         ''' <param name="nro_cuenta"></param>
         ''' <param name="nro_tarjeta"></param>
         ''' <remarks></remarks>
-        Public Sub registarReservaConTarjeta(ByVal numFactura As Integer, ByVal ud_monto As Integer, ByVal fechaCobro As DateTime, ByVal cuotas As String, ByVal interes As Integer, ByVal nro_cuenta As String, ByVal nro_tarjeta As String)
+        Public Sub registarReservaConTarjeta(ByVal numFactura As Integer, ByVal ud_monto As Integer, ByVal fechaCobro As DateTime, ByVal interes As Integer, ByVal cuotas As String, ByVal nro_cuenta As String, ByVal nro_tarjeta As String)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "UPDATE Cobro SET [monto]=@ud_monto,fechaCobro=@fechaCobro,nro_tarjeta=@nro_tarjeta,nro_cuenta=@nro_cuenta,cuotas=@cuotas,interes=@interes WHERE nroFactura=@numFactura"
+            Dim sqlQuery As String = "UPDATE Cobro SET [monto]=@ud_monto,ventaCancelada=@ventaCancelada,fechaCobro=@fechaCobro,nro_tarjeta=@nro_tarjeta,nro_cuenta=@nro_cuenta,cuotas=@cuotas,interes=@interes WHERE nroFactura=@numFactura"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -449,6 +492,13 @@ Namespace SIS.DAL
             iPar.ParameterName = "interes"
             iPar.DbType = DbType.Int32
             iPar.Value = interes
+            comando.Parameters.Add(iPar)
+
+            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado - SEÑA |3:significa cobro realizado - TOT
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "ventaCancelada"
+            iPar.DbType = DbType.Int32
+            iPar.Value = 2
             comando.Parameters.Add(iPar)
 
             Try

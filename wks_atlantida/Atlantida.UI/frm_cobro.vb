@@ -98,7 +98,19 @@ Public Class frm_cobro
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btn_sena_Click(sender As Object, e As EventArgs) Handles btn_sena.Click
-        txt_sena.Text = valorSeña
+        Dim validarSeñaCobrada As Integer
+
+        'VALIDACION PARA LOS DGW
+        If cobroTemporal IsNot Nothing Then
+            validarSeñaCobrada = interfazCobro.obtenerEstadoCobro(cobroTemporal.numeroFactura)
+            If validarSeñaCobrada = 1 Then
+                txt_sena.Text = valorSeña
+            Else
+                MsgBox("Ya se le ha cobrado una seña a este cliente!")
+            End If
+        Else
+            MsgBox("Seleccione un registro de la grilla,haciendo doble click sobre ella!")
+        End If
     End Sub
     ''' <summary>
     ''' 
@@ -220,9 +232,9 @@ Public Class frm_cobro
         Dim seña As Integer
         seña = CInt(cobroTemporal.montos) * 0.3
         seña = CStr(seña)
-        MsgBox("La seña es de: $" + seña.ToString)
 
         valorSeña = seña
+
     End Sub
     ''' <summary>
     ''' 
@@ -279,7 +291,7 @@ Public Class frm_cobro
                         interes = CInt(txt_sena.Text) * 0.3
                         MsgBox("Se le esta cobrando el 30% de interes!")
                     End If
-                    generarReservaConTarjeta(numeroFactura, CInt(importe), interes, cantCuotas, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
+                    generarReservaConTarjeta(numeroFactura, CInt(txt_sena.Text), interes, cantCuotas, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
                     incrementarCuenta(CStr(importe))
                     check = True
                 ElseIf selectedItem = "Debito" Then
