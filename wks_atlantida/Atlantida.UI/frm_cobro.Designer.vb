@@ -28,7 +28,6 @@ Partial Class frm_cobro
         Me.btn_sena = New System.Windows.Forms.Button()
         Me.txt_sena = New System.Windows.Forms.TextBox()
         Me.btn_imprimir_voucher = New System.Windows.Forms.Button()
-        Me.btn_ConfirmarComprobantes = New System.Windows.Forms.Button()
         Me.box_cliente_deuda = New System.Windows.Forms.GroupBox()
         Me.txt_cliente = New System.Windows.Forms.TextBox()
         Me.btn_validar = New System.Windows.Forms.Button()
@@ -62,7 +61,6 @@ Partial Class frm_cobro
         '
         Me.box_central.Controls.Add(Me.box_sena)
         Me.box_central.Controls.Add(Me.btn_imprimir_voucher)
-        Me.box_central.Controls.Add(Me.btn_ConfirmarComprobantes)
         Me.box_central.Controls.Add(Me.box_cliente_deuda)
         Me.box_central.Controls.Add(Me.box_formulario_pago)
         Me.box_central.Controls.Add(Me.box_resultado_deuda)
@@ -101,21 +99,12 @@ Partial Class frm_cobro
         '
         'btn_imprimir_voucher
         '
-        Me.btn_imprimir_voucher.Location = New System.Drawing.Point(109, 219)
+        Me.btn_imprimir_voucher.Location = New System.Drawing.Point(13, 219)
         Me.btn_imprimir_voucher.Name = "btn_imprimir_voucher"
         Me.btn_imprimir_voucher.Size = New System.Drawing.Size(90, 45)
         Me.btn_imprimir_voucher.TabIndex = 25
         Me.btn_imprimir_voucher.Text = "Imprimir voucher"
         Me.btn_imprimir_voucher.UseVisualStyleBackColor = True
-        '
-        'btn_ConfirmarComprobantes
-        '
-        Me.btn_ConfirmarComprobantes.Location = New System.Drawing.Point(13, 219)
-        Me.btn_ConfirmarComprobantes.Name = "btn_ConfirmarComprobantes"
-        Me.btn_ConfirmarComprobantes.Size = New System.Drawing.Size(90, 45)
-        Me.btn_ConfirmarComprobantes.TabIndex = 26
-        Me.btn_ConfirmarComprobantes.Text = "Conf.Comprobante"
-        Me.btn_ConfirmarComprobantes.UseVisualStyleBackColor = True
         '
         'box_cliente_deuda
         '
@@ -358,7 +347,6 @@ Partial Class frm_cobro
     Friend WithEvents txt_cuenta As System.Windows.Forms.TextBox
     Friend WithEvents lbl_datos_tarjeta As System.Windows.Forms.Label
     Friend WithEvents txt_tarjeta As System.Windows.Forms.TextBox
-    Friend WithEvents btn_ConfirmarComprobantes As System.Windows.Forms.Button
     Friend WithEvents box_sena As System.Windows.Forms.GroupBox
     Friend WithEvents btn_sena As System.Windows.Forms.Button
     Friend WithEvents txt_sena As System.Windows.Forms.TextBox

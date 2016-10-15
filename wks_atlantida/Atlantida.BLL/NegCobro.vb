@@ -29,7 +29,12 @@ Namespace SIS.BLL
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
         End Function
-
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_cobro"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
         Function registrarPresupuestoCobro(ByVal _cobro As Cobro)
             Dim oDalCobro As New DALCobro
             Try
@@ -43,12 +48,15 @@ Namespace SIS.BLL
         ''' </summary>
         ''' <param name="_idFact"></param>
         ''' <param name="_upmonto"></param>
+        ''' <param name="_cuenta"></param>
+        ''' <param name="_tarjeta"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function registrarReserva(ByVal _idFact As Integer, ByVal _upmonto As Integer)
+        Function registrarReservaConTarjeta(ByVal _idFact As Integer, ByVal _upmonto As Integer, ByVal _interes As Integer, ByVal _cuotas As String, ByVal _cuenta As String, ByVal _tarjeta As String)
             Dim oDalCobro As New DALCobro
+            Dim fechaCobro As DateTime = DateTime.Now
             Try
-                oDalCobro.registarReserva(_idFact, _upmonto)
+                oDalCobro.registarReservaConTarjeta(_idFact, _upmonto, fechaCobro, _interes, _cuotas, _cuenta, _tarjeta)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
@@ -57,12 +65,47 @@ Namespace SIS.BLL
         ''' 
         ''' </summary>
         ''' <param name="_idFact"></param>
+        ''' <param name="_upmonto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function registrarReserva(ByVal _idFact As Integer, ByVal _upmonto As Integer)
+            Dim oDalCobro As New DALCobro
+            Dim fechaCobro As DateTime = DateTime.Now
+            Try
+                oDalCobro.registarReserva(_idFact, _upmonto, fechaCobro)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_idFact"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Function registrarCobro(ByVal _idFact As Integer)
             Dim oDalCobro As New DALCobro
+            Dim fechaCobro As DateTime = DateTime.Now
             Try
-                oDalCobro.registrarCobro(_idFact)
+                oDalCobro.registrarCobro(_idFact, fechaCobro)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_idFact"></param>
+        ''' <param name="_cuenta"></param>
+        ''' <param name="_tarjeta"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function registrarCobroConTarjeta(ByVal _idFact As Integer, ByVal _interes As Integer, ByVal _cuotas As String, ByVal _cuenta As String, ByVal _tarjeta As String)
+            Dim oDalCobro As New DALCobro
+            Dim fechaCobro As DateTime = DateTime.Now
+            Try
+                oDalCobro.registrarCobroConTarjeta(_idFact, fechaCobro, _interes, _cuotas, _cuenta, _tarjeta)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
@@ -84,6 +127,23 @@ Namespace SIS.BLL
             End Try
 
             Return listadoCobro
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_monto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function incrementarCuenta(ByVal _monto As Integer)
+            Dim oDalCobro As New DALCobro
+            Dim montoTemporal As Integer
+            Try
+                montoTemporal = oDalCobro.obtenerMonto()
+                montoTemporal = montoTemporal + _monto
+                oDalCobro.incrementarCuenta(montoTemporal)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
         End Function
         ''' <summary>
         ''' 

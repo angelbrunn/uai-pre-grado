@@ -188,9 +188,6 @@ Public Class frm_cobro
             If enu.Current.componente = "box_sena" Then
                 Me.box_sena.Text = enu.Current.value
             End If
-            If enu.Current.componente = "btn_ConfirmarComprobantes" Then
-                Me.btn_ConfirmarComprobantes.Text = enu.Current.value
-            End If
             If enu.Current.componente = "ChkReserva" Then
                 Me.ChkReserva.Text = enu.Current.value
             End If
@@ -235,6 +232,7 @@ Public Class frm_cobro
     ''' <remarks></remarks>
     Private Sub btn_pagar_Click(sender As Object, e As EventArgs) Handles btn_pagar.Click
         Dim bandera As String = True
+        Dim check As Boolean = False
 
         Dim selectedIndex As Integer
         selectedIndex = cbx_formasPago.SelectedIndex
@@ -267,17 +265,86 @@ Public Class frm_cobro
         End If
 
         If bandera = True Then
+
             If ChkReserva.Checked = True Then
-                generarReserva(numeroFactura, CInt(txt_sena.Text))
+                If selectedItem = "Credito" Then
+                    selectedIndex = cbx_cantidad.SelectedIndex
+                    selectedItem = cbx_cantidad.SelectedItem
+                    Dim cantCuotas As String = selectedItem
+                    Dim importe As Integer
+                    Dim interes As Integer
+                    'SI PAGA CON CREDITO Y MAS DE 1 CUOTA SE LE COBRA EL 30% DE INTERES
+                    If selectedItem > 1 Then
+                        importe = CInt(txt_sena.Text) * 1.3
+                        interes = CInt(txt_sena.Text) * 0.3
+                        MsgBox("Se le esta cobrando el 30% de interes!")
+                    End If
+                    generarReservaConTarjeta(numeroFactura, CInt(importe), interes, cantCuotas, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
+                    incrementarCuenta(CStr(importe))
+                    check = True
+                ElseIf selectedItem = "Debito" Then
+                    generarReservaConTarjeta(numeroFactura, CInt(txt_sena.Text), 0, 1, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
+                    incrementarCuenta(txt_sena.Text)
+                    check = True
+                ElseIf selectedItem = "Efectivo" Then
+                    generarReserva(numeroFactura, CInt(txt_sena.Text))
+                    incrementarCuenta(txt_sena.Text)
+                    check = True
+                End If
             End If
 
             If ChkPagoToT.Checked = True Then
-                generarCobro(numeroFactura)
-                'TO-DO:INCREMENTAR MI CAJA POR LA RESERVA O PAGO TOTAL
-
+                If selectedItem = "Credito" Then
+                    selectedIndex = cbx_cantidad.SelectedIndex
+                    selectedItem = cbx_cantidad.SelectedItem
+                    Dim cantCuotas As String = selectedItem
+                    Dim importe As Integer
+                    Dim interes As Integer
+                    'SI PAGA CON CREDITO Y MAS DE 1 CUOTA SE LE COBRA EL 30% DE INTERES
+                    If selectedItem > 1 Then
+                        importe = CInt(txt_importe.Text) * 1.3
+                        interes = CInt(txt_importe.Text) * 0.3
+                        MsgBox("Se le esta cobrando el 30% de interes!")
+                    End If
+                    generarCobroConTarjeta(numeroFactura, interes, cantCuotas, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
+                    incrementarCuenta(CStr(importe))
+                    check = True
+                ElseIf selectedItem = "Debito" Then
+                    generarCobroConTarjeta(numeroFactura, 0, 1, txt_cuenta.Text.ToString, txt_tarjeta.Text.ToString)
+                    incrementarCuenta(txt_importe.Text)
+                    check = True
+                ElseIf selectedItem = "Efectivo" Then
+                    generarCobro(numeroFactura)
+                    incrementarCuenta(txt_importe.Text)
+                    check = True
+                End If
             End If
-            MsgBox("Debe seleccionar un tipo de cobro ya sea RESERVA O PAGO TOTAL")
+
+            If check = False Then
+                MsgBox("Debe seleccionar un tipo de cobro ya sea RESERVA O PAGO TOTAL")
+            End If
         End If
+        cleanTextBoxs()
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub cleanTextBoxs()
+        txt_cuenta.Clear()
+        txt_tarjeta.Clear()
+        txt_importe.Clear()
+        txt_sena.Clear()
+        ChkPagoToT.Checked = False
+        ChkReserva.Checked = False
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="importe"></param>
+    ''' <remarks></remarks>
+    Private Sub incrementarCuenta(ByVal importe As Integer)
+        interfazCobro.incrementarCuenta(importe)
     End Sub
     ''' <summary>
     ''' 
@@ -294,9 +361,41 @@ Public Class frm_cobro
     ''' 
     ''' </summary>
     ''' <param name="idFactura"></param>
+    ''' <param name="_montoReserva"></param>
+    ''' <param name="_cuenta"></param>
+    ''' <param name="_tarjeta"></param>
+    ''' <remarks></remarks>
+    Private Sub generarReservaConTarjeta(ByVal idFactura As Integer, ByVal _montoReserva As Integer, ByVal _interes As Integer, ByVal _cuotas As String, ByVal _cuenta As String, ByVal _tarjeta As String)
+        Dim montoCReserva As Integer
+        montoCReserva = montoCobro - _montoReserva
+        interfazCobro.registrarReservaConTarjeta(idFactura, montoCReserva, _interes, _cuotas, _cuenta, _tarjeta)
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="idFactura"></param>
+    ''' <param name="_cuenta"></param>
+    ''' <param name="_tarjeta"></param>
+    ''' <remarks></remarks>
+    Private Sub generarCobroConTarjeta(ByVal idFactura As String, ByVal _interes As Integer, ByVal _cuotas As String, ByVal _cuenta As String, ByVal _tarjeta As String)
+        interfazCobro.registrarCobroConTarjeta(idFactura, _interes, _cuotas, _cuenta, _tarjeta)
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="idFactura"></param>
     ''' <remarks></remarks>
     Private Sub generarCobro(ByVal idFactura As String)
         interfazCobro.registrarCobro(idFactura)
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_imprimir_voucher_Click(sender As Object, e As EventArgs) Handles btn_imprimir_voucher.Click
+        'TO-DO:GENERAR UN PDF CON LOS SIG.DATOS: NOM Y APELLIDO - NUM DE PRES O NUM PAGO - MONTO 
     End Sub
     ''' <summary>
     ''' 

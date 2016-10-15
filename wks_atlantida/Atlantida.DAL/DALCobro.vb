@@ -47,6 +47,36 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function obtenerMonto() As Integer
+            Dim ultimoMonto As Integer
+
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "SELECT TOP 1 monto FROM Caja WHERE id=1"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            Try
+                conex.Open()
+                ultimoMonto = comando.ExecuteScalar
+                conex.Close()
+
+            Catch ex As SqlException
+                Throw New DALExcepcion(ex.Message)
+            End Try
+            Return ultimoMonto
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="oCobro"></param>
         ''' <remarks></remarks>
         Public Sub insertarCobro(ByVal oCobro As Cobro)
@@ -153,7 +183,7 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:significa que el cobro esta activo |1:significa cobro cancelado
+            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado
             iPar.ParameterName = "ventaCancelada"
             iPar.DbType = DbType.Int32
             iPar.Value = 1
@@ -175,11 +205,41 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
-        ''' <param name="numFactura"></param>
+        ''' <param name="monto"></param>
         ''' <remarks></remarks>
-        Public Sub registrarCobro(ByVal nroFactura As Integer)
+        Public Sub incrementarCuenta(ByVal monto As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "UPDATE Cobro SET [ventaCancelada]=@ventaCancelada WHERE nroFactura=@nroFactura"
+            Dim sqlQuery As String = "UPDATE Caja SET [monto]=@monto WHERE id=1"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "monto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = monto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="nroFactura"></param>
+        ''' <remarks></remarks>
+        Public Sub registrarCobro(ByVal nroFactura As Integer, ByVal fechaCobro As DateTime)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Cobro SET [ventaCancelada]=@ventaCancelada,fechaCobro=@fechaCobro WHERE nroFactura=@nroFactura"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -201,6 +261,83 @@ Namespace SIS.DAL
             iPar.Value = nroFactura
             comando.Parameters.Add(iPar)
 
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "fechaCobro"
+            iPar.DbType = DbType.DateTime
+            iPar.Value = fechaCobro
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="nroFactura"></param>
+        ''' <param name="fechaCobro"></param>
+        ''' <param name="interes"></param>
+        ''' <param name="cuotas"></param>
+        ''' <param name="nro_cuenta"></param>
+        ''' <param name="nro_tarjeta"></param>
+        ''' <remarks></remarks>
+        Public Sub registrarCobroConTarjeta(ByVal nroFactura As Integer, ByVal fechaCobro As DateTime, ByVal interes As Integer, ByVal cuotas As String, ByVal nro_cuenta As String, ByVal nro_tarjeta As String)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Cobro SET [ventaCancelada]=@ventaCancelada,fechaCobro=@fechaCobro,nro_tarjeta=@nro_tarjeta,nro_cuenta=@nro_cuenta,cuotas=@cuotas,interes=@interes WHERE nroFactura=@nroFactura"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+            '0:significa que el cobro esta activo |1:significa cobro cancelado|2:significa cobro realizado
+            iPar.ParameterName = "ventaCancelada"
+            iPar.DbType = DbType.Int32
+            iPar.Value = 2
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "nroFactura"
+            iPar.DbType = DbType.Int32
+            iPar.Value = nroFactura
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "fechaCobro"
+            iPar.DbType = DbType.DateTime
+            iPar.Value = fechaCobro
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "nro_tarjeta"
+            iPar.DbType = DbType.String
+            iPar.Value = nro_tarjeta
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "nro_cuenta"
+            iPar.DbType = DbType.String
+            iPar.Value = nro_cuenta
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "cuotas"
+            iPar.DbType = DbType.String
+            iPar.Value = cuotas
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "interes"
+            iPar.DbType = DbType.Int32
+            iPar.Value = interes
+            comando.Parameters.Add(iPar)
+
             Try
                 conex.Open()
                 comando.ExecuteNonQuery()
@@ -214,9 +351,9 @@ Namespace SIS.DAL
         ''' <param name="numFactura"></param>
         ''' <param name="ud_monto"></param>
         ''' <remarks></remarks>
-        Public Sub registarReserva(ByVal numFactura As Integer, ByVal ud_monto As Integer)
+        Public Sub registarReserva(ByVal numFactura As Integer, ByVal ud_monto As Integer, ByVal fechaCobro As DateTime)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "UPDATE Cobro SET [monto]=@ud_monto WHERE nroFactura=@numFactura"
+            Dim sqlQuery As String = "UPDATE Cobro SET [monto]=@ud_monto,fechaCobro=@fechaCobro WHERE nroFactura=@numFactura"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -235,6 +372,83 @@ Namespace SIS.DAL
             iPar.ParameterName = "numFactura"
             iPar.DbType = DbType.Int32
             iPar.Value = numFactura
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "fechaCobro"
+            iPar.DbType = DbType.DateTime
+            iPar.Value = fechaCobro
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="numFactura"></param>
+        ''' <param name="ud_monto"></param>
+        ''' <param name="fechaCobro"></param>
+        ''' <param name="cuotas"></param>
+        ''' <param name="interes"></param>
+        ''' <param name="nro_cuenta"></param>
+        ''' <param name="nro_tarjeta"></param>
+        ''' <remarks></remarks>
+        Public Sub registarReservaConTarjeta(ByVal numFactura As Integer, ByVal ud_monto As Integer, ByVal fechaCobro As DateTime, ByVal cuotas As String, ByVal interes As Integer, ByVal nro_cuenta As String, ByVal nro_tarjeta As String)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "UPDATE Cobro SET [monto]=@ud_monto,fechaCobro=@fechaCobro,nro_tarjeta=@nro_tarjeta,nro_cuenta=@nro_cuenta,cuotas=@cuotas,interes=@interes WHERE nroFactura=@numFactura"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+            iPar.ParameterName = "ud_monto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = ud_monto
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "numFactura"
+            iPar.DbType = DbType.Int32
+            iPar.Value = numFactura
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "fechaCobro"
+            iPar.DbType = DbType.DateTime
+            iPar.Value = fechaCobro
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "nro_tarjeta"
+            iPar.DbType = DbType.String
+            iPar.Value = nro_tarjeta
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "nro_cuenta"
+            iPar.DbType = DbType.String
+            iPar.Value = nro_cuenta
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "cuotas"
+            iPar.DbType = DbType.String
+            iPar.Value = cuotas
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "interes"
+            iPar.DbType = DbType.Int32
+            iPar.Value = interes
             comando.Parameters.Add(iPar)
 
             Try
