@@ -24,7 +24,12 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
-        Private idProveedor As Integer
+        Private idProveedorTransporte As Integer
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private idProveedorHospedaje As Integer
         ''' <summary>
         ''' 
         ''' </summary>
@@ -133,10 +138,24 @@
         ''' <remarks></remarks>
         Public Property idProv() As Integer
             Get
-                Return idProveedor
+                Return idProveedorTransporte
             End Get
             Set(ByVal value As Integer)
-                idProveedor = value
+                idProveedorTransporte = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property idProvHosp() As Integer
+            Get
+                Return idProveedorHospedaje
+            End Get
+            Set(ByVal value As Integer)
+                idProveedorHospedaje = value
             End Set
         End Property
         ''' <summary>

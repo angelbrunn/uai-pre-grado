@@ -24,6 +24,7 @@ Partial Class frm_cobro
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_cobro))
         Me.box_central = New System.Windows.Forms.GroupBox()
+        Me.btn_refrescar = New System.Windows.Forms.Button()
         Me.box_sena = New System.Windows.Forms.GroupBox()
         Me.btn_sena = New System.Windows.Forms.Button()
         Me.txt_sena = New System.Windows.Forms.TextBox()
@@ -59,6 +60,7 @@ Partial Class frm_cobro
         '
         'box_central
         '
+        Me.box_central.Controls.Add(Me.btn_refrescar)
         Me.box_central.Controls.Add(Me.box_sena)
         Me.box_central.Controls.Add(Me.btn_imprimir_voucher)
         Me.box_central.Controls.Add(Me.box_cliente_deuda)
@@ -69,6 +71,15 @@ Partial Class frm_cobro
         Me.box_central.Size = New System.Drawing.Size(816, 462)
         Me.box_central.TabIndex = 1
         Me.box_central.TabStop = False
+        '
+        'btn_refrescar
+        '
+        Me.btn_refrescar.Location = New System.Drawing.Point(109, 218)
+        Me.btn_refrescar.Name = "btn_refrescar"
+        Me.btn_refrescar.Size = New System.Drawing.Size(75, 46)
+        Me.btn_refrescar.TabIndex = 29
+        Me.btn_refrescar.Text = "Refrescar"
+        Me.btn_refrescar.UseVisualStyleBackColor = True
         '
         'box_sena
         '
@@ -353,4 +364,5 @@ Partial Class frm_cobro
     Friend WithEvents ChkPagoToT As System.Windows.Forms.CheckBox
     Friend WithEvents ChkReserva As System.Windows.Forms.CheckBox
     Friend WithEvents dgw_resultDeuda As System.Windows.Forms.DataGridView
+    Friend WithEvents btn_refrescar As System.Windows.Forms.Button
 End Class

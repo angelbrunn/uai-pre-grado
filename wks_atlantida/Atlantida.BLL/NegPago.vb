@@ -2,6 +2,8 @@
 Imports Atlantida.IO.SIS.IO
 Imports Atlantida.Entidades.SIS.Entidades
 Imports Atlantida.DAL.SIS.DAL
+Imports System.Net.Mail
+Imports System.Net
 
 Namespace SIS.BLL
     Public Class NegPago

@@ -559,6 +559,31 @@ Namespace SIS.DAL
             connection.Close()
             Return Dt
         End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="dni"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function obtenerVoucherCliente(ByVal dni As Integer) As DataTable
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim command As New SqlCommand("sp_voucher_cliente")
+
+            Dim connection As New SqlConnection(conexString)
+            command.Connection = connection
+            command.CommandType = CommandType.StoredProcedure
+
+            command.Parameters.AddWithValue("@pdni", dni)
+
+            Dim adapter As New SqlDataAdapter(command)
+            adapter.SelectCommand.CommandTimeout = 300
+
+            Dim Ada As New SqlDataAdapter(command)
+            Dim Dt As New DataTable()
+            Ada.Fill(Dt)
+            connection.Close()
+            Return Dt
+        End Function
     End Class
 End Namespace
 

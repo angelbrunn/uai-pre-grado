@@ -183,6 +183,9 @@ Public Class frm_cobro
             If enu.Current.componente = "btn_validar" Then
                 Me.btn_validar.Text = enu.Current.value
             End If
+            If enu.Current.componente = "btn_refrescar" Then
+                Me.btn_refrescar.Text = enu.Current.value
+            End If
             If enu.Current.componente = "lbl_cantidad" Then
                 Me.lbl_cantidad.Text = enu.Current.value
             End If
@@ -441,8 +444,27 @@ Public Class frm_cobro
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
+    Private Sub btn_refrescar_Click(sender As Object, e As EventArgs) Handles btn_refrescar.Click
+        If txt_cliente.Text.ToString <> "" Then
+            Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
+            dgw_resultDeuda.DataSource = interfazCobro.obtenerDeudaCliente(_dni)
+        Else
+            MsgBox("Seleccione la deuda de un cliente ingresando su dni en el casillero: Nro dni!")
+        End If
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btn_imprimir_voucher_Click(sender As Object, e As EventArgs) Handles btn_imprimir_voucher.Click
-        'TO-DO:GENERAR UN PDF CON LOS SIG.DATOS: NOM Y APELLIDO - NUM DE PRES O NUM PAGO - MONTO 
+        'TO-DO:GENERAR UN PDF CON LOS SIG.DATOS: NOM Y APELLIDO - NUM DE PRES O NUM PAGO - MONTO
+        'EL VAUCHER SE DEBE IMPRIMIR SOLO SI EL COBRO FUE TOTAL
+        Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
+        dgw_resultDeuda.DataSource = interfazCobro.obtenerVoucherCliente(_dni)
+        'GENERAR UN PDF
+
     End Sub
     ''' <summary>
     ''' 

@@ -201,6 +201,24 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="dni"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerVoucherCliente(ByVal dni As Integer) As DataTable
+            Dim listadoVoucher As DataTable
+            listadoVoucher = Nothing
+            Dim oDalCobro As New DALCobro
+            Try
+                listadoVoucher = oDalCobro.obtenerVoucherCliente(dni)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+
+            Return listadoVoucher
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>

@@ -26,7 +26,6 @@ Partial Class frm_pago
         Me.box_pagos_pend = New System.Windows.Forms.GroupBox()
         Me.dgw_pagos_pend = New System.Windows.Forms.DataGridView()
         Me.box_acciones = New System.Windows.Forms.GroupBox()
-        Me.btn_solicitarPax = New System.Windows.Forms.Button()
         Me.btn_refrescar = New System.Windows.Forms.Button()
         Me.btn_terminar_op = New System.Windows.Forms.Button()
         Me.btn_transferencia = New System.Windows.Forms.Button()
@@ -55,7 +54,6 @@ Partial Class frm_pago
         '
         'box_acciones
         '
-        Me.box_acciones.Controls.Add(Me.btn_solicitarPax)
         Me.box_acciones.Controls.Add(Me.btn_refrescar)
         Me.box_acciones.Controls.Add(Me.btn_terminar_op)
         Me.box_acciones.Controls.Add(Me.btn_transferencia)
@@ -65,15 +63,6 @@ Partial Class frm_pago
         Me.box_acciones.TabIndex = 9
         Me.box_acciones.TabStop = False
         Me.box_acciones.Text = "Acciones"
-        '
-        'btn_solicitarPax
-        '
-        Me.btn_solicitarPax.Location = New System.Drawing.Point(96, 19)
-        Me.btn_solicitarPax.Name = "btn_solicitarPax"
-        Me.btn_solicitarPax.Size = New System.Drawing.Size(81, 37)
-        Me.btn_solicitarPax.TabIndex = 4
-        Me.btn_solicitarPax.Text = "Solicitar Conf.Pago"
-        Me.btn_solicitarPax.UseVisualStyleBackColor = True
         '
         'btn_refrescar
         '
@@ -86,7 +75,7 @@ Partial Class frm_pago
         '
         'btn_terminar_op
         '
-        Me.btn_terminar_op.Location = New System.Drawing.Point(183, 19)
+        Me.btn_terminar_op.Location = New System.Drawing.Point(96, 19)
         Me.btn_terminar_op.Name = "btn_terminar_op"
         Me.btn_terminar_op.Size = New System.Drawing.Size(81, 37)
         Me.btn_terminar_op.TabIndex = 2
@@ -125,6 +114,5 @@ Partial Class frm_pago
     Friend WithEvents box_acciones As System.Windows.Forms.GroupBox
     Friend WithEvents btn_transferencia As System.Windows.Forms.Button
     Friend WithEvents btn_terminar_op As System.Windows.Forms.Button
-    Friend WithEvents btn_solicitarPax As System.Windows.Forms.Button
     Friend WithEvents btn_refrescar As System.Windows.Forms.Button
 End Class

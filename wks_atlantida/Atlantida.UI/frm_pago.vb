@@ -1,6 +1,5 @@
 ﻿Imports Atlantida.BLL.SIS.BLL
 Imports Atlantida.Entidades.SIS.Entidades
-
 ''' <summary>
 ''' 
 ''' </summary>
@@ -50,13 +49,14 @@ Public Class frm_pago
         selectedRow = dgw_pagos_pend.Rows(idx)
 
         pagoTemporal.idProv = selectedRow.Cells(0).Value.ToString()
-        pagoTemporal.idPresu = selectedRow.Cells(1).Value.ToString()
-        pagoTemporal.idCuentaCorriente = selectedRow.Cells(2).Value.ToString()
-        pagoTemporal.estadoDelPago = selectedRow.Cells(3).Value.ToString()
-        pagoTemporal.montoAPagarTransporte = selectedRow.Cells(4).Value.ToString()
-        razonSocialTransp = selectedRow.Cells(5).Value.ToString()
-        pagoTemporal.montoAPagarHospedaje = selectedRow.Cells(6).Value.ToString()
-        razonSocialHospedaje = selectedRow.Cells(7).Value.ToString()
+        pagoTemporal.idProvHosp = selectedRow.Cells(1).Value.ToString()
+        pagoTemporal.idPresu = selectedRow.Cells(2).Value.ToString()
+        pagoTemporal.idCuentaCorriente = selectedRow.Cells(3).Value.ToString()
+        pagoTemporal.estadoDelPago = selectedRow.Cells(4).Value.ToString()
+        pagoTemporal.montoAPagarTransporte = selectedRow.Cells(5).Value.ToString()
+        razonSocialTransp = selectedRow.Cells(6).Value.ToString()
+        pagoTemporal.montoAPagarHospedaje = selectedRow.Cells(7).Value.ToString()
+        razonSocialHospedaje = selectedRow.Cells(8).Value.ToString()
     End Sub
     ''' <summary>
     ''' 
@@ -170,23 +170,10 @@ Public Class frm_pago
             If enu.Current.componente = "btn_confirmar" Then
                 Me.btn_refrescar.Text = enu.Current.value
             End If
-            If enu.Current.componente = "btn_solicitarPax" Then
-                Me.btn_solicitarPax.Text = enu.Current.value
-            End If
             If enu.Current.componente = "frm_pago" Then
                 Me.Text = enu.Current.value
             End If
         End While
-    End Sub
-    ''' <summary>
-    ''' 
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub btn_solicitarPax_Click(sender As Object, e As EventArgs) Handles btn_solicitarPax.Click
-        'ENVIO DE MAIL
-
     End Sub
     ''' <summary>
     ''' 
