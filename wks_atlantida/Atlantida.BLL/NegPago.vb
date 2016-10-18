@@ -119,7 +119,7 @@ Namespace SIS.BLL
             Try
                 montoTemporal = oDalCobro.obtenerMonto()
                 montoTemporal = montoTemporal - _monto
-                oDalPago.decrementarCaja(_monto)
+                oDalPago.decrementarCaja(montoTemporal)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try
@@ -133,17 +133,33 @@ Namespace SIS.BLL
         ''' <remarks></remarks>
         Function decrementoPagoPendiente(ByVal idPresupuesto As Integer, ByVal _monto As Integer, ByVal action As String)
             Dim oDalPago As New DALPago
-            Dim montoTemporal As Integer
+            Dim montoTemporalTransporte As Integer
+            Dim montoTemporalHospedaje As Integer
             Try
                 If action = "Transporte" Then
-                    montoTemporal = oDalPago.obtenerMontoTransporte(idPresupuesto)
-                    montoTemporal = montoTemporal - _monto
-                    oDalPago.decrementarPagoTransporte(idPresupuesto, montoTemporal)
+                    montoTemporalTransporte = oDalPago.obtenerMontoTransporte(idPresupuesto)
+                    montoTemporalTransporte = montoTemporalTransporte - _monto
+                    oDalPago.decrementarPagoTransporte(idPresupuesto, montoTemporalTransporte)
                 Else
-                    montoTemporal = oDalPago.obtenerMontoHospedaje(idPresupuesto)
-                    montoTemporal = montoTemporal - _monto
-                    oDalPago.decrementarPagoTransporte(idPresupuesto, montoTemporal)
+                    montoTemporalHospedaje = oDalPago.obtenerMontoHospedaje(idPresupuesto)
+                    montoTemporalHospedaje = montoTemporalHospedaje - _monto
+                    oDalPago.decrementarPagoHospedaje(idPresupuesto, montoTemporalHospedaje)
                 End If
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <param name="_estado"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function actualizarEstado(ByVal idPresupuesto As Integer, ByVal _estado As String)
+            Dim oDalPago As New DALPago
+            Try
+                oDalPago.actualizarEstadoPago(idPresupuesto, _estado)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
             End Try

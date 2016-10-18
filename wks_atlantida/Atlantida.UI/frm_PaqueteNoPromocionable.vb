@@ -57,9 +57,13 @@ Public Class frm_PaqueteNoPromocionable
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btn_seleccionar_Click(sender As Object, e As EventArgs) Handles btn_seleccionar.Click
-        Me.Hide()
-        frm_presupuesto.doAssembler(presupuestoTemporal)
-        frm_presupuesto.Show()
+        If presupuestoTemporal IsNot Nothing Then
+            Me.Hide()
+            frm_presupuesto.doAssembler(presupuestoTemporal)
+            frm_presupuesto.Show()
+        Else
+            MsgBox("Seleccione un registro de la grilla,haciendo doble click sobre ella!")
+        End If
     End Sub
     ''' <summary>
     ''' 

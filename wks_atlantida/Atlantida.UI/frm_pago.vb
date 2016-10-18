@@ -78,56 +78,69 @@ Public Class frm_pago
     ''' <remarks></remarks>
     Private Sub btn_transferencia_Click(sender As Object, e As EventArgs) Handles btn_transferencia.Click
         Dim tipoTrasnf As Integer
-        tipoTrasnf = interfazPago.consultarTipoTransferencia(pagoTemporal.idPresu)
 
-        Dim montoCseñaTransporte As Integer
-        Dim montoCseñaHospedaje As Integer
+        If pagoTemporal IsNot Nothing Then
+            tipoTrasnf = interfazPago.consultarTipoTransferencia(pagoTemporal.idPresu)
 
-        Dim montoToTTransporte As Integer
-        Dim montoToTHospedaje As Integer
+            Dim montoCseñaTransporte As Integer
+            Dim montoCseñaHospedaje As Integer
 
-        '1:PAGO DE TRANSFERENCIA POR SEÑA
-        If tipoTrasnf = 1 Then
-            If pagoTemporal.montoAPagarTransporte <> 0 Then
-                montoCseñaTransporte = (pagoTemporal.montoAPagarTransporte * 0.3)
-                'INCREMENTO CUENTA CORRIENTE DEL CLIENTE
-                interfazPago.incrementarCuentaCorriente(pagoTemporal.idPresu, pagoTemporal.idCuentaCorriente, montoCseñaTransporte)
-                'DECREMENTO CAJA
-                interfazPago.decrementoCaja(montoCseñaTransporte)
-                'DECREMENTO PAGO PENDIENTE
-                interfazPago.decrementoPagoPendiente(pagoTemporal.idPresu, montoCseñaTransporte, "Transporte")
+            Dim montoToTTransporte As Integer
+            Dim montoToTHospedaje As Integer
+
+            '1:PAGO DE TRANSFERENCIA POR SEÑA
+            If tipoTrasnf = 1 Then
+                If pagoTemporal.montoAPagarTransporte <> 0 Then
+                    montoCseñaTransporte = (pagoTemporal.montoAPagarTransporte * 0.3)
+                    'INCREMENTO CUENTA CORRIENTE DEL CLIENTE
+                    interfazPago.incrementarCuentaCorriente(pagoTemporal.idPresu, pagoTemporal.idCuentaCorriente, montoCseñaTransporte)
+                    'DECREMENTO CAJA
+                    interfazPago.decrementoCaja(montoCseñaTransporte)
+                    'DECREMENTO PAGO PENDIENTE
+                    interfazPago.decrementoPagoPendiente(pagoTemporal.idPresu, montoCseñaTransporte, "Transporte")
+                    '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado|4:seña Paga|5:tot Paga
+                    interfazPago.actualizarEstado(pagoTemporal.idPresu, 4)
+                End If
+                If pagoTemporal.montoAPagarHospedaje <> 0 Then
+                    montoCseñaHospedaje = (pagoTemporal.montoAPagarHospedaje * 0.3)
+                    interfazPago.incrementarCuentaCorriente(pagoTemporal.idPresu, pagoTemporal.idCuentaCorriente, montoCseñaHospedaje)
+                    'DECREMENTO CAJA
+                    interfazPago.decrementoCaja(montoCseñaHospedaje)
+                    'DECREMENTO PAGO PENDIENTE
+                    interfazPago.decrementoPagoPendiente(pagoTemporal.idPresu, montoCseñaHospedaje, "Hospedaje")
+                    '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado|4:seña Paga|5:tot Paga
+                    interfazPago.actualizarEstado(pagoTemporal.idPresu, 4)
+                End If
             End If
-            If pagoTemporal.montoAPagarHospedaje <> 0 Then
-                montoCseñaHospedaje = (pagoTemporal.montoAPagarHospedaje * 0.3)
-                interfazPago.incrementarCuentaCorriente(pagoTemporal.idPresu, pagoTemporal.idCuentaCorriente, montoCseñaHospedaje)
-                'DECREMENTO CAJA
-                interfazPago.decrementoCaja(montoCseñaHospedaje)
-                'DECREMENTO PAGO PENDIENTE
-                interfazPago.decrementoPagoPendiente(pagoTemporal.idPresu, montoCseñaTransporte, "Hospedaje")
+            '2:PAGO DE TRANSFERENCIA POR TOTAL
+            If tipoTrasnf = 2 Then
+                'pagoTemporal.idCuentaCorriente
+                If pagoTemporal.montoAPagarTransporte <> 0 Then
+                    montoToTTransporte = pagoTemporal.montoAPagarTransporte
+                    'INCREMENTO CUENTA CORRIENTE DEL CLIENTE
+                    interfazPago.incrementarCuentaCorriente(pagoTemporal.idPresu, pagoTemporal.idCuentaCorriente, montoToTTransporte)
+                    'DECREMENTO CAJA
+                    interfazPago.decrementoCaja(montoToTTransporte)
+                    'DECREMENTO PAGO PENDIENTE
+                    '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado|4:seña Paga|5:tot Paga
+                    interfazPago.decrementoPagoPendiente(pagoTemporal.idPresu, montoToTTransporte, "Transporte")
+                    interfazPago.actualizarEstado(pagoTemporal.idPresu, 5)
+                End If
+                If pagoTemporal.montoAPagarHospedaje <> 0 Then
+                    montoToTHospedaje = pagoTemporal.montoAPagarHospedaje
+                    interfazPago.incrementarCuentaCorriente(pagoTemporal.idPresu, pagoTemporal.idCuentaCorriente, montoToTHospedaje)
+                    'DECREMENTO CAJA
+                    interfazPago.decrementoCaja(montoCseñaHospedaje)
+                    'DECREMENTO PAGO PENDIENTE
+                    interfazPago.decrementoPagoPendiente(pagoTemporal.idPresu, montoToTHospedaje, "Hospedaje")
+                    '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado|4:seña Paga|5:tot Paga
+                    interfazPago.actualizarEstado(pagoTemporal.idPresu, 5)
+                End If
             End If
+            MsgBox("Operacion Exitosa!")
+        Else
+            MsgBox("Seleccione un registro de la grilla,haciendo doble click sobre ella!")
         End If
-        '2:PAGO DE TRANSFERENCIA POR TOTAL
-        If tipoTrasnf = 2 Then
-            'pagoTemporal.idCuentaCorriente
-            If pagoTemporal.montoAPagarTransporte <> 0 Then
-                montoToTTransporte = pagoTemporal.montoAPagarTransporte
-                'INCREMENTO CUENTA CORRIENTE DEL CLIENTE
-                interfazPago.incrementarCuentaCorriente(pagoTemporal.idPresu, pagoTemporal.idCuentaCorriente, montoToTTransporte)
-                'DECREMENTO CAJA
-                interfazPago.decrementoCaja(montoToTTransporte)
-                'DECREMENTO PAGO PENDIENTE
-                interfazPago.decrementoPagoPendiente(pagoTemporal.idPresu, montoToTTransporte, "Transporte")
-            End If
-            If pagoTemporal.montoAPagarHospedaje <> 0 Then
-                montoToTHospedaje = pagoTemporal.montoAPagarHospedaje
-                interfazPago.incrementarCuentaCorriente(pagoTemporal.idPresu, pagoTemporal.idCuentaCorriente, montoToTHospedaje)
-                'DECREMENTO CAJA
-                interfazPago.decrementoCaja(montoCseñaHospedaje)
-                'DECREMENTO PAGO PENDIENTE
-                interfazPago.decrementoPagoPendiente(pagoTemporal.idPresu, montoToTHospedaje, "Hospedaje")
-            End If
-        End If
-        MsgBox("Operacion Exitosa!")
     End Sub
     ''' <summary>
     ''' 
@@ -155,10 +168,7 @@ Public Class frm_pago
                 Me.btn_transferencia.Text = enu.Current.value
             End If
             If enu.Current.componente = "btn_confirmar" Then
-                Me.btn_confirmar.Text = enu.Current.value
-            End If
-            If enu.Current.componente = "lbl_idPres" Then
-                Me.lbl_idPres.Text = enu.Current.value
+                Me.btn_refrescar.Text = enu.Current.value
             End If
             If enu.Current.componente = "btn_solicitarPax" Then
                 Me.btn_solicitarPax.Text = enu.Current.value
@@ -167,6 +177,26 @@ Public Class frm_pago
                 Me.Text = enu.Current.value
             End If
         End While
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_solicitarPax_Click(sender As Object, e As EventArgs) Handles btn_solicitarPax.Click
+        'ENVIO DE MAIL
+
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_refrescar_Click(sender As Object, e As EventArgs) Handles btn_refrescar.Click
+        'Recargar el datagridview
+        dgw_pagos_pend.DataSource = interfazPago.obtenerPagos()
     End Sub
     ''' <summary>
     ''' 

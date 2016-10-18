@@ -27,11 +27,9 @@ Partial Class frm_pago
         Me.dgw_pagos_pend = New System.Windows.Forms.DataGridView()
         Me.box_acciones = New System.Windows.Forms.GroupBox()
         Me.btn_solicitarPax = New System.Windows.Forms.Button()
-        Me.btn_confirmar = New System.Windows.Forms.Button()
+        Me.btn_refrescar = New System.Windows.Forms.Button()
         Me.btn_terminar_op = New System.Windows.Forms.Button()
         Me.btn_transferencia = New System.Windows.Forms.Button()
-        Me.txt_idProveedor = New System.Windows.Forms.TextBox()
-        Me.lbl_idPres = New System.Windows.Forms.Label()
         Me.box_pagos_pend.SuspendLayout()
         CType(Me.dgw_pagos_pend, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.box_acciones.SuspendLayout()
@@ -58,7 +56,7 @@ Partial Class frm_pago
         'box_acciones
         '
         Me.box_acciones.Controls.Add(Me.btn_solicitarPax)
-        Me.box_acciones.Controls.Add(Me.btn_confirmar)
+        Me.box_acciones.Controls.Add(Me.btn_refrescar)
         Me.box_acciones.Controls.Add(Me.btn_terminar_op)
         Me.box_acciones.Controls.Add(Me.btn_transferencia)
         Me.box_acciones.Location = New System.Drawing.Point(12, 342)
@@ -70,25 +68,25 @@ Partial Class frm_pago
         '
         'btn_solicitarPax
         '
-        Me.btn_solicitarPax.Location = New System.Drawing.Point(274, 19)
+        Me.btn_solicitarPax.Location = New System.Drawing.Point(96, 19)
         Me.btn_solicitarPax.Name = "btn_solicitarPax"
         Me.btn_solicitarPax.Size = New System.Drawing.Size(81, 37)
         Me.btn_solicitarPax.TabIndex = 4
         Me.btn_solicitarPax.Text = "Solicitar Conf.Pago"
         Me.btn_solicitarPax.UseVisualStyleBackColor = True
         '
-        'btn_confirmar
+        'btn_refrescar
         '
-        Me.btn_confirmar.Location = New System.Drawing.Point(361, 19)
-        Me.btn_confirmar.Name = "btn_confirmar"
-        Me.btn_confirmar.Size = New System.Drawing.Size(81, 37)
-        Me.btn_confirmar.TabIndex = 3
-        Me.btn_confirmar.Text = "Confirmar Pago"
-        Me.btn_confirmar.UseVisualStyleBackColor = True
+        Me.btn_refrescar.Location = New System.Drawing.Point(352, 19)
+        Me.btn_refrescar.Name = "btn_refrescar"
+        Me.btn_refrescar.Size = New System.Drawing.Size(81, 37)
+        Me.btn_refrescar.TabIndex = 3
+        Me.btn_refrescar.Text = "Refrescar"
+        Me.btn_refrescar.UseVisualStyleBackColor = True
         '
         'btn_terminar_op
         '
-        Me.btn_terminar_op.Location = New System.Drawing.Point(96, 19)
+        Me.btn_terminar_op.Location = New System.Drawing.Point(183, 19)
         Me.btn_terminar_op.Name = "btn_terminar_op"
         Me.btn_terminar_op.Size = New System.Drawing.Size(81, 37)
         Me.btn_terminar_op.TabIndex = 2
@@ -104,29 +102,11 @@ Partial Class frm_pago
         Me.btn_transferencia.Text = "Transferencia"
         Me.btn_transferencia.UseVisualStyleBackColor = True
         '
-        'txt_idProveedor
-        '
-        Me.txt_idProveedor.Location = New System.Drawing.Point(660, 361)
-        Me.txt_idProveedor.Name = "txt_idProveedor"
-        Me.txt_idProveedor.Size = New System.Drawing.Size(106, 20)
-        Me.txt_idProveedor.TabIndex = 10
-        '
-        'lbl_idPres
-        '
-        Me.lbl_idPres.AutoSize = True
-        Me.lbl_idPres.Location = New System.Drawing.Point(576, 361)
-        Me.lbl_idPres.Name = "lbl_idPres"
-        Me.lbl_idPres.Size = New System.Drawing.Size(78, 13)
-        Me.lbl_idPres.TabIndex = 11
-        Me.lbl_idPres.Text = "Id.Presupuesto"
-        '
         'frm_pago
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 430)
-        Me.Controls.Add(Me.lbl_idPres)
-        Me.Controls.Add(Me.txt_idProveedor)
         Me.Controls.Add(Me.box_acciones)
         Me.Controls.Add(Me.box_pagos_pend)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -138,7 +118,6 @@ Partial Class frm_pago
         CType(Me.dgw_pagos_pend, System.ComponentModel.ISupportInitialize).EndInit()
         Me.box_acciones.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents box_pagos_pend As System.Windows.Forms.GroupBox
@@ -146,8 +125,6 @@ Partial Class frm_pago
     Friend WithEvents box_acciones As System.Windows.Forms.GroupBox
     Friend WithEvents btn_transferencia As System.Windows.Forms.Button
     Friend WithEvents btn_terminar_op As System.Windows.Forms.Button
-    Friend WithEvents btn_confirmar As System.Windows.Forms.Button
-    Friend WithEvents txt_idProveedor As System.Windows.Forms.TextBox
-    Friend WithEvents lbl_idPres As System.Windows.Forms.Label
     Friend WithEvents btn_solicitarPax As System.Windows.Forms.Button
+    Friend WithEvents btn_refrescar As System.Windows.Forms.Button
 End Class

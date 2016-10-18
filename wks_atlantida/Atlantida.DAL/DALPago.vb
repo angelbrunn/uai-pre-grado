@@ -54,7 +54,7 @@ Namespace SIS.DAL
             Dim connection As New SqlConnection(conexString)
             command.Connection = connection
             command.CommandType = CommandType.StoredProcedure
-            '0:Pago Pendiente pero Activo |1:Pago realizado correctamente |2:Pago cancelado
+            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado|4:seña Paga|5:tot Paga
             Dim adapter As New SqlDataAdapter(command)
             adapter.SelectCommand.CommandTimeout = 300
 
@@ -82,7 +82,7 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado
+            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado|4:seña Paga|5:tot Paga
             iPar = comando.CreateParameter
             iPar.ParameterName = "confirmacionPagoRealizado"
             iPar.DbType = DbType.Int32
@@ -213,7 +213,7 @@ Namespace SIS.DAL
             comando.CommandText = sqlQuery
 
             Dim iPar As IDataParameter = comando.CreateParameter
-            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado
+            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado|4:seña Paga|5:tot Paga
             iPar.ParameterName = "confirmacionPagoRealizado"
             iPar.DbType = DbType.Int32
             iPar.Value = 3
@@ -268,9 +268,9 @@ Namespace SIS.DAL
         ''' <param name="idPresupuesto"></param>
         ''' <param name="montoTransporte"></param>
         ''' <remarks></remarks>
-        Public Sub decrementarPagoTransporte(ByVal idPresupuesto As String, ByVal montoTransporte As String)
+        Public Sub decrementarPagoTransporte(ByVal idPresupuesto As String, ByVal montoTransporte As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "UPDATE Pago SET [montoTransporte]=@montoTransporte WHERE idPresupuesto=@idPresupuesto"
+            Dim sqlQuery As String = "UPDATE Pago SET montoTransporte=@montoTransporte WHERE idPresupuesto=@idPresupuesto"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -286,6 +286,7 @@ Namespace SIS.DAL
             iPar.Value = idPresupuesto
             comando.Parameters.Add(iPar)
 
+            iPar = comando.CreateParameter
             iPar.ParameterName = "montoTransporte"
             iPar.DbType = DbType.Int32
             iPar.Value = montoTransporte
@@ -304,9 +305,9 @@ Namespace SIS.DAL
         ''' <param name="idPresupuesto"></param>
         ''' <param name="montoHospedaje"></param>
         ''' <remarks></remarks>
-        Public Sub decrementarPagoHospedaje(ByVal idPresupuesto As String, ByVal montoHospedaje As String)
+        Public Sub decrementarPagoHospedaje(ByVal idPresupuesto As String, ByVal montoHospedaje As Integer)
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "UPDATE Pago SET [montoHospedaje]=@montoHospedaje WHERE idPresupuesto=@idPresupuesto"
+            Dim sqlQuery As String = "UPDATE Pago SET montoHospedaje=@montoHospedaje WHERE idPresupuesto=@idPresupuesto"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -322,6 +323,7 @@ Namespace SIS.DAL
             iPar.Value = idPresupuesto
             comando.Parameters.Add(iPar)
 
+            iPar = comando.CreateParameter
             iPar.ParameterName = "montoHospedaje"
             iPar.DbType = DbType.Int32
             iPar.Value = montoHospedaje
@@ -344,7 +346,7 @@ Namespace SIS.DAL
             Dim ultimoMonto As Integer
 
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "SELECT TOP montoTransporte FROM Pago WHERE idPresupuesto=@idPresupuesto"
+            Dim sqlQuery As String = "SELECT montoTransporte FROM Pago WHERE idPresupuesto=@idPresupuesto"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -380,7 +382,7 @@ Namespace SIS.DAL
             Dim ultimoMonto As Integer
 
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "SELECT TOP montoHospedaje FROM Pago WHERE idPresupuesto=@idPresupuesto"
+            Dim sqlQuery As String = "SELECT montoHospedaje FROM Pago WHERE idPresupuesto=@idPresupuesto"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
@@ -429,7 +431,7 @@ Namespace SIS.DAL
             iPar.DbType = DbType.Int32
             iPar.Value = idPresupuesto
             comando.Parameters.Add(iPar)
-            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado
+            '0:Pago iniciado y Activo - no hay actividad |1:Pago por reserva |2:Pago por totalidad|3:cancelado|4:seña Paga|5:tot Paga
             iPar = comando.CreateParameter
             iPar.ParameterName = "confirmacionPagoRealizado"
             iPar.DbType = DbType.String
