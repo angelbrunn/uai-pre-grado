@@ -29,6 +29,16 @@ Public Class frm_pago
     ''' 
     ''' </summary>
     ''' <remarks></remarks>
+    Private interfazCobro As NegCobro = New NegCobro
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private interfazNegocio As NegNegocio = New NegNegocio
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
     Private razonSocialTransp As String
     ''' <summary>
     ''' 
@@ -138,6 +148,17 @@ Public Class frm_pago
                 End If
             End If
             MsgBox("Operacion Exitosa!")
+            Dim _isVenta As Boolean = False
+            'VERFICO PAGO EN ESTADO : 5
+            _isVenta = interfazPago.verificarEstadoPago(pagoTemporal.idPresu)
+            'VERFICO COBRO EN ESTADO: 3
+            _isVenta = interfazCobro.verificarEstadoCobro(pagoTemporal.idPresu)
+            'INSERTAR VENTA
+            If _isVenta = True Then
+                'TO-DO:REVIEW CAMPOS A GUARDAR PARA ESTA TRANSACCION DE VENTA REALIZADA
+                interfazNegocio.registrarVenta(pagoTemporal.idPresu)
+            End If
+            MsgBox("Venta Registrada!")
         Else
             MsgBox("Seleccione un registro de la grilla,haciendo doble click sobre ella!")
         End If

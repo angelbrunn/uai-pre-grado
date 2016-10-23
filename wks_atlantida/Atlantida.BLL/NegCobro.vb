@@ -201,6 +201,22 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="idPresupuesto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function verificarEstadoCobro(ByVal idPresupuesto As Integer) As Boolean
+            Dim oDalCobro As New DALCobro
+            Dim estadoCobro As Boolean = False
+            Try
+                estadoCobro = oDalCobro.verificarEstado(idPresupuesto)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+            Return estadoCobro
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <param name="dni"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>

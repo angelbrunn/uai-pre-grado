@@ -1,5 +1,8 @@
 ﻿Imports Atlantida.Entidades.SIS.Entidades
 Imports Atlantida.BLL.SIS.BLL
+Imports iTextSharp.text.pdf
+Imports iTextSharp.text
+Imports System.IO
 
 Public Class frm_cobro
     ''' <summary>
@@ -464,7 +467,13 @@ Public Class frm_cobro
         Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
         dgw_resultDeuda.DataSource = interfazCobro.obtenerVoucherCliente(_dni)
         'GENERAR UN PDF
+        Dim pdfVoucher As New Document()
+        Dim pdfWriter As PdfWriter = pdfWriter.GetInstance(pdfVoucher, New FileStream("Voucher", FileMode.Create))
 
+        pdfVoucher.Open()
+        pdfVoucher.Add(New Paragraph("ASI SE ESCRIBE UN STRING EN EL PDF"))
+        'pdfVoucher.NewPage()
+        pdfVoucher.Close()
     End Sub
     ''' <summary>
     ''' 
