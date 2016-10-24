@@ -464,15 +464,37 @@ Public Class frm_cobro
     Private Sub btn_imprimir_voucher_Click(sender As Object, e As EventArgs) Handles btn_imprimir_voucher.Click
         'TO-DO:GENERAR UN PDF CON LOS SIG.DATOS: NOM Y APELLIDO - NUM DE PRES O NUM PAGO - MONTO
         'EL VAUCHER SE DEBE IMPRIMIR SOLO SI EL COBRO FUE TOTAL
-        Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
-        dgw_resultDeuda.DataSource = interfazCobro.obtenerVoucherCliente(_dni)
+        'Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
+        'dgw_resultDeuda.DataSource = interfazCobro.obtenerVoucherCliente(_dni)
         'GENERAR UN PDF
         Dim pdfVoucher As New Document()
-        Dim pdfWriter As PdfWriter = pdfWriter.GetInstance(pdfVoucher, New FileStream("Voucher", FileMode.Create))
+        Dim pdfWriter As PdfWriter = pdfWriter.GetInstance(pdfVoucher, New FileStream("C://Voucher Atlantida//VoucherTest.pdf", FileMode.Create))
 
         pdfVoucher.Open()
-        pdfVoucher.Add(New Paragraph("ASI SE ESCRIBE UN STRING EN EL PDF"))
-        'pdfVoucher.NewPage()
+        Dim dirInfo As New System.IO.DirectoryInfo("Resources")
+        Dim img As Image = Image.GetInstance(dirInfo.FullName + "/logo_Atlantis.png")
+        pdfVoucher.Add(img)
+        pdfVoucher.Add(New Paragraph("Datos de el/los pasajero/s: "))
+        pdfVoucher.Add(New Paragraph("----------------------------------------------------------------------------------------------------------------------------------"))
+        pdfVoucher.Add(New Paragraph("Nombre/s completo: "))
+        pdfVoucher.Add(New Paragraph("DNI/s: "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph("Detalle de la compra: "))
+        pdfVoucher.Add(New Paragraph("----------------------------------------------------------------------------------------------------------------------------------"))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph(" "))
+        pdfVoucher.Add(New Paragraph("---------------------------------------------------SIS-Atlantida Turismo--------------------------------------------------"))
+
         pdfVoucher.Close()
     End Sub
     ''' <summary>
