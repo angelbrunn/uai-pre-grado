@@ -29,6 +29,11 @@
         ''' 
         ''' </summary>
         ''' <remarks></remarks>
+        Private pasajeros As String
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
         Private fechaCobro As Date
         ''' <summary>
         ''' 
@@ -98,6 +103,20 @@
             End Get
             Set(ByVal value As String)
                 ventaCancelada = value
+            End Set
+        End Property
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property pasajerosCobros() As String
+            Get
+                Return pasajeros
+            End Get
+            Set(ByVal value As String)
+                pasajeros = value
             End Set
         End Property
         ''' <summary>

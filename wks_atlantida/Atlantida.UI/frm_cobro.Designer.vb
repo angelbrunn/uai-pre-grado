@@ -50,6 +50,7 @@ Partial Class frm_cobro
         Me.txt_importe = New System.Windows.Forms.TextBox()
         Me.box_resultado_deuda = New System.Windows.Forms.GroupBox()
         Me.dgw_resultDeuda = New System.Windows.Forms.DataGridView()
+        Me.btn_validar_voucher = New System.Windows.Forms.Button()
         Me.box_central.SuspendLayout()
         Me.box_sena.SuspendLayout()
         Me.box_cliente_deuda.SuspendLayout()
@@ -60,6 +61,7 @@ Partial Class frm_cobro
         '
         'box_central
         '
+        Me.box_central.Controls.Add(Me.btn_validar_voucher)
         Me.box_central.Controls.Add(Me.btn_refrescar)
         Me.box_central.Controls.Add(Me.box_sena)
         Me.box_central.Controls.Add(Me.btn_imprimir_voucher)
@@ -74,7 +76,7 @@ Partial Class frm_cobro
         '
         'btn_refrescar
         '
-        Me.btn_refrescar.Location = New System.Drawing.Point(109, 218)
+        Me.btn_refrescar.Location = New System.Drawing.Point(205, 219)
         Me.btn_refrescar.Name = "btn_refrescar"
         Me.btn_refrescar.Size = New System.Drawing.Size(75, 46)
         Me.btn_refrescar.TabIndex = 29
@@ -110,7 +112,7 @@ Partial Class frm_cobro
         '
         'btn_imprimir_voucher
         '
-        Me.btn_imprimir_voucher.Location = New System.Drawing.Point(13, 219)
+        Me.btn_imprimir_voucher.Location = New System.Drawing.Point(109, 219)
         Me.btn_imprimir_voucher.Name = "btn_imprimir_voucher"
         Me.btn_imprimir_voucher.Size = New System.Drawing.Size(90, 45)
         Me.btn_imprimir_voucher.TabIndex = 25
@@ -317,6 +319,15 @@ Partial Class frm_cobro
         Me.dgw_resultDeuda.Size = New System.Drawing.Size(791, 159)
         Me.dgw_resultDeuda.TabIndex = 2
         '
+        'btn_validar_voucher
+        '
+        Me.btn_validar_voucher.Location = New System.Drawing.Point(16, 220)
+        Me.btn_validar_voucher.Name = "btn_validar_voucher"
+        Me.btn_validar_voucher.Size = New System.Drawing.Size(90, 45)
+        Me.btn_validar_voucher.TabIndex = 30
+        Me.btn_validar_voucher.Text = "Validar voucher"
+        Me.btn_validar_voucher.UseVisualStyleBackColor = True
+        '
         'frm_cobro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -365,4 +376,5 @@ Partial Class frm_cobro
     Friend WithEvents ChkReserva As System.Windows.Forms.CheckBox
     Friend WithEvents dgw_resultDeuda As System.Windows.Forms.DataGridView
     Friend WithEvents btn_refrescar As System.Windows.Forms.Button
+    Friend WithEvents btn_validar_voucher As System.Windows.Forms.Button
 End Class

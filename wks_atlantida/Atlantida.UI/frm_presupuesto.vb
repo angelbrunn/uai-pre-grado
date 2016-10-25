@@ -312,6 +312,11 @@ Public Class frm_presupuesto
         Dim oPresupuesto As Presupuesto
         oPresupuesto = New Presupuesto()
         Dim _dni As String
+        Dim _dniPasajero1 As String
+        Dim _dniPasajero2 As String
+        Dim _dniPasajero3 As String
+        Dim _dniPasajero4 As String
+        Dim _dniPasajero5 As String
         Dim _nomYape As String
         Dim _Pasajeros As String
         _Pasajeros = ""
@@ -329,36 +334,41 @@ Public Class frm_presupuesto
             'Recorrer el txt y guardarme el dni
             tx1 = txt_cliente1.Text
             _dni = tx1.Substring(0, 8)
+            _dniPasajero1 = tx1.Substring(0, 8)
             _nomYape = tx1.Substring(9, tx1.Length - 9)
-            _Pasajeros = _Pasajeros + _nomYape
+            _Pasajeros = _Pasajeros + _nomYape + " " + _dniPasajero1
             cantPasajeros = cantPasajeros + 1
         End If
 
         If txt_cliente2.Text <> "" Then
             tx2 = txt_cliente2.Text
+            _dniPasajero2 = tx2.Substring(0, 8)
             _nomYape = tx2.Substring(9, tx2.Length - 9)
-            _Pasajeros = _Pasajeros + " | " + _nomYape
+            _Pasajeros = _Pasajeros + " | " + _nomYape + " " + _dniPasajero2
             cantPasajeros = cantPasajeros + 1
         End If
 
         If txt_cliente3.Text <> "" Then
             tx3 = txt_cliente3.Text
+            _dniPasajero3 = tx3.Substring(0, 8)
             _nomYape = tx3.Substring(9, tx3.Length - 9)
-            _Pasajeros = _Pasajeros + " | " + _nomYape
+            _Pasajeros = _Pasajeros + " | " + _nomYape + " " + _dniPasajero3
             cantPasajeros = cantPasajeros + 1
         End If
 
         If txt_cliente4.Text <> "" Then
             tx4 = txt_cliente4.Text
+            _dniPasajero4 = tx4.Substring(0, 8)
             _nomYape = tx4.Substring(9, tx4.Length - 9)
-            _Pasajeros = _Pasajeros + " | " + _nomYape
+            _Pasajeros = _Pasajeros + " | " + _nomYape + " " + _dniPasajero4
             cantPasajeros = cantPasajeros + 1
         End If
 
         If txt_cliente5.Text <> "" Then
             tx5 = txt_cliente5.Text
+            _dniPasajero5 = tx5.Substring(0, 8)
             _nomYape = tx5.Substring(9, tx5.Length - 9)
-            _Pasajeros = _Pasajeros + " | " + _nomYape
+            _Pasajeros = _Pasajeros + " | " + _nomYape + " " + _dniPasajero5
             cantPasajeros = cantPasajeros + 1
         End If
 
@@ -659,7 +669,7 @@ Public Class frm_presupuesto
 
         'COBRO
         oCobro.montos = monto.ToString()
-        oCobro.ventaCancel = 1
+        oCobro.ventaCancel = 0
         oCobro.numeroFactura = ultimaFactura + 1
         oCobro.FechCobro = "2016-01-01 00:00:00.000"
         'Generar un presupuesto de cobro
@@ -690,7 +700,6 @@ Public Class frm_presupuesto
             'Generar un presupuestoHotel en estado inpago en caso de elegir hotel - implementacion
             interfazPresupuesto.insertarPresupuestoHospedaje(idPresupuesto, hospedajeTemporal.idHospedaje)
         End If
-
 
         'OPERACION EXITOSA
         MsgBox("OPERACION EXITOSA!")

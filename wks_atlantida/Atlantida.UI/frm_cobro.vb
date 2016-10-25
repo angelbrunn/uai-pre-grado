@@ -44,6 +44,21 @@ Public Class frm_cobro
     ''' 
     ''' </summary>
     ''' <remarks></remarks>
+    Dim detPresupuesto As String
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Dim isVoucher As Boolean = False
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Dim isValidar As Boolean = False
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
     Private interfazCobro As NegCobro = New NegCobro
     ''' <summary>
     ''' 
@@ -67,6 +82,7 @@ Public Class frm_cobro
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_validar.Click
+        isValidar = True
         Dim bandera As Boolean = True
         If txt_cliente.Text = "" Then
             MsgBox("Ingrese un numero de dni")
@@ -186,6 +202,9 @@ Public Class frm_cobro
             If enu.Current.componente = "btn_validar" Then
                 Me.btn_validar.Text = enu.Current.value
             End If
+            If enu.Current.componente = "btn_validar_voucher" Then
+                Me.btn_validar_voucher.Text = enu.Current.value
+            End If
             If enu.Current.componente = "btn_refrescar" Then
                 Me.btn_refrescar.Text = enu.Current.value
             End If
@@ -243,8 +262,16 @@ Public Class frm_cobro
         cobroTemporal.idPresu = selectedRow.Cells(0).Value.ToString()
         cobroTemporal.numeroFactura = selectedRow.Cells(1).Value.ToString()
         numeroFactura = cobroTemporal.numeroFactura
+        cobroTemporal.pasajerosCobros = selectedRow.Cells(3).Value.ToString()
         cobroTemporal.montos = selectedRow.Cells(4).Value.ToString()
         montoCobro = cobroTemporal.montos
+
+        If isValidar = False Then
+            Dim _destino As String = selectedRow.Cells(5).Value.ToString()
+            If _destino <> "" Then
+                detPresupuesto = "DESTINO: " + selectedRow.Cells(5).Value.ToString() + " " + "FECHA.PARTIDA: " + selectedRow.Cells(6).Value.ToString() + " " + "FECHA.REGRESO: " + selectedRow.Cells(7).Value.ToString() + " " + "TRANSPORTE: " + selectedRow.Cells(8).Value.ToString() + " " + "HOSPEDAJE: " + selectedRow.Cells(9).Value.ToString()
+            End If
+        End If
 
         Dim seña As Integer
         seña = CInt(cobroTemporal.montos) * 0.3
@@ -461,41 +488,58 @@ Public Class frm_cobro
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
+    Private Sub btn_validar_voucher_Click(sender As Object, e As EventArgs) Handles btn_validar_voucher.Click
+        isValidar = False
+        Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
+        If _dni = 0 Then
+            MsgBox("Por favor ingrese un dni")
+        Else
+            Dim dt As DataTable = interfazCobro.obtenerVoucherCliente(_dni)
+            dgw_resultDeuda.DataSource = interfazCobro.obtenerVoucherCliente(_dni)
+            isVoucher = True
+        End If
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btn_imprimir_voucher_Click(sender As Object, e As EventArgs) Handles btn_imprimir_voucher.Click
-        'TO-DO:GENERAR UN PDF CON LOS SIG.DATOS: NOM Y APELLIDO - NUM DE PRES O NUM PAGO - MONTO
-        'EL VAUCHER SE DEBE IMPRIMIR SOLO SI EL COBRO FUE TOTAL
-        'Dim _dni As Integer = Integer.Parse(txt_cliente.Text)
-        'dgw_resultDeuda.DataSource = interfazCobro.obtenerVoucherCliente(_dni)
-        'GENERAR UN PDF
-        Dim pdfVoucher As New Document()
-        Dim pdfWriter As PdfWriter = pdfWriter.GetInstance(pdfVoucher, New FileStream("C://Voucher Atlantida//VoucherTest.pdf", FileMode.Create))
+        If isVoucher = True Then
+            'GENERAR UN PDF
+            'Dim pasajeros As String = interfazCobro.obtenerPasajeros()
+            Dim pdfVoucher As New Document()
+            Dim pdfWriter As PdfWriter = pdfWriter.GetInstance(pdfVoucher, New FileStream("C://Voucher Atlantida//VoucherTest.pdf", FileMode.Create))
 
-        pdfVoucher.Open()
-        Dim dirInfo As New System.IO.DirectoryInfo("Resources")
-        Dim img As Image = Image.GetInstance(dirInfo.FullName + "/logo_Atlantis.png")
-        pdfVoucher.Add(img)
-        pdfVoucher.Add(New Paragraph("Datos de el/los pasajero/s: "))
-        pdfVoucher.Add(New Paragraph("----------------------------------------------------------------------------------------------------------------------------------"))
-        pdfVoucher.Add(New Paragraph("Nombre/s completo: "))
-        pdfVoucher.Add(New Paragraph("DNI/s: "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph("Detalle de la compra: "))
-        pdfVoucher.Add(New Paragraph("----------------------------------------------------------------------------------------------------------------------------------"))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph(" "))
-        pdfVoucher.Add(New Paragraph("---------------------------------------------------SIS-Atlantida Turismo--------------------------------------------------"))
+            pdfVoucher.Open()
+            Dim dirInfo As New System.IO.DirectoryInfo("Resources")
+            Dim img As Image = Image.GetInstance(dirInfo.FullName + "/logo_Atlantis.png")
+            pdfVoucher.Add(img)
+            pdfVoucher.Add(New Paragraph("Datos de el/los pasajero/s: "))
+            pdfVoucher.Add(New Paragraph("----------------------------------------------------------------------------------------------------------------------------------"))
+            pdfVoucher.Add(New Paragraph("Nombre/s completo y DNI/s: "))
+            pdfVoucher.Add(New Paragraph(cobroTemporal.pasajerosCobros.ToString))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph("Detalle de la compra: "))
+            pdfVoucher.Add(New Paragraph("----------------------------------------------------------------------------------------------------------------------------------"))
+            pdfVoucher.Add(New Paragraph(detPresupuesto.ToString))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph(" "))
+            pdfVoucher.Add(New Paragraph("---------------------------------------------------SIS-Atlantida Turismo--------------------------------------------------"))
 
-        pdfVoucher.Close()
+            pdfVoucher.Close()
+        Else
+            MsgBox("El cliente ingresado no posee ningun presupuesto con pago total a la fecha!")
+        End If
     End Sub
     ''' <summary>
     ''' 
