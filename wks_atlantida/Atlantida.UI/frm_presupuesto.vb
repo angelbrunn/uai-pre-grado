@@ -701,6 +701,13 @@ Public Class frm_presupuesto
             interfazPresupuesto.insertarPresupuestoHospedaje(idPresupuesto, hospedajeTemporal.idHospedaje)
         End If
 
+        'Registro el presupuesto para ese vendedor
+        Dim legajoVenedor As Integer = interfazPresupuesto.obtenerLegajoUsuario(UsuarioId)
+        interfazPresupuesto.registrarPresupuestoVendedor(legajoVenedor, idPresupuesto)
+
+        'Registro el presupuesto para ese cliente
+        interfazPresupuesto.registrarPresupuestoCliente(cli.codigoCliente, idPresupuesto)
+
         'OPERACION EXITOSA
         MsgBox("OPERACION EXITOSA!")
         'CLEAN ALL

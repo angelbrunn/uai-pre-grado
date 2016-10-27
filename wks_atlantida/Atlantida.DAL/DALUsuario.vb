@@ -45,6 +45,42 @@ Namespace SIS.DAL
         ''' <param name="idUsuario"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
+        Public Function obtenerLegajoUsuario(ByVal idUsuario As Integer) As Integer
+            Dim legajoVendedor As Integer
+
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "SELECT legajo FROM tbl_Usuario WHERE idUsuario=@idUsuario"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+            iPar.ParameterName = "idUsuario"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idUsuario
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+
+                legajoVendedor = comando.ExecuteScalar
+
+                conex.Close()
+
+            Catch ex As Exception
+            End Try
+            Return legajoVendedor
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="idUsuario"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
         Public Function obtenerUsuarioPorId(ByVal idUsuario As Integer) As Usuario
             Dim oUsuario As New Usuario
 

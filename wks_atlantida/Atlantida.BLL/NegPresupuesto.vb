@@ -32,7 +32,7 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
-        ''' <param name="idCliente"></param>
+        ''' <param name="_dni"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Function obtenerCliente(ByVal _dni As Integer) As Cliente
@@ -63,7 +63,53 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
-        ''' <param name="_cliente"></param>
+        ''' <param name="_idUsuario"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function obtenerLegajoUsuario(ByVal _idUsuario As Integer) As Integer
+            Dim oDalUsuario As New DALUsuario
+            Dim legajoVendedor As Integer
+            Try
+                legajoVendedor = oDalUsuario.obtenerLegajoUsuario(_idUsuario)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+            Return legajoVendedor
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_legajo"></param>
+        ''' <param name="_idPresupuesto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function registrarPresupuestoVendedor(ByVal _legajo As Integer, ByVal _idPresupuesto As Integer)
+            Dim oDalVendedor As New DALVendedor
+            Try
+                oDalVendedor.registrarPresupuestoVendedor(_legajo, _idPresupuesto)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_codCliente"></param>
+        ''' <param name="_idPresupuesto"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Function registrarPresupuestoCliente(ByVal _codCliente As Integer, ByVal _idPresupuesto As Integer)
+            Dim oDalCliente As New DALCLiente
+            Try
+                oDalCliente.registrarPresupuestoCliente(_codCliente, _idPresupuesto)
+            Catch ex As Exception
+                interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
+            End Try
+        End Function
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="_dni"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Function inhabilitarCliente(ByVal _dni As String)

@@ -48,6 +48,43 @@ Namespace SIS.DAL
         ''' 
         ''' </summary>
         ''' <param name="codigoCliente"></param>
+        ''' <param name="idPresupuesto"></param>
+        ''' <remarks></remarks>
+        Public Sub registrarPresupuestoCliente(ByVal codigoCliente As Integer, ByVal idPresupuesto As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "INSERT INTO ClientePresupuesto([codigoCliente],[idPresupuesto]) VALUES (@codigoCliente,@idPresupuesto)"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "codigoCliente"
+            iPar.DbType = DbType.Int32
+            iPar.Value = codigoCliente
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="dni"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function obtenerClientePorId(ByVal dni As Integer) As Cliente

@@ -77,6 +77,43 @@ Namespace SIS.DAL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <param name="legajo"></param>
+        ''' <param name="idPresupuesto"></param>
+        ''' <remarks></remarks>
+        Public Sub registrarPresupuestoVendedor(ByVal legajo As Integer, ByVal idPresupuesto As Integer)
+            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
+            Dim sqlQuery As String = "INSERT INTO vendedorPresupuesto([legajo],[idPresupuesto]) VALUES (@legajo,@idPresupuesto)"
+
+            Dim conex As New SqlConnection
+            conex.ConnectionString = conexString
+
+            Dim comando As SqlCommand = conex.CreateCommand
+            comando.CommandType = CommandType.Text
+            comando.CommandText = sqlQuery
+
+            Dim iPar As IDataParameter = comando.CreateParameter
+
+            iPar.ParameterName = "legajo"
+            iPar.DbType = DbType.Int32
+            iPar.Value = legajo
+            comando.Parameters.Add(iPar)
+
+            iPar = comando.CreateParameter
+            iPar.ParameterName = "idPresupuesto"
+            iPar.DbType = DbType.Int32
+            iPar.Value = idPresupuesto
+            comando.Parameters.Add(iPar)
+
+            Try
+                conex.Open()
+                comando.ExecuteNonQuery()
+                conex.Close()
+            Catch ex As Exception
+            End Try
+        End Sub
+        ''' <summary>
+        ''' 
+        ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function obtenerUltimoId() As Integer
