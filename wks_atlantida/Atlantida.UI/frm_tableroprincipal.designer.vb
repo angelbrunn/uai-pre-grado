@@ -37,13 +37,15 @@ Partial Class frm_TableroPrincipal
         Me.SubMenu_Cambiar = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_Terminar = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubMenu_Salir = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Menu_Ayuda = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Menu_Leer = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_General.SuspendLayout()
         Me.SuspendLayout()
         '
         'Menu_General
         '
         resources.ApplyResources(Me.Menu_General, "Menu_General")
-        Me.Menu_General.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Menu_Administracion, Me.Menu_Generar, Me.Menu_CyP, Me.Menu_Idioma, Me.Menu_Terminar})
+        Me.Menu_General.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Menu_Administracion, Me.Menu_Generar, Me.Menu_CyP, Me.Menu_Idioma, Me.Menu_Ayuda, Me.Menu_Terminar})
         Me.Menu_General.Name = "Menu_General"
         '
         'Menu_Administracion
@@ -116,6 +118,17 @@ Partial Class frm_TableroPrincipal
         resources.ApplyResources(Me.SubMenu_Salir, "SubMenu_Salir")
         Me.SubMenu_Salir.Name = "SubMenu_Salir"
         '
+        'Menu_Ayuda
+        '
+        resources.ApplyResources(Me.Menu_Ayuda, "Menu_Ayuda")
+        Me.Menu_Ayuda.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Menu_Leer})
+        Me.Menu_Ayuda.Name = "Menu_Ayuda"
+        '
+        'Menu_Leer
+        '
+        resources.ApplyResources(Me.Menu_Leer, "Menu_Leer")
+        Me.Menu_Leer.Name = "Menu_Leer"
+        '
         'frm_TableroPrincipal
         '
         resources.ApplyResources(Me, "$this")
@@ -146,5 +159,7 @@ Partial Class frm_TableroPrincipal
     Friend WithEvents SubMenu_Depuracion As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Menu_Idioma As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SubMenu_Cambiar As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Menu_Ayuda As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Menu_Leer As System.Windows.Forms.ToolStripMenuItem
 
 End Class

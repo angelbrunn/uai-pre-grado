@@ -133,9 +133,6 @@
   <data name="Menu_PstVenta.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 20</value>
   </data>
-  <data name="&gt;&gt;SalirToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;PToolStripMenuItem.Name" xml:space="preserve">
     <value>PToolStripMenuItem</value>
   </data>
@@ -155,9 +152,6 @@
   <data name="&gt;&gt;SubMenuPresupuesto.Name" xml:space="preserve">
     <value>SubMenuPresupuesto</value>
   </data>
-  <data name="&gt;&gt;SubMenu_Presupuesto.Name" xml:space="preserve">
-    <value>SubMenu_Presupuesto</value>
-  </data>
   <data name="&gt;&gt;Menu_Negocio.Name" xml:space="preserve">
     <value>Menu_Negocio</value>
   </data>
@@ -167,8 +161,8 @@
   <data name="PostVentaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 20</value>
   </data>
-  <data name="&gt;&gt;CyPToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PagoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
   </data>
   <data name="MetricasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 22</value>
@@ -182,8 +176,11 @@
   <data name="PresupuestoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="&gt;&gt;SubMenu_Usuario.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="SubMenuMetricas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 22</value>
+  </data>
+  <data name="&gt;&gt;VentasToolStripMenuItem.Name" xml:space="preserve">
+    <value>VentasToolStripMenuItem</value>
   </data>
   <data name="EncuestaPasajesToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Alt+5</value>
@@ -215,6 +212,9 @@
   <data name="ResguardoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
+  <data name="&gt;&gt;Menu_Ayuda.Name" xml:space="preserve">
+    <value>Menu_Ayuda</value>
+  </data>
   <data name="SalirToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 22</value>
   </data>
@@ -233,19 +233,19 @@
   <data name="Menu_General.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="UsuariosToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Alt+0</value>
+  <data name="SubMenu_Cambiar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="&gt;&gt;Menu_Leer.Name" xml:space="preserve">
+    <value>Menu_Leer</value>
   </data>
   <data name="&gt;&gt;Menu_General.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CambiarToolStripMenuItem.Name" xml:space="preserve">
-    <value>CambiarToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;SalirToolStripMenuItem.Name" xml:space="preserve">
-    <value>SalirToolStripMenuItem</value>
-  </data>
   <data name="&gt;&gt;SubMenu_Cambiar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SubMenuUsuario.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -253,12 +253,6 @@
   </data>
   <data name="&gt;&gt;pToolStripMenuItem1.Name" xml:space="preserve">
     <value>pToolStripMenuItem1</value>
-  </data>
-  <data name="PagoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="&gt;&gt;GeneralMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem1.Name" xml:space="preserve">
     <value>ToolStripMenuItem1</value>
@@ -275,6 +269,9 @@
   <data name="&gt;&gt;VentasToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;SubMenu_Cobro.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;SubMenu_Pago.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -287,6 +284,9 @@
   <data name="&gt;&gt;SubMenuMetricas.Name" xml:space="preserve">
     <value>SubMenuMetricas</value>
   </data>
+  <data name="&gt;&gt;Menu_Ayuda.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Marketing_Menu.Name" xml:space="preserve">
     <value>Marketing_Menu</value>
   </data>
@@ -296,17 +296,20 @@
   <data name="&gt;&gt;SubMenu_Depuracion.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Menu_Leer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
   <data name="&gt;&gt;Menu_Negocio.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GenerarToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;CyPToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SubMenu_Resguardo.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 22</value>
+  </data>
+  <data name="&gt;&gt;Menu_PstVenta.Name" xml:space="preserve">
+    <value>Menu_PstVenta</value>
   </data>
   <data name="&gt;&gt;Menu_Marketing.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -317,6 +320,12 @@
   <data name="SubMenu_Metricas.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 22</value>
   </data>
+  <data name="&gt;&gt;Menu_Leer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Menu_Generar.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 20</value>
   </data>
@@ -325,6 +334,9 @@
   </data>
   <data name="&gt;&gt;PagosToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SubMenu_Resguardo.Name" xml:space="preserve">
+    <value>SubMenu_Resguardo</value>
   </data>
   <data name="&gt;&gt;SubMenuCobro.Name" xml:space="preserve">
     <value>SubMenuCobro</value>
@@ -357,9 +369,6 @@
   <data name="&gt;&gt;SegurityToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MenuStrip1.Name" xml:space="preserve">
-    <value>MenuStrip1</value>
-  </data>
   <data name="&gt;&gt;SalirToolStripMenuItem1.Name" xml:space="preserve">
     <value>SalirToolStripMenuItem1</value>
   </data>
@@ -372,14 +381,14 @@
   <data name="&gt;&gt;BackUPRestoreToolStripMenuItem.Name" xml:space="preserve">
     <value>BackUPRestoreToolStripMenuItem</value>
   </data>
+  <data name="Menu_Ayuda.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 20</value>
+  </data>
   <data name="SubMenuPresupuesto.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
   <data name="&gt;&gt;Menu_Generar.Name" xml:space="preserve">
     <value>Menu_Generar</value>
-  </data>
-  <data name="&gt;&gt;PasajesToolStripMenuItem.Name" xml:space="preserve">
-    <value>PasajesToolStripMenuItem</value>
   </data>
   <data name="EncuestaPasajesToolMenu_PstVentaStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 22</value>
@@ -462,9 +471,6 @@
   <data name="GeneralMenu.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;Menu_Administracion.Name" xml:space="preserve">
-    <value>Menu_Administracion</value>
-  </data>
   <data name="&gt;&gt;Menu_Marketing.Name" xml:space="preserve">
     <value>Menu_Marketing</value>
   </data>
@@ -476,6 +482,9 @@
   </data>
   <data name="SubMenu_Salir.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
+  </data>
+  <data name="AdministrativoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Gestion Usuario</value>
   </data>
   <data name="&gt;&gt;GenerarToolStripMenuItem.Name" xml:space="preserve">
     <value>GenerarToolStripMenuItem</value>
@@ -489,6 +498,9 @@
   <data name="&gt;&gt;SalirToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;DepuracionToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Menu_Negocio.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
   </data>
@@ -497,6 +509,9 @@
   </data>
   <data name="&gt;&gt;MarketingToolStripMenuItem.Name" xml:space="preserve">
     <value>MarketingToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;EncuestaPasajesToolStripMenuItem.Name" xml:space="preserve">
+    <value>EncuestaPasajesToolStripMenuItem</value>
   </data>
   <data name="CobrosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 22</value>
@@ -525,6 +540,9 @@
   <data name="Menu_CyP.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 20</value>
   </data>
+  <data name="&gt;&gt;pToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;SubMenu_Encuesta.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -552,9 +570,6 @@
   <data name="&gt;&gt;ResguardoToolStripMenuItem.Name" xml:space="preserve">
     <value>ResguardoToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;SubMenuEncuesta.Name" xml:space="preserve">
-    <value>SubMenuEncuesta</value>
-  </data>
   <data name="&gt;&gt;GeneralMenu.Name" xml:space="preserve">
     <value>GeneralMenu</value>
   </data>
@@ -579,14 +594,20 @@
   <data name="&gt;&gt;SubMenu_Salir.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Marketing_Menu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 20</value>
+  <data name="&gt;&gt;SalirToolStripMenuItem.Name" xml:space="preserve">
+    <value>SalirToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;PasajesToolStripMenuItem.Name" xml:space="preserve">
+    <value>PasajesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;SubMenu_Presupuesto.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SegurityToolStripMenuItem.Name" xml:space="preserve">
     <value>SegurityToolStripMenuItem</value>
@@ -606,8 +627,8 @@
   <data name="&gt;&gt;TableroPasajesToolStripMenuItem.Name" xml:space="preserve">
     <value>TableroPasajesToolStripMenuItem</value>
   </data>
-  <data name="Menu_Salir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
+  <data name="&gt;&gt;SubMenu_Pago.Name" xml:space="preserve">
+    <value>SubMenu_Pago</value>
   </data>
   <data name="SubMenu_Presupuesto.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
@@ -630,20 +651,14 @@
   <data name="GenerarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 20</value>
   </data>
-  <data name="&gt;&gt;EncuestaPasajesToolMenu_PstVentaStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="UsuariosToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Alt+0</value>
   </data>
   <data name="Menu_Terminar.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 20</value>
   </data>
-  <data name="&gt;&gt;Menu_Terminar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;PresupuestoToolStripMenuItem.Name" xml:space="preserve">
     <value>PresupuestoToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;SubMenu_Resguardo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SubMenuUsuario.Name" xml:space="preserve">
     <value>SubMenuUsuario</value>
@@ -663,16 +678,16 @@
   <data name="SalirToolStripMenuItem1.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Alt+F4</value>
   </data>
-  <data name="AdministrativoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Gestion Usuario</value>
+  <data name="&gt;&gt;GeneralMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SubMenuCobro.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
-  <data name="&gt;&gt;VentasToolStripMenuItem.Name" xml:space="preserve">
-    <value>VentasToolStripMenuItem</value>
+  <data name="&gt;&gt;Menu_Terminar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SubMenuUsuario.Type" xml:space="preserve">
+  <data name="&gt;&gt;SalirToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="UsuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -681,14 +696,14 @@
   <data name="&gt;&gt;sssss.Name" xml:space="preserve">
     <value>sssss</value>
   </data>
-  <data name="&gt;&gt;SubMenu_Cobro.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;SubMenu_Presupuesto.Name" xml:space="preserve">
+    <value>SubMenu_Presupuesto</value>
   </data>
   <data name="Menu_General.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="TableroPasajesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Metricas</value>
+  <data name="&gt;&gt;EncuestaPasajesToolMenu_PstVentaStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>726, 509</value>
@@ -699,8 +714,11 @@
   <data name="CobrosToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Alt+3</value>
   </data>
-  <data name="&gt;&gt;Menu_PstVenta.Name" xml:space="preserve">
-    <value>Menu_PstVenta</value>
+  <data name="&gt;&gt;MenuStrip1.Name" xml:space="preserve">
+    <value>MenuStrip1</value>
+  </data>
+  <data name="Menu_Administracion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
   <data name="&gt;&gt;SubMenu_Encuesta.Name" xml:space="preserve">
     <value>SubMenu_Encuesta</value>
@@ -711,17 +729,17 @@
   <data name="SubMenu_Pago.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
-  <data name="&gt;&gt;pToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;SubMenu_Usuario.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PagoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SubMenu_Cambiar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+  <data name="&gt;&gt;SubMenuEncuesta.Name" xml:space="preserve">
+    <value>SubMenuEncuesta</value>
   </data>
-  <data name="SubMenuMetricas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+  <data name="&gt;&gt;CambiarToolStripMenuItem.Name" xml:space="preserve">
+    <value>CambiarToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;Menu_Terminar.Name" xml:space="preserve">
     <value>Menu_Terminar</value>
@@ -738,8 +756,8 @@
   <data name="MenuStrip1.Text" xml:space="preserve">
     <value>MenuStrip1</value>
   </data>
-  <data name="&gt;&gt;SubMenu_Presupuesto.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TableroPasajesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Metricas</value>
   </data>
   <data name="MarketingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 20</value>
@@ -750,8 +768,8 @@
   <data name="&gt;&gt;SubMenuResguardo.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SubMenu_Pago.Name" xml:space="preserve">
-    <value>SubMenu_Pago</value>
+  <data name="&gt;&gt;SubMenu_Resguardo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SubMenu_Metricas.Name" xml:space="preserve">
     <value>SubMenu_Metricas</value>
@@ -759,14 +777,14 @@
   <data name="&gt;&gt;SubMenuSalir.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SubMenu_Resguardo.Name" xml:space="preserve">
-    <value>SubMenu_Resguardo</value>
+  <data name="&gt;&gt;Menu_Administracion.Name" xml:space="preserve">
+    <value>Menu_Administracion</value>
   </data>
   <data name="&gt;&gt;IdiomaToolStripMenuItem.Name" xml:space="preserve">
     <value>IdiomaToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;EncuestaPasajesToolStripMenuItem.Name" xml:space="preserve">
-    <value>EncuestaPasajesToolStripMenuItem</value>
+  <data name="Menu_Salir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
   </data>
   <data name="PagosToolStripMenuItem1.Text" xml:space="preserve">
     <value>Cobros</value>
@@ -774,11 +792,11 @@
   <data name="&gt;&gt;UsuariosToolStripMenuItem.Name" xml:space="preserve">
     <value>UsuariosToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;DepuracionToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;GenerarToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Menu_Administracion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="Marketing_Menu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
   </data>
   <data name="&gt;&gt;MarketingToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

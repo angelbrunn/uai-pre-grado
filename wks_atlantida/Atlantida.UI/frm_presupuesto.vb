@@ -150,7 +150,7 @@ Public Class frm_presupuesto
             _medioTransporte += "Crucero"
         End If
 
-        If _medioTransporte Is Nothing Then
+        If _medioTransporte = "" Then
             MsgBox("Debe Seleccionar un Medio de Transporte")
             bandera = False
         End If
@@ -158,8 +158,13 @@ Public Class frm_presupuesto
         If bandera = True Then
             Dim listadoPaquetesNoProm As DataTable
             listadoPaquetesNoProm = interfazPresupuesto.obtenerPaqueteNoPromo(_Origen, _Destino, _FIda, _FVta, _medioTransporte)
-            frm_PaqueteNoPromocionable.dgw_PaqNotProm.DataSource = listadoPaquetesNoProm
-            frm_PaqueteNoPromocionable.Show()
+
+            If listadoPaquetesNoProm.Rows.Count = 0 Then
+                MsgBox("No existen disponibilidad para esta busqueda, Intente nuevamente!")
+            Else
+                frm_PaqueteNoPromocionable.dgw_PaqNotProm.DataSource = listadoPaquetesNoProm
+                frm_PaqueteNoPromocionable.Show()
+            End If
         End If
     End Sub
     ''' <summary>
@@ -549,7 +554,7 @@ Public Class frm_presupuesto
         Tabla.Columns.Add("FP", Type.GetType("System.String"))
         Tabla.Columns.Add("FR", Type.GetType("System.String"))
         'Tabla.Columns.Add("EMP", Type.GetType("tipo_de datos que contendrá la columna"))
-        Tabla.Columns.Add("AD", Type.GetType("System.String"))
+        Tabla.Columns.Add("DIS", Type.GetType("System.String"))
         Tabla.Columns.Add("MT", Type.GetType("System.String"))
         Tabla.Columns.Add("TPA", Type.GetType("System.String"))
 
@@ -566,7 +571,7 @@ Public Class frm_presupuesto
         Fila("CCD") = presupuestoTemporal.destPres.ToString()
         Fila("FP") = presupuestoTemporal.FechPartida.ToString()
         Fila("FR") = presupuestoTemporal.FechRegreso.ToString()
-        Fila("AD") = presupuestoTemporal.dispPresu.ToString()
+        Fila("DIS") = presupuestoTemporal.dispPresu.ToString()
         Fila("MT") = presupuestoTemporal.MontoAPagar.ToString()
         Fila("TPA") = presupuestoTemporal.TipoPaquete.ToString()
 

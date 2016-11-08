@@ -67,6 +67,7 @@ Public Class frm_login
         Dim resultadoConsistencia As Boolean = False
 
         Try
+            'VERIFICO QUE LA DB ESTE INSTALADA
             resultadoConsistencia = interfazNegMultiUsuario.verificarConsistenciaBD()
 
         Catch ex As Exception

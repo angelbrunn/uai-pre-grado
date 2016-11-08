@@ -537,6 +537,7 @@ Public Class frm_cobro
             pdfVoucher.Add(New Paragraph("---------------------------------------------------SIS-Atlantida Turismo--------------------------------------------------"))
 
             pdfVoucher.Close()
+            MsgBox("Operacion Exitosa!")
         Else
             MsgBox("El cliente ingresado no posee ningun presupuesto con pago total a la fecha!")
         End If

@@ -134,6 +134,12 @@ Public Class frm_TableroPrincipal
             If enu.Current.componente = "SubMenu_Cambiar" Then
                 Me.SubMenu_Cambiar.Text = enu.Current.value
             End If
+            If enu.Current.componente = "Menu_Ayuda" Then
+                Me.Menu_Ayuda.Text = enu.Current.value
+            End If
+            If enu.Current.componente = "Menu_Leer" Then
+                Me.Menu_Leer.Text = enu.Current.value
+            End If
         End While
     End Sub
     ''' <summary>

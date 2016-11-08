@@ -209,6 +209,15 @@ Public Class frm_pago
     ''' <summary>
     ''' 
     ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btn_terminar_op_Click(sender As Object, e As EventArgs) Handles btn_terminar_op.Click
+        Me.Close()
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
