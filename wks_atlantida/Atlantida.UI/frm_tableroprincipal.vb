@@ -252,6 +252,18 @@ Public Class frm_TableroPrincipal
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
+    Private Sub Menu_Leer_Click(sender As Object, e As EventArgs) Handles Menu_Leer.Click
+        'Persisto el usuario dentro de mi aplicacion
+        frm_ayuda.UsuarioId = unUsuario.idUsuario
+        frm_ayuda.UsuarioIdioma = unUsuario.idioma
+        frm_ayuda.Show()
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub SubMenuSalir_Click(sender As Object, e As EventArgs) Handles SubMenu_Salir.Click
         Me.Close()
         Application.ExitThread()

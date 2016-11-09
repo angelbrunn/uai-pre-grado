@@ -163,27 +163,33 @@
   <data name="Menu_CyP.Text" xml:space="preserve">
     <value>Cobros/Pagos</value>
   </data>
+  <data name="SubMenu_Cambiar.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Alt+4</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="SubMenu_Cambiar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 22</value>
+  </data>
   <data name="SubMenu_Cambiar.Text" xml:space="preserve">
     <value>Cambiar</value>
   </data>
   <data name="Menu_Idioma.Text" xml:space="preserve">
     <value>Idioma</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Menu_Leer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+  <data name="Menu_Leer.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F1</value>
   </data>
   <data name="Menu_Leer.Text" xml:space="preserve">
     <value>Leer</value>
-  </data>
-  <data name="Menu_Ayuda.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 20</value>
   </data>
   <data name="Menu_Ayuda.Text" xml:space="preserve">
     <value>Ayuda</value>
   </data>
   <data name="SubMenu_Salir.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Alt+6</value>
+  </data>
+  <data name="SubMenu_Salir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 22</value>
   </data>
   <data name="SubMenu_Salir.Text" xml:space="preserve">
     <value>Salir</value>

@@ -35,10 +35,10 @@ Partial Class frm_TableroPrincipal
         Me.SubMenu_Pago = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_Idioma = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubMenu_Cambiar = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Menu_Terminar = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SubMenu_Salir = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_Ayuda = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_Leer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Menu_Terminar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SubMenu_Salir = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_General.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -107,17 +107,6 @@ Partial Class frm_TableroPrincipal
         resources.ApplyResources(Me.SubMenu_Cambiar, "SubMenu_Cambiar")
         Me.SubMenu_Cambiar.Name = "SubMenu_Cambiar"
         '
-        'Menu_Terminar
-        '
-        resources.ApplyResources(Me.Menu_Terminar, "Menu_Terminar")
-        Me.Menu_Terminar.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubMenu_Salir})
-        Me.Menu_Terminar.Name = "Menu_Terminar"
-        '
-        'SubMenu_Salir
-        '
-        resources.ApplyResources(Me.SubMenu_Salir, "SubMenu_Salir")
-        Me.SubMenu_Salir.Name = "SubMenu_Salir"
-        '
         'Menu_Ayuda
         '
         resources.ApplyResources(Me.Menu_Ayuda, "Menu_Ayuda")
@@ -128,6 +117,17 @@ Partial Class frm_TableroPrincipal
         '
         resources.ApplyResources(Me.Menu_Leer, "Menu_Leer")
         Me.Menu_Leer.Name = "Menu_Leer"
+        '
+        'Menu_Terminar
+        '
+        resources.ApplyResources(Me.Menu_Terminar, "Menu_Terminar")
+        Me.Menu_Terminar.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SubMenu_Salir})
+        Me.Menu_Terminar.Name = "Menu_Terminar"
+        '
+        'SubMenu_Salir
+        '
+        resources.ApplyResources(Me.SubMenu_Salir, "SubMenu_Salir")
+        Me.SubMenu_Salir.Name = "SubMenu_Salir"
         '
         'frm_TableroPrincipal
         '
