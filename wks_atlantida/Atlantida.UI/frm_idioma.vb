@@ -83,6 +83,9 @@ Public Class frm_idioma
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btn_cancelar_Click(sender As Object, e As EventArgs) Handles btn_cancelar.Click
+        Dim formulario As New frm_TableroPrincipal()
+        formulario.unUsuario = chUsuario
+        formulario.Show()
         Me.Close()
     End Sub
     ''' <summary>
