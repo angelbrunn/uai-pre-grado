@@ -68,7 +68,7 @@ Public Class frm_TableroPrincipal
         Else
             idiomaElegido = "Ingles"
         End If
-        MsgBox("El idioma elegido es: " + idiomaElegido)
+        'MsgBox("El idioma elegido es: " + idiomaElegido)
     End Sub
     ''' <summary>
     ''' 

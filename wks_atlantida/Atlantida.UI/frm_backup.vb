@@ -297,6 +297,9 @@ Public Class frm_backup
         Me.chkbxGrupoPermiso.Checked = True
         Me.chkbxPermiso.Checked = True
         Me.chkbxMultiIdioma.Checked = True
+        Me.chkbxPresupuesto.Checked = True
+        Me.chkbxPago.Checked = True
+        Me.chkbxCobro.Checked = True
     End Sub
     ''' <summary>
     ''' 

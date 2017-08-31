@@ -24,6 +24,9 @@ Partial Class frm_backup
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_backup))
         Me.a = New System.Windows.Forms.GroupBox()
+        Me.chkbxCobro = New System.Windows.Forms.CheckBox()
+        Me.chkbxPago = New System.Windows.Forms.CheckBox()
+        Me.chkbxPresupuesto = New System.Windows.Forms.CheckBox()
         Me.chkbxMultiIdioma = New System.Windows.Forms.CheckBox()
         Me.chkbxPermiso = New System.Windows.Forms.CheckBox()
         Me.chkbxGrupoPermiso = New System.Windows.Forms.CheckBox()
@@ -41,9 +44,6 @@ Partial Class frm_backup
         Me.txtbxDelimitador = New System.Windows.Forms.TextBox()
         Me.lbl_del = New System.Windows.Forms.Label()
         Me.btn_Exportar = New System.Windows.Forms.Button()
-        Me.chkbxPresupuesto = New System.Windows.Forms.CheckBox()
-        Me.chkbxPago = New System.Windows.Forms.CheckBox()
-        Me.chkbxCobro = New System.Windows.Forms.CheckBox()
         Me.a.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,6 +74,36 @@ Partial Class frm_backup
         Me.a.Size = New System.Drawing.Size(478, 224)
         Me.a.TabIndex = 0
         Me.a.TabStop = False
+        '
+        'chkbxCobro
+        '
+        Me.chkbxCobro.AutoSize = True
+        Me.chkbxCobro.Location = New System.Drawing.Point(249, 182)
+        Me.chkbxCobro.Name = "chkbxCobro"
+        Me.chkbxCobro.Size = New System.Drawing.Size(74, 17)
+        Me.chkbxCobro.TabIndex = 21
+        Me.chkbxCobro.Text = "TB_Cobro"
+        Me.chkbxCobro.UseVisualStyleBackColor = True
+        '
+        'chkbxPago
+        '
+        Me.chkbxPago.AutoSize = True
+        Me.chkbxPago.Location = New System.Drawing.Point(249, 159)
+        Me.chkbxPago.Name = "chkbxPago"
+        Me.chkbxPago.Size = New System.Drawing.Size(71, 17)
+        Me.chkbxPago.TabIndex = 20
+        Me.chkbxPago.Text = "TB_Pago"
+        Me.chkbxPago.UseVisualStyleBackColor = True
+        '
+        'chkbxPresupuesto
+        '
+        Me.chkbxPresupuesto.AutoSize = True
+        Me.chkbxPresupuesto.Location = New System.Drawing.Point(249, 136)
+        Me.chkbxPresupuesto.Name = "chkbxPresupuesto"
+        Me.chkbxPresupuesto.Size = New System.Drawing.Size(105, 17)
+        Me.chkbxPresupuesto.TabIndex = 19
+        Me.chkbxPresupuesto.Text = "TB_Presupuesto"
+        Me.chkbxPresupuesto.UseVisualStyleBackColor = True
         '
         'chkbxMultiIdioma
         '
@@ -232,36 +262,6 @@ Partial Class frm_backup
         Me.btn_Exportar.Text = "Exportar"
         Me.btn_Exportar.UseVisualStyleBackColor = True
         '
-        'chkbxPresupuesto
-        '
-        Me.chkbxPresupuesto.AutoSize = True
-        Me.chkbxPresupuesto.Location = New System.Drawing.Point(249, 136)
-        Me.chkbxPresupuesto.Name = "chkbxPresupuesto"
-        Me.chkbxPresupuesto.Size = New System.Drawing.Size(105, 17)
-        Me.chkbxPresupuesto.TabIndex = 19
-        Me.chkbxPresupuesto.Text = "TB_Presupuesto"
-        Me.chkbxPresupuesto.UseVisualStyleBackColor = True
-        '
-        'chkbxPago
-        '
-        Me.chkbxPago.AutoSize = True
-        Me.chkbxPago.Location = New System.Drawing.Point(249, 159)
-        Me.chkbxPago.Name = "chkbxPago"
-        Me.chkbxPago.Size = New System.Drawing.Size(71, 17)
-        Me.chkbxPago.TabIndex = 20
-        Me.chkbxPago.Text = "TB_Pago"
-        Me.chkbxPago.UseVisualStyleBackColor = True
-        '
-        'chkbxCobro
-        '
-        Me.chkbxCobro.AutoSize = True
-        Me.chkbxCobro.Location = New System.Drawing.Point(249, 182)
-        Me.chkbxCobro.Name = "chkbxCobro"
-        Me.chkbxCobro.Size = New System.Drawing.Size(74, 17)
-        Me.chkbxCobro.TabIndex = 21
-        Me.chkbxCobro.Text = "TB_Cobro"
-        Me.chkbxCobro.UseVisualStyleBackColor = True
-        '
         'frm_backup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -295,6 +295,6 @@ Partial Class frm_backup
     Friend WithEvents chkbxPermiso As System.Windows.Forms.CheckBox
     Friend WithEvents chkbxMultiIdioma As System.Windows.Forms.CheckBox
     Friend WithEvents chkbxCobro As System.Windows.Forms.CheckBox
-    Friend WithEvents chkbxPago As System.Windows.Forms.CheckBox
     Friend WithEvents chkbxPresupuesto As System.Windows.Forms.CheckBox
+    Friend WithEvents chkbxPago As System.Windows.Forms.CheckBox
 End Class
