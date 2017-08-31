@@ -63,6 +63,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DALAuditoria.vb" />
     <Compile Include="DALBitacora.vb" />
     <Compile Include="DALCliente.vb" />
     <Compile Include="DALCobro.vb" />
