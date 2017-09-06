@@ -11,6 +11,11 @@ Public Class frm_login
     ''' 
     ''' </summary>
     ''' <remarks></remarks>
+    Private interfazNegocio As NegNegocio = New NegNegocio
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
     Dim interfazNegMultiUsuario As INegMultiUsuario = New NegMultiUsuario
     ''' <summary>
     ''' 
@@ -66,9 +71,17 @@ Public Class frm_login
 
         Dim resultadoConsistencia As Boolean = False
 
+        Dim firstIntall As Boolean = True
+
         Try
-            'VERIFICO QUE LA DB ESTE INSTALADA
-            resultadoConsistencia = interfazNegMultiUsuario.verificarConsistenciaBD()
+            'VERIFICO SI YA ESTA CONFIGURADA POR PRIMERA VEZ LA APP| RETURN:FALSE SI CONFIG / SI RETURN TRUE: FALTA CONFIGURAR
+            firstIntall = interfazNegocio.validarPrimeraConexion()
+            If firstIntall = False Then
+                'VERIFICO QUE LA DB ESTE INSTALADA
+                resultadoConsistencia = interfazNegMultiUsuario.verificarConsistenciaBD()
+            Else
+                MsgBox("Falta configurar la aplicacion.")
+            End If
 
         Catch ex As Exception
             MsgBox("Error de Conexión contra la Base de Datos")

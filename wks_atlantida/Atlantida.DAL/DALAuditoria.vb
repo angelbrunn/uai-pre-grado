@@ -2,6 +2,7 @@
 Imports System.Data
 Imports System.Exception
 Imports Atlantida.Excepcion.SIS.Excepcion
+Imports System.Configuration
 
 Namespace SIS.DAL
     ''' <summary>
@@ -37,27 +38,5 @@ Namespace SIS.DAL
             End Try
             Return id
         End Function
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <remarks></remarks>
-        Public Sub saveConexion()
-            Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "INSERT INTO Config(id,entidad,estado) VALUES (1,'DB_SYS','OK')"
-
-            Dim conex As New SqlConnection
-            conex.ConnectionString = conexString
-
-            Dim comando As SqlCommand = conex.CreateCommand
-            comando.CommandType = CommandType.Text
-            comando.CommandText = sqlQuery
-
-            Try
-                conex.Open()
-                comando.ExecuteNonQuery()
-                conex.Close()
-            Catch ex As Exception
-            End Try
-        End Sub
     End Class
 End Namespace

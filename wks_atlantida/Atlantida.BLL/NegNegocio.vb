@@ -4,7 +4,11 @@ Imports Atlantida.DAL.SIS.DAL
 
 Namespace SIS.BLL
     Public Class NegNegocio
-
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <remarks></remarks>
+        Dim interfazNegocioBitacora As INegBitacora = New NegBitacora
         ''' <summary>
         ''' 
         ''' </summary>
@@ -23,21 +27,6 @@ Namespace SIS.BLL
                 oDalVenta.insertarVenta(idPresupuesto, fechaVenta)
             Catch ex As Exception
                 interfazNegocioBitacora.registrarEnBitacora_BLL(unUsuario.idUsuario, ex)
-            End Try
-        End Function
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Function saveConexion() As Boolean
-            Dim isSave As Boolean = True
-            Dim oDalAuditoria As New DALAuditoria
-            Try
-                oDalAuditoria.saveConexion()
-                Return isSave = False
-            Catch ex As Exception
-                interfazNegocioBitacora.registrarEnBitacora_BLL("SYS_DB_CONN", ex)
             End Try
         End Function
         ''' <summary>
@@ -66,8 +55,9 @@ Namespace SIS.BLL
         ''' <summary>
         ''' 
         ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
         ''' <remarks></remarks>
-        Dim interfazNegocioBitacora As INegBitacora = New NegBitacora
         Public Property unUsuario() As Usuario
             Get
                 Return unUsuarioField
