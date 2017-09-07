@@ -19,7 +19,7 @@ Namespace SIS.DAL
             Dim id As Integer
 
             Dim conexString As String = System.Configuration.ConfigurationManager.ConnectionStrings("AtlantidaDev").ConnectionString
-            Dim sqlQuery As String = "SELECT id FROM Config WHERE entidad='DB_SYS' AND estado='OK'"
+            Dim sqlQuery As String = "SELECT id FROM Config WHERE entidad='IS_CONFIG'"
 
             Dim conex As New SqlConnection
             conex.ConnectionString = conexString
