@@ -74,9 +74,9 @@ Public Class frm_login
         Dim firstIntall As Boolean = True
 
         Try
-            'VERIFICO SI YA ESTA CONFIGURADA POR PRIMERA VEZ LA APP| RETURN:FALSE SI CONFIGURADA / RETURN TRUE: FALTA CONFIGURAR
+            'VERIFICO SI YA ESTA CONFIGURADA POR PRIMERA VEZ LA APP| RETURN TRUE: SI CONFIGURADA / RETURN FALSE: FALTA CONFIGURAR
             firstIntall = interfazNegocio.validarPrimeraConexion()
-            If firstIntall = False Then
+            If firstIntall = True Then
                 'VERIFICO QUE LA DB ESTE INSTALADA
                 resultadoConsistencia = interfazNegMultiUsuario.verificarConsistenciaBD()
             Else

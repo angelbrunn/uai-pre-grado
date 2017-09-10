@@ -35,16 +35,16 @@ Namespace SIS.BLL
         ''' <returns></returns>
         ''' <remarks></remarks>
         Function validarPrimeraConexion() As Boolean
-            Dim isFirts As Boolean = True
+            Dim isFirts As Boolean = False
             Dim oDalAuditoria As New DALAuditoria
             Try
                 Dim id = oDalAuditoria.primeraConexion()
 
-                If id = 0 Then
-                    'ES LA PRIMERA CONEXION
+                If id <> 0 Then
+                    'DB ESTA CONFIGURADA
                     isFirts = True
                 Else
-                    'NO ES LA PRIMERA CONEXION
+                    'NO DB ESTA CONFIGURADA
                     isFirts = False
                 End If
                 Return isFirts
